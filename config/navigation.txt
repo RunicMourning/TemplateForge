@@ -1,0 +1,4 @@
+Home|index.html
+About Us|about.html
+Blog|blog.html
+Contact|contact.html

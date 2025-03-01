@@ -1,0 +1,344 @@
+/*--------------------------------------------------------------
+   Global Variables & Reset
+--------------------------------------------------------------*/
+:root {
+  --primary-color: #0073e6;
+  --primary-hover: #005bb5;
+  --secondary-color: #cfe2ff;
+  --background-color: #f8f9fa;
+  --text-color: #333;
+  --white: #fff;
+  --header-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --aside-bg: #e3e7ed;
+  --aside-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*--------------------------------------------------------------
+   Import Google Font
+   It is best practice to link fonts in your HTML <head>
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Nabla&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+   Base Styles
+--------------------------------------------------------------*/
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+a {
+  font-family: "Cairo Play", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  text-decoration: none;
+}
+
+/*--------------------------------------------------------------
+   Header
+--------------------------------------------------------------*/
+header {
+  background-color: #333;
+  color: var(--white);
+  padding: 20px;
+  box-shadow: var(--header-shadow);
+}
+
+header h1 {
+  margin-bottom: 10px;
+}
+
+/*--------------------------------------------------------------
+   Global Navigation
+--------------------------------------------------------------*/
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 0;
+}
+
+nav a {
+  color: var(--white);
+  padding: 8px 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.1);
+}
+
+/*--------------------------------------------------------------
+   Layout
+--------------------------------------------------------------*/
+.main-content {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+  padding: 20px;
+}
+
+/*--------------------------------------------------------------
+   Sidebar
+--------------------------------------------------------------*/
+aside {
+  width: 250px;
+  background-color: var(--aside-bg);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: var(--aside-shadow);
+}
+
+aside nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+aside nav a {
+  display: block;
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+aside nav a:hover {
+  background-color: var(--secondary-color);
+}
+
+/*--------------------------------------------------------------
+   Main Content Area
+--------------------------------------------------------------*/
+main {
+  flex: 1;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/*--------------------------------------------------------------
+   Footer
+--------------------------------------------------------------*/
+footer {
+  background-color: #333;
+  color: var(--white);
+  padding: 15px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+/*--------------------------------------------------------------
+   Responsive Design
+--------------------------------------------------------------*/
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  aside {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin: 5px 0;
+  }
+}
+
+/*--------------------------------------------------------------
+   Navigation Variants
+--------------------------------------------------------------*/
+
+/* Horizontal Navigation */
+ul.nav-horizontal {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
+}
+
+ul.nav-horizontal a {
+  color: var(--primary-color);
+  padding: 8px 15px;
+  font-weight: 600;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+ul.nav-horizontal a:hover {
+  background-color: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+/* Ensure horizontal nav remains horizontal on small screens */
+@media (max-width: 768px) {
+  ul.nav-horizontal {
+    flex-direction: row;
+  }
+}
+
+/* Vertical Navigation */
+ul.nav-vertical {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+ul.nav-vertical a {
+  color: var(--primary-color);
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+ul.nav-vertical a:hover {
+  background-color: var(--secondary-color);
+}
+
+/*--------------------------------------------------------------
+   Headings
+--------------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Cairo Play", serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  text-decoration: none;
+  text-transform: lowercase;
+}
+
+h1::first-letter, 
+h2::first-letter, 
+h3::first-letter, 
+h4::first-letter, 
+h5::first-letter, 
+h6::first-letter {
+  text-transform: uppercase;
+}
+
+
+
+
+/* navbar */
+
+/* Main navbar container */
+.mainNavbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, #000,#333,#000);
+    color: white;
+}
+/* Left section for nav links */
+.navbar-nav-left {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-nav-left li {
+    margin-right: 20px;
+}
+
+.navbar-nav-left li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 5px 10px;
+    display: block;
+}
+
+.navbar-nav-left li a:hover {
+    background-color: #fff;
+    border-radius: 4px;
+    color: #000;}
+
+/* Right section for custom elements (search, social media) */
+.navbar-custom-elements {
+    list-style: none;
+    display: flex; /* Keep flex on the UL */
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.navbar-custom-elements li {
+    margin-left: 20px;
+    align-items: center; /* Vertically center align items */
+} /* Removed display: flex from the LI */
+
+.navbar-custom-elements li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.navbar-custom-elements li a img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Styles for the search bar */
+.navbar-search form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.navbar-search input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.navbar-search button {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.navbar-search button:hover {
+    background-color: #0056b3;
+}

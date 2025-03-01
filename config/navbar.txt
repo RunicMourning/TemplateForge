@@ -1,0 +1,10 @@
+Home|index.html
+About Us|about.html
+Blog|blog.html
+Contact|contact.html
+@social||https://twitter.com|#1D9BF0|<i class="bi bi-twitter"></i>
+@social||https://facebook.com|#0165E1|<i class="bi bi-facebook"></i>
+@social||https://reddit.com|#FF4500|<i class="bi bi-reddit"></i>
+@social||https://linkedin.com|#0A66C2|<i class="bi bi-linkedin"></i>
+@social||https://instagram.com|#F77737|<i class="bi bi-instagram"></i>
+@search
