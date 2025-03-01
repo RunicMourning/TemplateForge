@@ -142,7 +142,7 @@ function generateBreadcrumbs() {
     }
 
     // Build the breadcrumb HTML using Bootstrap 5.3 markup.
-    $html = '<nav aria-label="breadcrumb mt-3"><ol class="breadcrumb">';
+    $html = '<nav aria-label="breadcrumb"><ol class="breadcrumb mt-3">';
     $lastIndex = count($breadcrumbs) - 1;
     foreach ($breadcrumbs as $index => $crumb) {
         if ($index === $lastIndex || empty($crumb["link"])) {

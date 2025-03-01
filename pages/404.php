@@ -23,7 +23,7 @@ $fileName = basename($_SERVER['PHP_SELF']); // Get the current file name
                 <div class="card-body">
                     <div class="row">
                         <!-- Left Column: Error Heading & Message -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-8">
 <div class="error-code display-1 text-primary mb-4">Oops!</div>
 
 <div class="error-message h3 mb-4">
@@ -41,7 +41,7 @@ $fileName = basename($_SERVER['PHP_SELF']); // Get the current file name
                         </div>
 
                         <!-- Right Column: Nerd Information -->
-                        <div class="col-lg-6">
+                        <div class="col-lg-4">
 <div class="nerd-info">
     <h5>Technical Details (For Internal Use):</h5>
     <ul class="list-unstyled">

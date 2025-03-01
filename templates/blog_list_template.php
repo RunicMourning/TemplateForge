@@ -9,7 +9,7 @@
 <article class="blog-post mt-3">
   <div class="card">
     <h5 class="card-header">
-      <a href="blog-<?php echo urlencode($post['slug']); ?>.html">
+      <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="link-underline-primary text-black">
         <?php echo htmlspecialchars($post['title']); ?>
       </a>
     </h5>
