@@ -2,6 +2,7 @@
 // admin/pages.php
 
 require_once 'login_module.php';
+require_once '../config/config.php';
 
 $pagesDir = realpath(__DIR__ . '/../pages');
 $pages = glob($pagesDir . '/*.php');
@@ -40,7 +41,17 @@ $pages = glob($pagesDir . '/*.php');
 </head>
 <body class="d-flex flex-column min-vh-100">
   <div class="container-fluid d-flex flex-column min-vh-100">
-    <div class="bg-light p-2"><a href="/"><i class="bi bi-book-half"></i> Admin</a></div>
+
+  
+  
+    <header class="bg-light p-2 d-flex justify-content-between align-items-center">
+  <div><i class="bi bi-book-half"></i> <?php echo htmlspecialchars($siteTitle); ?> Admin</div>
+  <a href="/" class="btn btn-sm btn-primary float-end" target="_blank" title="Visit Site">
+    Visit Site
+  </a>
+</header>
+  
+
     <div class="row flex-grow-1 h-100">
       <div class="col-sm-1 d-flex flex-column bg-body-tertiary h-100">
         <div class="d-flex flex-column flex-shrink-0">
