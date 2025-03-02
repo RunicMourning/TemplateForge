@@ -1,15 +1,9 @@
 <?php
-// pages/home.php
+// pages/404.php
 
-// Define the title for this page.
-$pageTitle = "404";
-//$headerIncludes[] = "";
-//$footerIncludes[] = "Content";
-
-// 404 Error Page - Displaying File Name and Other Details
-$fileName = basename($_SERVER['PHP_SELF']); // Get the current file name
+$pageTitle = '404';
 ?>
-            <div class="card shadow-sm mt-3">
+<div class="card shadow-sm mt-3">
 
                 <!-- Card Header with Search Form -->
                 <div class="card-header text-center">

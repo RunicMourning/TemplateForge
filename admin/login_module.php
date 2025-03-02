@@ -31,30 +31,47 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     <html lang="en">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login Required</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
-            .login-form { max-width: 400px; margin: 0 auto; }
-            .login-form label { display: block; margin-top: 10px; }
-            .login-form input { width: 100%; padding: 8px; margin-top: 5px; }
-            .login-form input[type="submit"] { margin-top: 15px; }
-            .error { color: red; }
+            body {
+                font-family: Arial, sans-serif;
+                padding-top: 50px; /* Add padding to top to center the form */
+            }
+            .error {
+                color: red;
+            }
         </style>
     </head>
     <body>
-        <h1>Login Required</h1>
-        <?php if (isset($error)) { echo '<p class="error">' . htmlspecialchars($error) . '</p>'; } ?>
-        <div class="login-form">
-            <form method="post" action="">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required>
-
-                <input type="submit" value="Login">
-            </form>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <h2 class="text-center">Login Required</h2>
+                    <?php if (isset($error)) { echo '<div class="alert alert-danger">' . htmlspecialchars($error) . '</div>'; } ?>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" action="">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" id="username" name="username" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" id="password" name="password" class="form-control" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Bootstrap JS and dependencies -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
     </html>
     <?php
