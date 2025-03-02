@@ -61,51 +61,187 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create New Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Text Editor</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    label { display: block; margin-top: 10px; font-weight: bold; }
-    input[type="text"], textarea { width: 100%; padding: 8px; margin-top: 5px; }
-    textarea { height: 100px; }
-    .message { margin-top: 15px; padding: 10px; }
-    .error { background: #fdd; color: #900; }
-    .success { background: #dfd; color: #060; }
+    html, body {
+      height: 100%;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    #preview {
+      padding: 10px;
+      margin-top: 10px;
+    }
+    #colorPickerOverlay {
+      display: none;
+      position: absolute;
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      z-index: 999;
+    }
   </style>
 </head>
-<body>
-  <h1>Create New Page</h1>
-  <p><a href="pages.php">Back to Manage Pages</a></p>
+<body class="d-flex flex-column min-vh-100">
+  <div class="container-fluid d-flex flex-column min-vh-100">
+    <div class="bg-light p-2"><a href="/"><i class="bi bi-book-half"></i> Admin</a></div>
+    <div class="row flex-grow-1 h-100">
+      <div class="col-sm-1 d-flex flex-column bg-body-tertiary h-100">
+        <div class="d-flex flex-column flex-shrink-0">
+          <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+<?php include('adminnav.inc'); ?>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-11 h-100">
+    <?php if (isset($error)): ?>
+      <div class="message alert alert-danger">
+        <?php echo htmlspecialchars($error); ?>
+      </div>
+    <?php endif; ?>
+    <?php if (isset($success)): ?>
+      <div class="message alert alert-success">
+        <?php echo htmlspecialchars($success); ?>
+      </div>
+    <?php endif; ?>
+        <form method="post" action="">
+          <div class="row mt-4">
+            <div class="col">
+      <div class="mb-3 input-group">
+        <span class="input-group-text" id="title-addon">Title</span>
+        <input type="text" id="title" name="title" class="form-control" aria-describedby="title-addon" required>
+      </div>
+			</div>
+            <div class="col">
+      <div class="mb-3 input-group">
+        <span class="input-group-text" id="filename-addon">Filename</span>
+        <input type="text" id="filename" name="filename" class="form-control" aria-describedby="filename-addon" required>
+      </div>
+			</div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="btn-group editor-controls w-100 card-header">
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertLink()" title="Insert Link"><i class="bi bi-link"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertImage()" title="Insert Image"><i class="bi bi-image"></i></button>
+                  <button type="button" class="btn btn-light btn-sm btn-color-picker" onclick="showColorPicker()" title="Text Color"><i class="bi bi-palette"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('bold')" title="Bold Text"><i class="bi bi-type-bold"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('italic')" title="Italic Text"><i class="bi bi-type-italic"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('underline')" title="Underline Text"><i class="bi bi-type-underline"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('strikethrough')" title="Strikethrough Text"><i class="bi bi-type-strikethrough"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('unorderedList')" title="Unordered List"><i class="bi bi-list-ul"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('orderedList')" title="Ordered List"><i class="bi bi-list-ol"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('blockquote')" title="Blockquote"><i class="bi bi-blockquote-left"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('leftAlign')" title="Left Align"><i class="bi bi-text-left"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('centerAlign')" title="Center Align"><i class="bi bi-text-center"></i></button>
+                  <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('rightAlign')" title="Right Align"><i class="bi bi-text-right"></i></button>
+                </div>
+                <div class="card-body">
+                  <textarea id="content" name="content" class="form-control" rows="10" required></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Preview</h5>
+                </div>
+                <div class="card-body">
+                  <div id="preview"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col">
+      <div class="mb-3">
+        <label for="header_includes" class="form-label">Header Includes (one per line):</label>
+        <div class="input-group">
+          <span class="input-group-text">Header Includes</span>
+          <textarea id="header_includes" name="header_includes" class="form-control" rows="4" placeholder="E.g., &lt;link rel=&quot;stylesheet&quot; href=&quot;css/custom.css&quot;&gt;"></textarea>
+        </div>
+      </div>
+			</div>
+            <div class="col">
+      <div class="mb-3">
+        <label for="footer_includes" class="form-label">Footer Includes (one per line):</label>
+        <div class="input-group">
+          <span class="input-group-text">Footer Includes</span>
+          <textarea id="footer_includes" name="footer_includes" class="form-control" rows="4" placeholder="E.g., &lt;script src=&quot;js/custom.js&quot;&gt;&lt;/script&gt;"></textarea>
+        </div>
+      </div>
+			</div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
   
-  <?php if (isset($error)): ?>
-    <div class="message error"><?php echo htmlspecialchars($error); ?></div>
-  <?php endif; ?>
-  <?php if (isset($success)): ?>
-    <div class="message success"><?php echo htmlspecialchars($success); ?></div>
-  <?php endif; ?>
   
-  <form method="post" action="">
-    <label>Filename (without .php):</label>
-    <input type="text" name="filename" required>
+      <!-- Hidden Elements -->
+    <div id="colorPickerOverlay">
+      <input type="color" id="colorPicker">
+      <button onclick="applyTextColor()">OK</button>
+    </div>
     
-    <label>Page Title:</label>
-    <input type="text" name="title" required>
+    <!-- Link Insertion Modal -->
+    <div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="linkModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="linkModalLabel">Insert Link</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="linkText">Text to Display:</label>
+            <input type="text" id="linkText" class="form-control">
+            <label for="linkURL" class="mt-2">URL:</label>
+            <input type="url" id="linkURL" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="applyLink()">Insert</button>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    <label>Header Includes (one per line):</label>
-    <textarea name="header_includes" placeholder="E.g., &lt;link rel=&quot;stylesheet&quot; href=&quot;css/custom.css&quot;&gt;"></textarea>
-    
-    <label>Footer Includes (one per line):</label>
-    <textarea name="footer_includes" placeholder="E.g., &lt;script src=&quot;js/custom.js&quot;&gt;&lt;/script&gt;"></textarea>
-    
-    <label>Main Content (HTML/PHP):</label>
-    <textarea name="content" rows="10" required></textarea>
-    
-    <br>
-    <input type="submit" value="Create Page">
-  </form>
+    <!-- Image Insertion Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Insert Image</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <label for="imageURL">Image URL:</label>
+            <input type="url" id="imageURL" class="form-control">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" onclick="applyImage()">Insert</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="codeedit.js"></script>
 </body>
 </html>
