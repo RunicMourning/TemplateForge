@@ -2,6 +2,7 @@
 // pages/blog.php
 
 echo generateBreadcrumbs();
+$pageTitle = "Blog";
 
 // Define the directory where blog post files are stored.
 $blogPostsDir = __DIR__ . '/../blog_posts/';

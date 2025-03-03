@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 // Define the title of the website.
 // This variable can be used in the HTML <title> tag or header sections to represent your site's title.
-$siteTitle = "Nothing special";
+$siteTitle = "TemplateForge";
 
 // Define the name of the website.
 // This value may be displayed in branding elements, such as logos or site headers.

@@ -3,12 +3,8 @@
 
 echo generateBreadcrumbs();
 
-
 // Define the title for this page.
 $pageTitle = "Search";
-//$headerIncludes[] = "Content";
-//$footerIncludes[] = "Content";
-
 
 // Retrieve and sanitize the search query.
 $query = isset($_GET['q']) ? trim($_GET['q']) : '';
@@ -72,7 +68,24 @@ if (!empty($query)) {
     }
 }
 
-// Include the search results template.
-// This template will expect the $results array and the original $query.
-include __DIR__ . '/../templates/search_template.php';
+// If the query is empty, show the search form.
+if (empty($query)) {
+    echo '<div class="card mt-3">
+            <div class="card-header">
+                Search
+            </div>
+            <div class="card-body">
+                <form action="" method="GET">
+                    <div class="mb-3">
+                        <label for="q" class="form-label">Enter your search query:</label>
+                        <input type="text" class="form-control" id="q" name="q" placeholder="Search..." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+          </div>';
+} else {
+    // Include the search results template.
+    include __DIR__ . '/../templates/search_template.php';
+}
 ?>

@@ -29,7 +29,7 @@ $pageTitle = '404';
 </p>
 
 <ul class="list-unstyled">
-    <li><a href="/" class="text-decoration-none text-primary">Explore our Sitemap</a></li>
+    <li><a href="sitemap.html" class="text-decoration-none text-primary">Explore our Sitemap</a></li>
     <li><a href="index.html" class="text-decoration-none text-primary">Return to Homepage</a></li>
 </ul>
                         </div>

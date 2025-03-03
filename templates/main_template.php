@@ -36,7 +36,7 @@ if (!empty($headerIncludes)) {
 <div class="w-auto mx-2">
     <form class="input-group" action="search.html" method="GET">
         <input type="text" class="form-control" name="q" placeholder="Search..." aria-label="Search" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Go</button>
+        <button class="btn btn-success" type="submit" id="button-addon2">Go</button>
     </form></div>
             </div>
         </div>
