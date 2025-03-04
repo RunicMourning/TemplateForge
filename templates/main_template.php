@@ -67,7 +67,7 @@ if (!empty($headerIncludes)) {
                 <div class="col-md-4 mb-3">
                     <h5>Legal</h5>
                     <a href="#" class="d-block">Terms & Conditions</a>
-                    <a href="#" class="d-block">Privacy Policy</a>
+                    <a href="privacy.html" class="d-block">Privacy Policy</a>
                 </div>
                 <div class="col-md-4 mb-3">
                     <h5>Contact Us</h5>
