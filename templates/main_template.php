@@ -56,29 +56,44 @@ if (!empty($headerIncludes)) {
         </div>
     
     <!-- Footer -->
-    <footer class="py-4 mt-4 p-2 border-top">
-            <div class="row text-center text-md-start">
-                <div class="col-md-4 mb-3">
-                    <h5>Follow Us</h5>
-                    <a href="#" class="d-block">Facebook</a>
-                    <a href="#" class="d-block">Bluesky</a>
-                    <a href="#" class="d-block">Instagram</a>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Legal</h5>
-                    <a href="#" class="d-block">Terms & Conditions</a>
-                    <a href="privacy.html" class="d-block">Privacy Policy</a>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <h5>Contact Us</h5>
-                    <p>Email: contact@mywebsite.com</p>
-                    <p>Phone: (123) 456-7890</p>
-                </div>
+<footer class="py-5 mt-4 p-4 border-top bg-dark text-white">
+    <div class="container">
+        <div class="row text-center text-md-start">
+            <!-- Social Links -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase mb-3">Follow Us</h5>
+                <a href="#" class="d-block text-white mb-2">
+                    <i class="bi bi-facebook me-2"></i>Facebook
+                </a>
+                <a href="#" class="d-block text-white mb-2">
+                    <i class="bi bi-twitter me-2"></i>Bluesky
+                </a>
+                <a href="#" class="d-block text-white mb-2">
+                    <i class="bi bi-instagram me-2"></i>Instagram
+                </a>
             </div>
-            <div class="text-start mt-3">
-                <p>&copy; 2025 <?php echo htmlspecialchars($siteTitle); ?>. All rights reserved.</p>
+            
+            <!-- Legal Links -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase mb-3">Legal</h5>
+                <a href="#" class="d-block text-white mb-2">Terms & Conditions</a>
+                <a href="privacy.html" class="d-block text-white mb-2">Privacy Policy</a>
             </div>
-    </footer>
+            
+            <!-- Contact Information -->
+            <div class="col-md-4 mb-3">
+                <h5 class="text-uppercase mb-3">Contact Us</h5>
+                <p class="mb-1"><strong>Email:</strong> <a href="mailto:contact@mywebsite.com" class="text-white">contact@mywebsite.com</a></p>
+                <p class="mb-0"><strong>Phone:</strong> <a href="tel:+11234567890" class="text-white">(123) 456-7890</a></p>
+            </div>
+        </div>
+
+        <!-- Footer Copyright -->
+        <div class="text-start mt-4">
+            <p>&copy; 2025 <span class="fw-bold"><?php echo htmlspecialchars($siteTitle); ?></span>. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

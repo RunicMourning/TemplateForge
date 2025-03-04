@@ -118,12 +118,61 @@ $total_posts = count_files_in_directory('../blog_posts');  // Adjust the path to
                 </div>
               </div>
 
-              <!-- Column 2 -->
-              <div class="col-md-6">
-                <h6>Other Stats</h6>
-                <p>Additional content or stats can go here.</p>
-              </div>
+<?php
+// Set the main directory to monitor (relative path from admin folder)
+$dir = '../'; // Relative path to the 'dir' folder from the 'admin' folder
+
+// Function to get the total size of a directory (including subdirectories)
+function getDirectorySize($path) {
+    $size = 0;
+    // Recursively iterate through all files and directories
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path)) as $file) {
+        $size += $file->getSize();
+    }
+    return $size;
+}
+
+// Get directory size in bytes
+$dirSize = getDirectorySize($dir);
+
+// Convert size to KB and MB based on its size
+if ($dirSize >= 1024) {
+    $sizeInKB = $dirSize / 1024; // Convert to KB
+    if ($sizeInKB >= 1024) {
+        $sizeInMB = $sizeInKB / 1024; // Convert to MB
+        $formattedSize = round($sizeInMB, 2) . ' MB';
+    } else {
+        $formattedSize = round($sizeInKB, 2) . ' KB';
+    }
+} else {
+    $formattedSize = $dirSize . ' bytes';
+}
+?>
+<div class="col-md-6">
+    <div class="row">
+
+        <!-- PHP Version Card -->
+        <div class="col-md-6">
+    <h6>Server Stats</h6>
+            <div class="dashboard-card">
+                <h5>PHP Version</h5>
+                <p><?php echo phpversion(); ?></p> <!-- Display PHP Version -->
             </div>
+        </div>
+
+        <!-- Folder Stats Card -->
+        <div class="col-md-6">
+            <h6>Folder Stats</h6>
+            <div class="dashboard-card">
+                <h5>Entire Directory Size</h5>
+                <p><?php echo $formattedSize; ?></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+           </div>
           </div>
 
           <!-- Card Footer -->
@@ -148,6 +197,8 @@ $total_posts = count_files_in_directory('../blog_posts');  // Adjust the path to
       </div>
     </div>
   </div>
+
+
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
