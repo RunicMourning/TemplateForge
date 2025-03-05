@@ -38,29 +38,24 @@ usort($blogPosts, function($a, $b) {
 $recentPosts = array_slice($blogPosts, 0, 5);
 ?>
 
-
-    <div class="card shadow-lg mt-3">
-        <div class="card-header">
-            Recent Posts
-        </div>
-        <ul class="list-group list-group-flush">
-            <?php if (!empty($recentPosts)) : ?>
-                <?php foreach ($recentPosts as $post) : ?>
-                    <li class="list-group-item">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="text-decoration-none">
-                                <?php echo htmlspecialchars($post['title']); ?>
-                            </a>
-                            <span class="badge bg-secondary">
-                                <?php echo date('F jS Y', strtotime($post['timestamp'])); ?>
-                            </span>
-                        </div>
-                    </li>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <li class="list-group-item">No posts found.</li>
-            <?php endif; ?>
-        </ul>
+<div class="card mt-3">
+    <div class="card-header">
+        <h3><i class="bi bi-clock-history me-2"></i> Recent Posts</h3>
     </div>
-
-
+    <ul class="list-group list-group-flush">
+        <?php if (!empty($recentPosts)) : ?>
+            <?php foreach ($recentPosts as $post) : ?>
+                <li class="list-group-item d-flex justify-content-between align-items-center border-0">
+                    <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="text-decoration-none flex-grow-1">
+                        <small><i class="bi bi-file-earmark-text me-1 text-primary"></i> <?php echo htmlspecialchars($post['title']); ?></small>
+                    </a>
+                    <span class="badge bg-secondary rounded-pill">
+                        <small><i class="bi bi-calendar3 me-1"></i> <?php echo date('M j', strtotime($post['timestamp'])); ?></small>
+                    </span>
+                </li>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <li class="list-group-item text-muted text-center">No posts found.</li>
+        <?php endif; ?>
+    </ul>
+</div>

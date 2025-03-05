@@ -1,4 +1,4 @@
-Home|index.html
-About Us|about.html
-Blog|blog.html
-Contact|contact.html
+<i class="bi bi-house-door"></i> Home|index.html
+<i class="bi bi-people"></i> About|about.html
+<i class="bi bi-journal-text"></i> Blog|blog.html
+<i class="bi bi-envelope"></i> Contact|contact.html

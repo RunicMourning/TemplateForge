@@ -51,7 +51,7 @@ function buildNavigation() {
         // Build the list item.
         $html .= "<li{$liClassAttribute}>";
         $html .= "<a href=\"" . htmlspecialchars($linkUrl) . "\"{$aClassAttribute}>";
-        $html .= htmlspecialchars($linkTitle);
+        $html .= $linkTitle;
         $html .= "</a></li>\n";
     }
     
