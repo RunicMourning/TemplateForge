@@ -4,13 +4,93 @@
 $pageTitle = 'Home';
 ?>
 <h1>Common HTML Elements with Bootstrap 5.3</h1>
+ 
 
-        <hr> 
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=1" class="card-img-top" alt="Card Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 1</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
 
-        <h2>Images</h2>
-        <img src="https://loremflickr.com/320/240" class="img-fluid mb-3" alt="Placeholder Image 320x240">
-        <img src="https://loremflickr.com/640/480" class="img-fluid mb-3" alt="Placeholder Image 640x480">
-        <img src="https://loremflickr.com/200/150" class="img-fluid mb-3" alt="Placeholder Image 200x150">
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=2" class="card-img-top" alt="Card Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 2</h5>
+                        <p class="card-text">Another example card with a bit more text to demonstrate card content.</p>
+                        <a href="#" class="btn btn-success">Learn more</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=3" class="card-img-top" alt="Card Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 3</h5>
+                        <p class="card-text">Short card text.</p>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=4" class="card-img-top" alt="Card Image 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 4</h5>
+                        <p class="card-text">A longer description to show how cards handle varying content lengths.</p>
+                        <a href="#" class="btn btn-warning">Edit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=5" class="card-img-top" alt="Card Image 5">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 5</h5>
+                        <p class="card-text">Another card example.</p>
+                        <a href="#" class="btn btn-info">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=6" class="card-img-top" alt="Card Image 6">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 6</h5>
+                        <p class="card-text">Another card example.</p>
+                        <a href="#" class="btn btn-info">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=7" class="card-img-top" alt="Card Image 7">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 7</h5>
+                        <p class="card-text">Another card example.</p>
+                        <a href="#" class="btn btn-info">View</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="https://loremflickr.com/320/240?random=8" class="card-img-top" alt="Card Image 8">
+                    <div class="card-body">
+                        <h5 class="card-title">Card Title 8</h5>
+                        <p class="card-text">Another card example.</p>
+                        <a href="#" class="btn btn-info">View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <hr>
 

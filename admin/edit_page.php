@@ -57,8 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     $existingContent = file_get_contents($filePath);
     $title = '';
-    $headerIncludesText = '';
-    $footerIncludesText = '';
+    $headerIncludes = '';
+    $footerIncludes = '';
 
     // Extract page title
     if (preg_match('/\$pageTitle\s*=\s*(["\'])(.*?)\1\s*;/', $existingContent, $matches)) {
@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Extract headerIncludes[] lines
     preg_match_all('/\$headerIncludes\[\]\s*=\s*(["\'])(.*?)\1\s*;/', $existingContent, $headerMatches);
-    $headerIncludesText = implode("\n", $headerMatches[2] ?? []);
+    $headerIncludes = implode("\n", $headerMatches[2] ?? []);
 
     // Extract footerIncludes[] lines
     preg_match_all('/\$footerIncludes\[\]\s*=\s*(["\'])(.*?)\1\s*;/', $existingContent, $footerMatches);
-    $footerIncludesText = implode("\n", $footerMatches[2] ?? []);
+    $footerIncludes = implode("\n", $footerMatches[2] ?? []);
 
     // Extract content while keeping any custom PHP intact
     $content = preg_replace('/<\?php.*?\$pageTitle\s*=.*?\?>\s*/s', '', $existingContent);

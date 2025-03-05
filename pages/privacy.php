@@ -2,6 +2,9 @@
 // pages/privacy.php
 
 $pageTitle = 'Privacy Policy';
+$headerIncludes[] = "";
+$footerIncludes[] = "";
+
 ?>
                 <h1 class="display-4">Privacy Policy</h1>
                 <p class="lead">Effective Date: 03/03/2025</p>

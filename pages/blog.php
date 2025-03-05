@@ -3,6 +3,9 @@
 
 echo generateBreadcrumbs();
 $pageTitle = "Blog";
+$headerIncludes[] = "";
+$footerIncludes[] = "";
+
 
 // Define the directory where blog post files are stored.
 $blogPostsDir = __DIR__ . '/../blog_posts/';

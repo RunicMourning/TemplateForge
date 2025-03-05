@@ -3,6 +3,10 @@
 
 // Define the title for this page.
 $pageTitle = "About Us";
+
+$headerIncludes[] = "";
+$footerIncludes[] = "";
+
 ?>
   <h2>Overview</h2>
     <p>This project is a modular, flat-file-based website built with PHP. It supports dynamic content loading, a blog system, and a search feature without requiring a database.</p>

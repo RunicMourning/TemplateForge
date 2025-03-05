@@ -13,6 +13,7 @@ if (!empty($headerIncludes)) {
     echo implode("\n", $headerIncludes);
 }
 ?>
+<link rel="alternate" type="application/rss+xml" href="/rss.php" title="<?php echo htmlspecialchars($siteTitle); ?> RSS Feed" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>

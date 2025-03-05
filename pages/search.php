@@ -5,6 +5,9 @@ echo generateBreadcrumbs();
 
 // Define the title for this page.
 $pageTitle = "Search";
+$headerIncludes[] = "";
+$footerIncludes[] = "";
+
 
 // Retrieve and sanitize the search query.
 $query = isset($_GET['q']) ? trim($_GET['q']) : '';

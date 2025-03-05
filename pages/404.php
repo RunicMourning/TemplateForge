@@ -2,6 +2,8 @@
 // pages/404.php
 
 $pageTitle = '404';
+$headerIncludes[] = "";
+$footerIncludes[] = "";
 ?>
 <div class="card shadow-sm mt-3">
 

@@ -3,9 +3,9 @@
 
 // Define the title for this page.
 $pageTitle = "Sitemap";
+$headerIncludes[] = "";
+$footerIncludes[] = "";
 
-//$headerIncludes[] = "Content";
-//$footerIncludes[] = "Content";
 
 // Prepare the data for the sitemap.
 $pagesDir = 'pages/';

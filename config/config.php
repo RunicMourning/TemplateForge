@@ -1,85 +1,72 @@
 <?php
-// config/config.php
-
+// Enable error reporting for debugging purposes
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-// Define the title of the website.
-// This variable can be used in the HTML <title> tag or header sections to represent your site's title.
-$siteTitle = "TemplateForge";
+// =========================
+// General Site Configuration
+// =========================
+$siteTitle = "TemplateForge"; // Website title for <title> tags
 
-// Define the name of the website.
-// This value may be displayed in branding elements, such as logos or site headers.
-$siteName  = "Your Website Name";
-
-// ------------------------
+// ==========================
 // Navigation Configuration
-// ------------------------
-
-// Control whether the horizontal navigation menu is enabled.
-// Set to false to disable the horizontal navigation bar across the site.
+// ==========================
 $enableHorizontalNav = true;
-
-// Control whether the vertical navigation menu is enabled.
-// Set to true to display a vertical navigation bar, typically used in sidebar menus.
 $enableVerticalNav   = true;
 
-// Specify the CSS class to be applied to the active navigation link.
-// This class helps visually highlight the current page or section in the navigation.
 $activeNavClass      = 'active';
+$navItemClass        = "nav-item";
+$navLinkClass        = "nav-link";
 
-$navItemClass = "nav-item";
-$navLinkClass = "nav-link";
+$enableHorizontalNavbar = true;
+$navbarFilePath = __DIR__ . '/navbar.txt';
+$activeNavbarClass = 'active';
+$page = 'home'; // Default page
 
-$enableHorizontalNavbar = true; // Enable the horizontal navbar
-$navbarFilePath = __DIR__ . '/navbar.txt'; // Path to the text file containing the navbar links
-$activeNavbarClass = 'active'; // Class for the active navbar link
-$page = 'home'; // Current page (this should match the URLs in the navbar)
-//---------------------------------------------------------------------------------------------------------------------------------
+// ==========================
+// Podcast Configuration
+// ==========================
+$ispodcast = false;
+$podcastAuthor = "Your Name";
+$podcastDescription = "A short description of your podcast.";
+$podcastExplicit = false; // Mark as explicit or clean
 
-// Initialize arrays for header and body includes
+// ==========================
+// Add-ons & Includes
+// ==========================
 $headerIncludes = [];
 $footerIncludes = [];
 
-// Define the path to the navigation text file.
-// In this example, the file is located in the /config directory.
-$navFilePath = __DIR__ . '/navigation.txt';
-
-// Automatically include add-on files from the addons directory.
-// This allows you to simply add new PHP files (e.g., nav.php) into the addons folder,
-// and they will be automatically loaded without any additional configuration.
 $addonsPath = __DIR__ . '/addons';
-
-// Check if the addons directory exists and is readable.
 if (is_dir($addonsPath)) {
-    // Use glob to find all PHP files in the addons directory.
     foreach (glob($addonsPath . '/*.php') as $addonFile) {
         include_once $addonFile;
     }
 }
 
+$navFilePath = __DIR__ . '/navigation.txt';
 
-
+// ==========================
+// Sidebar Loader Function
+// ==========================
+/**
+ * Loads sidebar files from a given directory.
+ * 
+ * @param string|null $dir Path to the sidebar directory (default: /sidebars/)
+ * @return bool True on success, false on failure.
+ */
 function loadSidebars($dir = null) {
-    // If no directory is provided, assume sidebars is in the project root
-    if ($dir === null) {
-        // __DIR__ returns the path to the config/ folder.
-        // '/../sidebars/' navigates up one level and into the sidebars folder.
-        $dir = __DIR__ . '/../sidebars/';
-    }
+    $dir = $dir ?? __DIR__ . '/../sidebars/';
 
-    // Verify the directory exists and is readable.
     if (!is_dir($dir) || !is_readable($dir)) {
         error_log("Error: Directory '{$dir}' not found or not readable.");
         return false;
     }
 
     $files = [];
-
     try {
         $iterator = new DirectoryIterator($dir);
         foreach ($iterator as $fileinfo) {
-            // Ensure the item is a file and has a '.php' extension.
             if ($fileinfo->isFile() && strtolower($fileinfo->getExtension()) === 'php') {
                 $files[] = $fileinfo->getFilename();
             }
@@ -90,10 +77,9 @@ function loadSidebars($dir = null) {
             return false;
         }
 
-        // Sort the files naturally (e.g., 01zoo.php before 04about.php)
+        // Sort the sidebar files naturally (e.g., 01_menu.php before 04_about.php)
         sort($files, SORT_NATURAL);
 
-        // Include each sidebar file in sorted order
         foreach ($files as $file) {
             include_once $dir . $file;
         }
@@ -105,56 +91,79 @@ function loadSidebars($dir = null) {
     return true;
 }
 
-
-
-
+// ==========================
+// Breadcrumb Generator Function
+// ==========================
+/**
+ * Generates breadcrumb navigation HTML.
+ * 
+ * @return string The generated breadcrumb HTML (Bootstrap 5.3 compatible).
+ */
 function generateBreadcrumbs() {
-    $breadcrumbs = array();
+    $breadcrumbs = [
+        ["title" => "Home", "link" => "index.php"]
+    ];
 
-    // Always add the Home breadcrumb.
-    $breadcrumbs[] = array("title" => "Home", "link" => "index.php");
-
-    // Check if the main page parameter is set.
+    // Capture the current page and append breadcrumbs accordingly
     if (isset($_GET['p'])) {
         $page = $_GET['p'];
-        
-        // For the blog page.
-        if ($page === 'blog') {
-            $breadcrumbs[] = array("title" => "Blog", "link" => "index.php?p=blog");
-            if (isset($_GET['post']) && !empty($_GET['post'])) {
-                // For an individual blog post, add the post slug (without a link for the active item).
-                $postSlug = $_GET['post'];
-                $breadcrumbs[] = array("title" => htmlspecialchars($postSlug), "link" => "");
-            }
-        }
-        // For the search page.
-        elseif ($page === 'search') {
-            $breadcrumbs[] = array("title" => "Search", "link" => "index.php?p=search");
-            if (isset($_GET['q']) && !empty($_GET['q'])) {
-                $searchTerm = $_GET['q'];
-                $breadcrumbs[] = array("title" => htmlspecialchars($searchTerm), "link" => "");
-            }
-        }
-        // For any other page, simply add its name.
-        else {
-            $breadcrumbs[] = array("title" => htmlspecialchars($page), "link" => "");
-        }
+        handlePageBreadcrumbs($breadcrumbs, $page);
     }
 
-    // Build the breadcrumb HTML using Bootstrap 5.3 markup.
+    return buildBreadcrumbHtml($breadcrumbs);
+}
+
+/**
+ * Handles the breadcrumbs for specific pages.
+ * 
+ * @param array &$breadcrumbs The breadcrumbs array to modify.
+ * @param string $page The current page identifier.
+ */
+function handlePageBreadcrumbs(array &$breadcrumbs, string $page) {
+    if ($page === 'blog') {
+        $breadcrumbs[] = ["title" => "Blog", "link" => "index.php?p=blog"];
+        if (isset($_GET['post']) && !empty($_GET['post'])) {
+            $postSlug = htmlspecialchars($_GET['post']);
+            $breadcrumbs[] = ["title" => $postSlug, "link" => ""];
+        }
+    } elseif ($page === 'search') {
+        $breadcrumbs[] = ["title" => "Search", "link" => "index.php?p=search"];
+        if (isset($_GET['q']) && !empty($_GET['q'])) {
+            $searchTerm = htmlspecialchars($_GET['q']);
+            $breadcrumbs[] = ["title" => $searchTerm, "link" => ""];
+        }
+    } else {
+        $breadcrumbs[] = ["title" => htmlspecialchars($page), "link" => ""];
+    }
+}
+
+/**
+ * Builds breadcrumb HTML from an array of breadcrumbs.
+ * 
+ * @param array $breadcrumbs The breadcrumbs array to build HTML from.
+ * @return string The generated breadcrumb HTML.
+ */
+function buildBreadcrumbHtml(array $breadcrumbs) {
     $html = '<nav aria-label="breadcrumb"><ol class="breadcrumb mt-3">';
     $lastIndex = count($breadcrumbs) - 1;
+
     foreach ($breadcrumbs as $index => $crumb) {
         if ($index === $lastIndex || empty($crumb["link"])) {
-            // The last breadcrumb or an item without a link is active.
             $html .= '<li class="breadcrumb-item active" aria-current="page">' . $crumb["title"] . '</li>';
         } else {
             $html .= '<li class="breadcrumb-item"><a href="' . $crumb["link"] . '">' . $crumb["title"] . '</a></li>';
         }
     }
+
     $html .= '</ol></nav>';
     return $html;
 }
 
+// ==========================
+// Site URL Construction
+// ==========================
+$protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
+$host = $_SERVER['HTTP_HOST'];
+$siteUrl = $protocol . '://' . $host;
 
 ?>
