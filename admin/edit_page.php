@@ -187,13 +187,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="col">
       <div class="form-group">
         <label for="header_includes">Header Includes (one per line):</label>
-        <textarea class="form-control" id="header_includes" name="header_includes" rows="5"><?php echo htmlspecialchars($headerIncludesText); ?></textarea>
+        <textarea class="form-control" id="header_includes" name="header_includes" rows="5"><?php echo htmlspecialchars($headerIncludes); ?></textarea>
       </div>
 			</div>
             <div class="col">
       <div class="form-group">
         <label for="footer_includes">Footer Includes (one per line):</label>
-        <textarea class="form-control" id="footer_includes" name="footer_includes" rows="5"><?php echo htmlspecialchars($footerIncludesText); ?></textarea>
+        <textarea class="form-control" id="footer_includes" name="footer_includes" rows="5"><?php echo htmlspecialchars($footerIncludes); ?></textarea>
       </div>
 			</div>
           </div>
