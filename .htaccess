@@ -19,6 +19,8 @@ RewriteRule ^blog-([a-zA-Z0-9_-]+)\.html$ /index.php?p=blog&post=$1 [L,QSA]
 # General rule: Rewrite page.html to index.php?p=page
 RewriteRule ^([a-zA-Z0-9_-]+)\.html$ /index.php?p=$1 [L,QSA]
 
+# Custom 404 Redirect to a user-friendly page
+ErrorDocument 404 /404.html
 
 
 <IfModule mod_deflate.c>
