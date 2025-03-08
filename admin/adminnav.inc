@@ -27,3 +27,8 @@ $current_page = basename($_SERVER['PHP_SELF']);  // Get the current page name
     <i class="bi bi-pencil"></i><br>Edit Post
   </a>
 </li>
+<li>
+  <a href="uploads.php" class="nav-link py-3 border-bottom rounded-0 <?php echo ($current_page == 'uploads.php') ? 'active' : ''; ?>" title="Upload Images">
+    <i class="bi bi-upload"></i><br>Upload Images
+  </a>
+</li>
