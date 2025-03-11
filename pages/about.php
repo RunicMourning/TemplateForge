@@ -58,14 +58,17 @@ $pageTitle = 'About Us';
 <div class="row mt-5 text-center">
     <div class="col">
         <h3 class="text-primary">Connect with Me</h3>
-        <a href="#" class="btn btn-outline-primary me-2 shadow">
-            <i class="bi bi-twitter"></i> Twitter
-        </a>
-        <a href="#" class="btn btn-outline-secondary me-2 shadow">
-            <i class="bi bi-linkedin"></i> LinkedIn
-        </a>
-        <a href="#" class="btn btn-outline-dark shadow">
-            <i class="bi bi-github"></i> GitHub
-        </a>
+<div class="btn-group border" role="group" aria-label="Social Media">
+  <a href="#" class="btn btn-light">
+    <i class="bi bi-twitter"></i> Twitter
+  </a>
+  <a href="#" class="btn btn-light">
+    <i class="bi bi-linkedin"></i> LinkedIn
+  </a>
+  <a href="#" class="btn btn-light">
+    <i class="bi bi-github"></i> GitHub
+  </a>
+</div>
+
     </div>
 </div>

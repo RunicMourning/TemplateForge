@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo htmlspecialchars($pageTitle); ?> - <?php echo htmlspecialchars($siteTitle); ?></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Nabla&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" href="css/style.css">
 
 <!-- Output header includes -->
 <?php
@@ -70,9 +70,7 @@ if (!empty($headerIncludes)) {
   </li>
   <li>
     <a href="#" class="flex items-center gap-1 text-white text-decoration-none" title="Follow me on Bluesky" target="_blank">
-      <svg width="18" height="18" viewBox="0 0 600 530" xmlns="http://www.w3.org/2000/svg" class="me-2">
-        <path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="currentColor"/>
-      </svg>Bluesky
+      <i class="bi bi-bluesky me-2"></i>Bluesky
     </a>
   </li>
   <li>
@@ -86,15 +84,31 @@ if (!empty($headerIncludes)) {
             <!-- Legal Links -->
             <div class="col-md-4 mb-3">
                 <h5 class="text-uppercase mb-3">Legal</h5>
-                <a href="#" class="d-block text-white mb-2 text-decoration-none">Terms & Conditions</a>
-                <a href="privacy.html" class="d-block text-white mb-2 text-decoration-none">Privacy Policy</a>
+<ul class="list-unstyled">
+  <li>
+    <a href="#" class="d-block text-white mb-2 text-decoration-none">
+      <i class="bi bi-file-earmark-text me-2"></i>Terms & Conditions
+    </a>
+  </li>
+  <li>
+    <a href="privacy.html" class="d-block text-white mb-2 text-decoration-none">
+      <i class="bi bi-shield-lock me-2"></i>Privacy Policy
+    </a>
+  </li>
+</ul>
             </div>
             
             <!-- Contact Information -->
             <div class="col-md-4 mb-3">
                 <h5 class="text-uppercase mb-3">Contact Us</h5>
-                <p class="mb-1"><strong>Email:</strong> <a href="mailto:contact@mywebsite.com" class="text-white text-decoration-none">contact@mywebsite.com</a></p>
-                <p class="mb-0"><strong>Phone:</strong> <a href="tel:+11234567890" class="text-white text-decoration-none">(123) 456-7890</a></p>
+<ul class="list-unstyled">
+  <li class="mb-1">
+    <i class="bi bi-envelope-at-fill me-2"></i><a href="mailto:contact@mywebsite.com" class="text-white text-decoration-none">contact@mywebsite.com</a>
+  </li>
+  <li class="mb-0">
+    <i class="bi bi-telephone me-2"></i><a href="tel:+11234567890" class="text-white text-decoration-none">(123) 456-7890</a>
+  </li>
+</ul>
             </div>
         </div>
 

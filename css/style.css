@@ -1,41 +1,9 @@
 /*--------------------------------------------------------------
-   Global Variables & Reset
+   ✅ Base Typography
+   Sets up general font styles for the page and links.
 --------------------------------------------------------------*/
-:root {
-  --primary-color: #0073e6;
-  --primary-hover: #005bb5;
-  --secondary-color: #cfe2ff;
-  --background-color: #f8f9fa;
-  --text-color: #333;
-  --white: #fff;
-  --header-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  --aside-bg: #e3e7ed;
-  --aside-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-}
 
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/*--------------------------------------------------------------
-   Import Google Font
-   It is best practice to link fonts in your HTML <head>
-
-@import url('https://fonts.googleapis.com/css2?family=Cairo+Play:wght@200..1000&family=Nabla&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
-
---------------------------------------------------------------*/
-/*--------------------------------------------------------------
-   Base Styles
---------------------------------------------------------------*/
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   font-family: "Roboto", serif;
   font-optical-sizing: auto;
   font-weight: normal;
@@ -53,187 +21,10 @@ a {
 }
 
 /*--------------------------------------------------------------
-   Header
---------------------------------------------------------------*/
-header {
-  background-color: #333;
-  color: var(--white);
-  padding: 20px;
-  box-shadow: var(--header-shadow);
-}
-
-header h1 {
-  margin-bottom: 10px;
-}
-
-/*--------------------------------------------------------------
-   Global Navigation
---------------------------------------------------------------*/
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  padding: 0;
-}
-
-nav a {
-  color: var(--white);
-  padding: 8px 15px;
-  font-weight: 600;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-nav a:hover {
-  background-color: var(--primary-hover);
-  transform: scale(1.1);
-}
-
-/*--------------------------------------------------------------
-   Layout
---------------------------------------------------------------*/
-.main-content {
-  display: flex;
-  flex: 1;
-  gap: 20px;
-  padding: 20px;
-}
-
-/*--------------------------------------------------------------
-   Sidebar
---------------------------------------------------------------*/
-aside {
-  width: 250px;
-  background-color: var(--aside-bg);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: var(--aside-shadow);
-}
-
-aside nav ul {
-  list-style: none;
-  padding: 0;
-}
-
-aside nav a {
-  display: block;
-  color: var(--primary-color);
-  font-weight: 500;
-  padding: 8px 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-aside nav a:hover {
-  background-color: var(--secondary-color);
-}
-
-/*--------------------------------------------------------------
-   Main Content Area
---------------------------------------------------------------*/
-main {
-  flex: 1;
-  padding: 20px;
-  background: var(--white);
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/*--------------------------------------------------------------
-   Footer
---------------------------------------------------------------*/
-footer {
-  background-color: #333;
-  color: var(--white);
-  padding: 15px;
-  text-align: center;
-  font-size: 0.9em;
-}
-
-/*--------------------------------------------------------------
-   Responsive Design
---------------------------------------------------------------*/
-@media (max-width: 768px) {
-  .main-content {
-    flex-direction: column;
-  }
-
-  aside {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  nav li {
-    margin: 5px 0;
-  }
-}
-
-/*--------------------------------------------------------------
-   Navigation Variants
+   ✅ Headings
+   Ensures all heading elements are consistently styled with lowercase text and uppercase first letter.
 --------------------------------------------------------------*/
 
-/* Horizontal Navigation */
-ul.nav-horizontal {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: row;
-  gap: 15px;
-  justify-content: center;
-}
-
-ul.nav-horizontal a {
-  color: var(--primary-color);
-  padding: 8px 15px;
-  font-weight: 600;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-ul.nav-horizontal a:hover {
-  background-color: var(--secondary-color);
-  transform: scale(1.1);
-}
-
-/* Ensure horizontal nav remains horizontal on small screens */
-@media (max-width: 768px) {
-  ul.nav-horizontal {
-    flex-direction: row;
-  }
-}
-
-/* Vertical Navigation */
-ul.nav-vertical {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-ul.nav-vertical a {
-  color: var(--primary-color);
-  font-weight: 500;
-  padding: 4px 8px;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-ul.nav-vertical a:hover {
-  background-color: var(--secondary-color);
-}
-
-/*--------------------------------------------------------------
-   Headings
---------------------------------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
   font-family: "Cairo Play", serif;
   font-optical-sizing: auto;
@@ -253,92 +44,53 @@ h6::first-letter {
   text-transform: uppercase;
 }
 
+/*--------------------------------------------------------------
+   ✅ Social Media Icons
+   Styles for the various social media platform icons.
+--------------------------------------------------------------*/
 
-
-
-/* navbar */
-
-/* Main navbar container */
-.mainNavbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: linear-gradient(to bottom, #000,#333,#000);
-    color: white;
-}
-/* Left section for nav links */
-.navbar-nav-left {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
+.bi-bluesky {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+  fill: currentColor;
+  background: url('data:image/svg+xml;utf8,<svg width="18" height="18" viewBox="0 0 600 530" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="m135.72 44.03c66.496 49.921 138.02 151.14 164.28 205.46 26.262-54.316 97.782-155.54 164.28-205.46 47.98-36.021 125.72-63.892 125.72 24.795 0 17.712-10.155 148.79-16.111 170.07-20.703 73.984-96.144 92.854-163.25 81.433 117.3 19.964 147.14 86.092 82.697 152.22-122.39 125.59-175.91-31.511-189.63-71.766-2.514-7.3797-3.6904-10.832-3.7077-7.8964-0.0174-2.9357-1.1937 0.51669-3.7077 7.8964-13.714 40.255-67.233 197.36-189.63 71.766-64.444-66.128-34.605-132.26 82.697-152.22-67.108 11.421-142.55-7.4491-163.25-81.433-5.9562-21.282-16.111-152.36-16.111-170.07 0-88.687 77.742-60.816 125.72-24.795z" fill="%231185FE"/></svg>');
+  background-size: contain;
 }
 
-.navbar-nav-left li {
-    margin-right: 20px;
-}
+.bi-discord { color: #5865F2; }
+.bi-facebook { color: #1877F2; }
+.bi-github { color: #181717; }
+.bi-instagram { background: linear-gradient(45deg, #F58529, #DD2A7B, #8134AF, #515BD4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.bi-linkedin { color: #0A66C2; }
+.bi-mastodon { color: #6364FF; }
+.bi-medium { color: #000000; }
+.bi-pinterest { color: #E60023; }
+.bi-reddit { color: #FF4500; }
+.bi-snapchat { color: #FFFC00; text-shadow: 0 0 3px rgba(0, 0, 0, 0.3); }
+.bi-tiktok { background: linear-gradient(45deg, #25F4EE, #FE2C55); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.bi-twitch { color: #9146FF; }
+.bi-twitter { color: #1D9BF0; }
+.bi-vimeo { color: #1AB7EA; }
+.bi-youtube { color: #FF0000; }
 
-.navbar-nav-left li a {
-    text-decoration: none;
-    color: #fff;
-    padding: 5px 10px;
-    display: block;
-}
+/*--------------------------------------------------------------
+   ✅ Custom Icons for Functional Sections
+   Specific icons for common site functions like home, profile, blog, etc.
+--------------------------------------------------------------*/
 
-.navbar-nav-left li a:hover {
-    background-color: #fff;
-    border-radius: 4px;
-    color: #000;}
-
-/* Right section for custom elements (search, social media) */
-.navbar-custom-elements {
-    list-style: none;
-    display: flex; /* Keep flex on the UL */
-    margin: 0;
-    padding: 0;
-    align-items: center;
-}
-
-.navbar-custom-elements li {
-    margin-left: 20px;
-    align-items: center; /* Vertically center align items */
-} /* Removed display: flex from the LI */
-
-.navbar-custom-elements li a {
-    text-decoration: none;
-    color: #fff;
-}
-
-.navbar-custom-elements li a img {
-    width: 20px;
-    height: 20px;
-    margin-right: 5px;
-}
-
-/* Styles for the search bar */
-.navbar-search form {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.navbar-search input[type="text"] {
-    padding: 5px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.navbar-search button {
-    padding: 5px 10px;
-    font-size: 14px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-}
-
-.navbar-search button:hover {
-    background-color: #0056b3;
-}
+.bi-house-door { color: #007bff; }
+.bi-people { color: #20c997; }
+.bi-journal-text { color: #fff; }
+.bi-exclamation-circle-fill { color: #dc3545; }
+.bi-search { color: #efefef; }
+.bi-clock-history { color: #6f42c1; }
+.bi-file-earmark-text { color: #007bff; }
+.bi-calendar3 { color: #fd7e14; }
+.bi-folder-fill { background: linear-gradient(45deg, #FFD700 0%, #FFB700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.bi-arrow-right { color: #17a2b8; }
+.bi-shield-lock-fill { color: #bbb; }
+.bi-person-fill { color: #007bff; }
+.bi-lock-fill { color: #dc3545; }
+.bi-box-arrow-in-right { color: #1e3a8a; }
