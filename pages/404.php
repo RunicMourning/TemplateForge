@@ -9,7 +9,7 @@ $footerIncludes[] = "";
 
                 <!-- Card Header with Search Form -->
                 <div class="card-header text-center">
-                    <form class="input-group" action="search.php" method="GET">
+                    <form class="input-group" action="search.html" method="GET">
                         <input type="text" class="form-control" name="q" placeholder="Search for the page..." aria-label="Search" aria-describedby="button-addon2">
                         <button class="btn btn-danger" type="submit" id="button-addon2">Go</button>
                     </form>
