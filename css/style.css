@@ -20,6 +20,23 @@ a {
   text-decoration: none;
 }
 
+.cairo {
+  font-family: "Cairo Play", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "slnt" 0;
+  text-decoration: none;
+}
+.roboto {
+  font-family: "Roboto", serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+
 /*--------------------------------------------------------------
    ✅ Headings
    Ensures all heading elements are consistently styled with lowercase text and uppercase first letter.
