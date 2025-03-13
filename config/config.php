@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 // =========================
 // General Site Configuration
 // =========================
-$siteTitle = "TemplateForge"; // Website title for <title> tags
+$siteTitle = "TF Test Site"; // Website title for <title> tags
 
 // ==========================
 // Navigation Configuration

@@ -21,7 +21,12 @@ if (!empty($headerIncludes)) {
     <div class="container-fluid mt-4">
     <!-- Header -->
     <header class="bg-light py-3 text-start p-2">
-        <h1><span class="roboto">Template</span><b>Forge</b></h1>
+<svg width="350" height="90" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+  <g transform="scale(1.5) translate(10,10)">
+    <path d="M28.394 7.296l-4.254-0.64 1.241-1.64-5.146-3.928-1.308 1.728c-2.13-1.258-4.321-1.802-5.939-1.636l0 0.001c-0.231 0.022-0.45 0.078-0.656 0.129-0.646 0.162-1.148 0.459-1.465 0.877l5.412 4.129-1.207 1.595 1.017 0.776c-5.472 6.732-11.742 12.501-15.269 20.272l3.1 2.346c6.645-5.773 10.208-12.942 15.337-20.201l0.962 0.734 1.241-1.64 1.773 3.919 2.659 2.011c3.267-1.373 4.722-3.803 5.163-6.824l-2.659-2.012z" fill="#B22222"/>
+  </g>
+  <text x="50" y="70" font-size="40" font-family="Cairo Play, sans-serif" font-weight="bold" fill="#808080"><?php echo htmlspecialchars($siteTitle); ?></text>
+</svg>
     </header>
     
     <!-- Navigation Bar -->
@@ -56,60 +61,83 @@ if (!empty($headerIncludes)) {
             </main>
         </div>
     
-    <!-- Footer -->
+<!-- Footer -->
 <footer class="py-5 mt-4 p-4 border-top bg-dark text-white">
     <div class="container">
-        <div class="row text-center text-md-start">
+        <div class="row text-center text-md-start mb-3">
             <!-- Social Links -->
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase mb-3">Follow Us</h5>
-<ul class="list-unstyled">
-  <li>
-    <a href="#" class="flex items-center gap-1 text-white text-decoration-none">
-      <i class="bi bi-facebook me-2"></i>Facebook
-    </a>
-  </li>
-  <li>
-    <a href="#" class="flex items-center gap-1 text-white text-decoration-none" title="Follow me on Bluesky" target="_blank">
-      <i class="bi bi-bluesky me-2"></i>Bluesky
-    </a>
-  </li>
-  <li>
-    <a href="#" class="flex items-center gap-1 text-white text-decoration-none">
-      <i class="bi bi-instagram me-2"></i>Instagram
-    </a>
-  </li>
-</ul>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Follow Us
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none">
+                                    <i class="bi bi-linkedin me-2"></i>LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none" title="Follow me on Bluesky" target="_blank">
+                                    <i class="bi bi-bluesky me-2"></i>Bluesky
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="d-flex align-items-center gap-2 text-decoration-none">
+                                    <i class="bi bi-instagram me-2"></i>Instagram
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
             <!-- Legal Links -->
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase mb-3">Legal</h5>
-<ul class="list-unstyled">
-  <li>
-    <a href="#" class="d-block text-white mb-2 text-decoration-none">
-      <i class="bi bi-file-earmark-text me-2"></i>Terms & Conditions
-    </a>
-  </li>
-  <li>
-    <a href="privacy.html" class="d-block text-white mb-2 text-decoration-none">
-      <i class="bi bi-shield-lock me-2"></i>Privacy Policy
-    </a>
-  </li>
-</ul>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Legal
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#" class="d-block mb-2 text-decoration-none">
+                                    <i class="bi bi-file-earmark-text me-2"></i>Terms & Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="privacy.html" class="d-block mb-2 text-decoration-none">
+                                    <i class="bi bi-shield-lock me-2"></i>Privacy Policy
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
             
             <!-- Contact Information -->
-            <div class="col-md-4 mb-3">
-                <h5 class="text-uppercase mb-3">Contact Us</h5>
-<ul class="list-unstyled">
-  <li class="mb-1">
-    <i class="bi bi-envelope-at-fill me-2"></i><a href="mailto:contact@mywebsite.com" class="text-white text-decoration-none">contact@mywebsite.com</a>
-  </li>
-  <li class="mb-0">
-    <i class="bi bi-telephone me-2"></i><a href="tel:+11234567890" class="text-white text-decoration-none">(123) 456-7890</a>
-  </li>
-</ul>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Contact Us
+                    </div>
+                    <div class="card-body">
+<address>
+                        <ul class="list-unstyled">
+                            <li class="mb-1">
+                                <i class="bi bi-envelope-at-fill me-2"></i><a href="mailto:contact@mywebsite.com" class="text-decoration-none">contact@mywebsite.com</a>
+                            </li>
+                            <li class="mb-1">
+                                <i class="bi bi-telephone me-2"></i><a href="tel:+11234567890" class="text-decoration-none">(123) 456-7890</a>
+                            </li>
+                            <li class="mb-0">
+                                <i class="bi bi-car-front-fill me-2"></i>123 Business Ave, Suite 456, City, State, 78901</a>
+                            </li>
+                        </ul>
+</address>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -119,9 +147,15 @@ if (!empty($headerIncludes)) {
         </div>
     </div>
 </footer>
+
+
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
 
 <!-- Output header includes -->
 <?php

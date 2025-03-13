@@ -53,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Attempt to write file
                 if (file_put_contents($filePath, $phpContent) !== false) {
+include __DIR__.'/../logger.php'; // Adjust path as needed
+log_activity('File Created', 'Filename: ' . $filename);
+
                     $success = "Page created successfully.";
                 } else {
                     $error = "Error creating page. Check directory permissions.";

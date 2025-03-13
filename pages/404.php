@@ -4,6 +4,14 @@
 $pageTitle = '404';
 $headerIncludes[] = "";
 $footerIncludes[] = "";
+
+include __DIR__.'/../admin/logger.php'; // Adjust path as needed
+
+// Get the requested URL
+$requested_url = $_SERVER['REQUEST_URI'] ?? 'Unknown URL';
+
+// Log the 404 error
+log_activity('404 Not Found', 'Requested URL: ' . $requested_url);
 ?>
 <div class="card shadow-sm mt-3">
 
