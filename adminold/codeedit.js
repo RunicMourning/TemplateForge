@@ -2,10 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'use strict';
 
     // Cache frequently used DOM elements
-    const content = document.getElementById('content');  
+    const content = document.getElementById('content');  // Renamed from blogText to content
     const preview = document.getElementById('preview');
     const linkModalEl = document.getElementById('linkModal');
     const imageModalEl = document.getElementById('imageModal');
+    const colorPickerOverlay = document.getElementById('colorPickerOverlay');
     const btnColorPicker = document.querySelector('.btn-color-picker');
     
     // Initialize Bootstrap modals if available
@@ -14,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Utility function: Update preview in real time
     const updatePreview = () => {
-        preview.innerHTML = content.value;
+        preview.innerHTML = content.value;  // Update reference to content
     };
 
     // Utility function: Insert given text at the current cursor position
     function insertAtCursor(text) {
-        const { selectionStart, selectionEnd, scrollTop } = content;
+        const { selectionStart, selectionEnd, scrollTop } = content;  // Update reference to content
         content.value = content.value.substring(0, selectionStart) + text + content.value.substring(selectionEnd);
         content.selectionStart = selectionStart + text.length;
         content.selectionEnd = content.selectionStart;
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generic template insertion for formatting (e.g., bold, italic)
     window.insertTemplate = (tagName) => {
         let template = getTemplate(tagName);
-        const { selectionStart, selectionEnd } = content;
+        const { selectionStart, selectionEnd } = content;  // Update reference to content
         if (tagName === 'blockquote') {
             const selectedText = content.value.substring(selectionStart, selectionEnd) || 'Quoted Text';
             template = `<blockquote>${selectedText}</blockquote>`;
@@ -61,17 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
         insertAtCursor(template);
     };
 
-    // Color picker functions using Bootstrap Modal
+    // Color picker functions
     window.showColorPicker = () => {
-        const colorPickerModalEl = document.getElementById('colorPickerModal');
-        if (!colorPickerModalEl) return;
-        const colorPickerModal = new bootstrap.Modal(colorPickerModalEl);
-        colorPickerModal.show();
+        if (!btnColorPicker) return;
+        const buttonRect = btnColorPicker.getBoundingClientRect();
+        colorPickerOverlay.style.display = "block";
+        colorPickerOverlay.style.top = (buttonRect.bottom + 5) + "px";
+        colorPickerOverlay.style.left = buttonRect.left + "px";
+    };
+
+    window.hideColorPicker = () => {
+        colorPickerOverlay.style.display = "none";
     };
 
     window.applyTextColor = () => {
         const colorPicker = document.getElementById('colorPicker');
-        const { selectionStart, selectionEnd } = content;
+        const { selectionStart, selectionEnd } = content;  // Update reference to content
         if (selectionStart === selectionEnd) {
             alert("Please select text to apply color.");
             return;
@@ -79,12 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedText = content.value.substring(selectionStart, selectionEnd);
         const coloredText = `<span style="color: ${colorPicker.value};">${selectedText}</span>`;
         content.value = content.value.substring(0, selectionStart) + coloredText + content.value.substring(selectionEnd);
-        // Hide the modal after applying the color
-        const modalEl = document.getElementById('colorPickerModal');
-        const modalInstance = bootstrap.Modal.getInstance(modalEl);
-        if (modalInstance) {
-            modalInstance.hide();
-        }
+        window.hideColorPicker();
         updatePreview();
     };
 
@@ -123,5 +124,5 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Update the preview as the user types
-    content.addEventListener('input', updatePreview);
+    content.addEventListener('input', updatePreview);  // Update reference to content
 });
