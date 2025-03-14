@@ -29,6 +29,16 @@ foreach ($pages as $pagePath) {
 }
 ?>
 
+<div class="container mt-4">
+    <!-- Create Page Button -->
+    <div class="row mb-4">
+        <div class="col">
+            <a href="index.php?p=create_page" class="btn btn-primary btn-lg w-100">
+                Create New Page
+            </a>
+        </div>
+    </div>
+
         <div class="row">
           <?php foreach ($pagesWithTitles as $page): ?>
             <div class="col-md-4 col-sm-6">
@@ -38,7 +48,7 @@ foreach ($pages as $pagePath) {
                 </div>
                 <div class="card-footer btn-group" role="group" aria-label="Page Actions">
                     <a href="index.php?p=edit_page&post=<?php echo urlencode($page['filename']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="index.php?p=delete_page&post=<?php echo urlencode($page['filename']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this page?');">Delete</a>
+                    <a href="delete_page.php?page=<?php echo urlencode($filename); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this page?');">Delete</a>
                 </div>
               </div>
             </div>

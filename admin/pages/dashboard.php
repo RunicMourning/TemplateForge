@@ -61,7 +61,7 @@ if ($dirSize >= 1024) {
             <ul class="list-group">
                 <li class="list-group-item"><a href="index.php?p=pages"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
                 <li class="list-group-item"><a href="index.php?p=posts"><i class="bi bi-stickies"></i> Blog Posts</a></li>
-                <li class="list-group-item"><a href="index.php"><i class="bi bi-images"></i> Media Library</a></li>
+                <li class="list-group-item"><a href="index.php?p=gallery"><i class="bi bi-images"></i> Media Library</a></li>
                 <li class="list-group-item"><a href="index.php"><i class="bi bi-gear"></i> Settings</a></li>
                 <li class="list-group-item"><a href="index.php?p=systeminfo"><i class="bi bi-server"></i> System Info</a></li>
             </ul>
@@ -130,7 +130,7 @@ if ($dirSize >= 1024) {
                     $lines = file($logFile, FILE_IGNORE_NEW_LINES);  // Read log file line by line
 
                     // Define the activities you want to track (excluding 404 errors)
-                    $activitiesToTrack = ['Page Created', 'Page Edited', 'Post Created', 'Post Edited'];
+                    $activitiesToTrack = ['Page Created', 'Page Edited', 'Post Created', 'Post Edited', 'Post Deleted', 'Page Deleted'];
 
                     // Function to format timestamp
                     function formatTimestamp($timestamp) {
@@ -158,6 +158,10 @@ if ($dirSize >= 1024) {
                                     $message = "Post \"<strong>$filename</strong>\" was Created.";
                                 } elseif ($activity === 'Post Edited') {
                                     $message = "Post \"<strong>$filename</strong>\" was Edited.";
+                                } elseif ($activity === 'Post Deleted') {
+                                    $message = "Post \"<strong>$filename</strong>\" was Deleted.";
+                                } elseif ($activity === 'Page Deleted') {
+                                    $message = "Page \"<strong>$filename</strong>\" was Deleted.";
                                 }
 
                                 // Format the message and add to the list

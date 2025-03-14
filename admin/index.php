@@ -1,5 +1,9 @@
 <?php
 // admin/index.php
+
+
+require_once 'login_module.php';
+
 // Include the configuration file.
 require_once __DIR__ . '/../config/config.php';
 
