@@ -65,6 +65,36 @@ if ($dirSize >= 1024) {
                 <li class="list-group-item"><a href="index.php"><i class="bi bi-gear"></i> Settings</a></li>
                 <li class="list-group-item"><a href="index.php?p=systeminfo"><i class="bi bi-server"></i> System Info</a></li>
             </ul>
+			
+<?php
+// Define the directory containing sidebar files
+$sidebarDir = 'sidebars';
+
+// Scan the directory while ignoring the default "." and ".." entries
+$sidebarFiles = array_diff(scandir($sidebarDir), array('.', '..'));
+
+// Check if any files were found
+if (!empty($sidebarFiles)) {
+    // Loop through each file in the sidebar directory
+    foreach ($sidebarFiles as $file) {
+        // Optionally, you can filter by file type (e.g., only include PHP files)
+        if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
+            continue;
+        }
+        
+        // Build the file path
+        $filePath = $sidebarDir . '/' . $file;
+        
+        // Include the sidebar file; error handling can be added as needed
+        include $filePath;
+    }
+} else {
+    echo '<p class="mt-3">No sidebar items found.</p>';
+}
+?>
+
+
+
         </div>
 
         <!-- Main Content -->
@@ -78,8 +108,8 @@ if ($dirSize >= 1024) {
                         <!-- Total Pages -->
                         <div class="col-md-3">
                             <div class="card border-primary mx-1 p-3">
-                                <div class="card border-primary shadow text-primary p-3 my-card">
-                                    <i class="bi bi-file-earmark-text"></i>
+                                <div class="card border-primary shadow text-light bg-primary p-3 my-card">
+                                    <i class="bi bi-file-earmark-text-fill"></i>
                                 </div>
                                 <div class="text-primary text-center mt-3"><h4>Total Pages</h4></div>
                                 <div class="text-primary text-center mt-2"><h1><?php echo $total_pages; ?></h1></div>
@@ -89,8 +119,8 @@ if ($dirSize >= 1024) {
                         <!-- Total Posts -->
                         <div class="col-md-3">
                             <div class="card border-success mx-1 p-3">
-                                <div class="card border-success shadow text-success p-3 my-card">
-                                    <i class="bi bi-stickies"></i>
+                                <div class="card border-success shadow text-light bg-success p-3 my-card">
+                                    <i class="bi bi-stickies-fill"></i>
                                 </div>
                                 <div class="text-success text-center mt-3"><h4>Total Posts</h4></div>
                                 <div class="text-success text-center mt-2"><h1><?php echo $total_posts; ?></h1></div>
@@ -100,7 +130,7 @@ if ($dirSize >= 1024) {
                         <!-- PHP Version -->
                         <div class="col-md-3">
                             <div class="card border-danger mx-1 p-3">
-                                <div class="card border-danger shadow text-danger p-3 my-card">
+                                <div class="card border-danger shadow text-light bg-danger p-3 my-card">
                                     <i class="bi bi-code-slash"></i>
                                 </div>
                                 <div class="text-danger text-center mt-3"><h4>PHP Version</h4></div>
@@ -111,8 +141,8 @@ if ($dirSize >= 1024) {
                         <!-- Entire Directory Size -->
                         <div class="col-md-3">
                             <div class="card border-warning mx-1 p-3">
-                                <div class="card border-warning shadow text-warning p-3 my-card">
-                                    <i class="bi bi-folder2"></i>
+                                <div class="card border-warning shadow text-light bg-warning p-3 my-card">
+                                    <i class="bi bi-folder-fill"></i>
                                 </div>
                                 <div class="text-warning text-center mt-3"><h4>Directory Size</h4></div>
                                 <div class="text-warning text-center mt-2"><h1><?php echo $formattedSize; ?></h1></div>
