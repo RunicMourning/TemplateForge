@@ -59,11 +59,11 @@ if ($dirSize >= 1024) {
         <div class="col-md-3 bg-light p-3">
             <h5 class="text-center">Admin Menu</h5>
             <ul class="list-group">
-                <li class="list-group-item"><a href="index.php?p=pages"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
-                <li class="list-group-item"><a href="index.php?p=posts"><i class="bi bi-stickies"></i> Blog Posts</a></li>
-                <li class="list-group-item"><a href="index.php?p=gallery"><i class="bi bi-images"></i> Media Library</a></li>
-                <li class="list-group-item"><a href="index.php"><i class="bi bi-gear"></i> Settings</a></li>
-                <li class="list-group-item"><a href="index.php?p=systeminfo"><i class="bi bi-server"></i> System Info</a></li>
+                <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
+                <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies"></i> Blog Posts</a></li>
+                <li class="list-group-item"><a href="index.php?p=gallery" class="link-underline-light"><i class="bi bi-images"></i> Media Library</a></li>
+                <li class="list-group-item"><a href="index.php" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
+                <li class="list-group-item"><a href="index.php?p=systeminfo" class="link-underline-light"><i class="bi bi-server"></i> System Info</a></li>
             </ul>
 			
 <?php
@@ -221,12 +221,12 @@ if (!empty($sidebarFiles)) {
                 </div>
 
                 <!-- Quick Actions -->
-                <div class="mt-4">
+                <!-- <div class="mt-4">
                     <h5>Quick Actions</h5>
                     <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add New Page</button>
                     <button class="btn btn-success"><i class="bi bi-pencil-square"></i> Add New Post</button>
                     <button class="btn btn-warning"><i class="bi bi-upload"></i> Upload Media</button>
-                </div>
+                </div> -->
 
             </div>
         </div>
