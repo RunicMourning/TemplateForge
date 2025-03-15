@@ -6,7 +6,7 @@ $pageTitle = 'Home';
 <!-- Hero Section -->
 <header class="bg-dark text-white text-center py-5 mt-3 rounded-5">
     <div class="container">
-        <h1>Welcome to Your Website</h1>
+        <h1>Welcome to <?php echo htmlspecialchars($siteTitle); ?></h1>
         <p class="lead">A simple, clean homepage</p>
         <a href="#" class="btn btn-light btn-lg">Get Started</a>
     </div>

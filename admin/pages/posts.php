@@ -42,6 +42,15 @@ usort($postsWithDetails, function ($a, $b) {
 });
 ?>
 
+<div class="container mt-4">
+    <!-- Create Page Button -->
+    <div class="row mb-4">
+        <div class="col">
+            <a href="index.php?p=create_post" class="btn btn-primary btn-lg w-100">
+                Create New Page
+            </a>
+        </div>
+    </div>
         <div class="row">
           <?php foreach ($postsWithDetails as $post): ?>
             <div class="col-md-4 col-sm-6">
@@ -52,9 +61,10 @@ usort($postsWithDetails, function ($a, $b) {
                 </div>
                 <div class="card-footer btn-group" role="group" aria-label="Post Actions">
                     <a href="index.php?p=edit_post&post=<?php echo urlencode($post['filename']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="index.php?p=delete_post&post=<?php echo urlencode($post['filename']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                    <a href="delete_post.php?post=<?php echo urlencode($post['filename']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
                 </div>
               </div>
             </div>
           <?php endforeach; ?>
-        </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 <?php
-// pages/activitylog.php
+// pages/log.php
 
 $pageTitle = 'Activity Log';
 
@@ -19,7 +19,6 @@ $totalLines = count($lines);
 $totalPages = ceil($totalLines / $resultsPerPage);
 
 // Get the current pagination page number; default to 1.
-// (We use a separate "page" parameter while the log page is identified by "p=log")
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) {
     $page = 1;
@@ -31,32 +30,43 @@ $entries = array_slice($lines, $start, $resultsPerPage);
 
 // Function to format the timestamp into a human-readable format.
 function formatTimestamp($timestamp) {
-    return date("F j, Y, g:i a", strtotime($timestamp));  // e.g., March 13, 2025, 12:27 pm
+    return date("F j, Y, g:i a", strtotime($timestamp));  // e.g., March 15, 2025, 12:27 pm
 }
 
 // Function to map the raw activity string to a standardized name and an icon.
 function getActivityData($activityType) {
     $activityTypeLower = strtolower($activityType);
-    // Default icon and name (if no match is found)
-    $icon = '<i class="bi bi-info-circle-fill"></i>';
-    $standardName = $activityType; // default to original
     
-    if (strpos($activityTypeLower, '404 not found') !== false) {
-        $icon = '<i class="bi bi-exclamation-triangle-fill text-danger"></i>';
-        $standardName = '404 Not Found';
-    } elseif (strpos($activityTypeLower, 'page created') !== false || strpos($activityTypeLower, 'file created') !== false) {
-        $icon = '<i class="bi bi-file-earmark-plus-fill text-success"></i>';
-        $standardName = 'Page Created';
-    } elseif (strpos($activityTypeLower, 'page edited') !== false) {
-        $icon = '<i class="bi bi-pencil-square text-primary"></i>';
-        $standardName = 'Page Edited';
-    } elseif (strpos($activityTypeLower, 'post created') !== false) {
-        $icon = '<i class="bi bi-file-plus-fill text-success"></i>';
-        $standardName = 'Post Created';
-    } elseif (strpos($activityTypeLower, 'post edited') !== false) {
-        $icon = '<i class="bi bi-pencil-fill text-warning"></i>';
-        $standardName = 'Post Edited';
+    // Default icon and name (if no match is found)
+    $icon = '<i class="bi bi-info-circle-fill text-secondary"></i>';
+    $standardName = $activityType;
+
+    // Define icon mappings
+    $icons = [
+        '404 not found'        => ['<i class="bi bi-exclamation-triangle-fill text-danger"></i>', '404 Not Found'],
+        'page created'         => ['<i class="bi bi-file-earmark-plus-fill text-success"></i>', 'Page Created'],
+        'page edited'          => ['<i class="bi bi-pencil-square text-primary"></i>', 'Page Edited'],
+        'page deleted'         => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Page Deleted'],
+        'post created'         => ['<i class="bi bi-file-plus-fill text-success"></i>', 'Post Created'],
+        'post edited'          => ['<i class="bi bi-pencil-fill text-warning"></i>', 'Post Edited'],
+        'post deleted'         => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Post Deleted'],
+        'image uploaded'       => ['<i class="bi bi-file-earmark-image-fill text-success"></i>', 'Image Uploaded'],
+        'image deleted'        => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Image Deleted'],
+        'admin login'          => ['<i class="bi bi-person-check-fill text-primary"></i>', 'Admin Login'],
+        'failed login'         => ['<i class="bi bi-person-x-fill text-danger"></i>', 'Failed Login Attempt'],
+        'site configuration'   => ['<i class="bi bi-gear-fill text-info"></i>', 'Site Configuration'],
+        'settings updated'     => ['<i class="bi bi-tools text-info"></i>', 'Settings Updated'],
+    ];
+
+    // Match action type to predefined icons
+    foreach ($icons as $key => $value) {
+        if (strpos($activityTypeLower, $key) !== false) {
+            $icon = $value[0];
+            $standardName = $value[1];
+            break;
+        }
     }
+    
     return ['icon' => $icon, 'name' => $standardName];
 }
 ?>
@@ -78,15 +88,12 @@ function getActivityData($activityType) {
           if (preg_match('/^\[(.*?)\]\s*-\s*(.*)/', $line, $parts)) {
               $timestamp = $parts[1];
               $rest = $parts[2];
+
               // Split the rest by " - IP:" to isolate activity details and the IP.
               $split = explode(' - IP:', $rest);
-              if (count($split) === 2) {
-                  $activityAndFile = trim($split[0]);
-                  $ip = trim($split[1]);
-              } else {
-                  $activityAndFile = trim($rest);
-                  $ip = '';
-              }
+              $activityAndFile = trim($split[0]);
+              $ip = count($split) === 2 ? trim($split[1]) : '';
+
               // Further split the activity part into the main activity and file detail.
               $activityParts = explode(' - ', $activityAndFile, 2);
               $activityType = trim($activityParts[0]);
@@ -99,7 +106,10 @@ function getActivityData($activityType) {
       ?>
         <tr>
           <td>
-            <?php echo $activityIcon . ' ' . htmlspecialchars($activityName); ?>
+            <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo htmlspecialchars($activityName); ?>">
+              <?php echo $activityIcon; ?>
+            </span>
+            <?php echo ' ' . htmlspecialchars($activityName); ?>
             <?php if ($fileDetail): ?>
               <br><small class="text-muted"><?php echo htmlspecialchars($fileDetail); ?></small>
             <?php endif; ?>
@@ -137,3 +147,11 @@ function getActivityData($activityType) {
     </ul>
   </nav>
 </div>
+
+<!-- Enable Bootstrap Tooltips -->
+<script>
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+</script>

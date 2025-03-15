@@ -1,5 +1,8 @@
 <?php
 // upload_widget.php
+
+include_once __DIR__.'/logger.php';
+
 $uploadDir = __DIR__ . '/../images/' . date("Y/m/"); // Change as needed
 
 // Ensure directory exists
@@ -19,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         $fullImageUrl = 'images/' . date("Y/m/") . $fileName; // Relative URL for full image
         $thumbImageUrl = 'images/' . date("Y/m/") . 'tn_' . $fileName; // Relative URL for thumbnail
         echo "<div class='alert alert-success'>Upload successful!</div>";
+log_activity('Image Uploaded', 'Filename: ' . $fileName);
         echo "<p><strong>Full Image:</strong> <code>&lt;img src=\"$fullImageUrl\"&gt;</code></p>";
         echo "<p><strong>Thumbnail:</strong> <code>&lt;img src=\"$thumbImageUrl\"&gt;</code></p>";
     } else {

@@ -14,7 +14,6 @@ function count_files_in_directory($dir) {
 $total_pages = count_files_in_directory('../pages');  // Adjust the path to point to the pages directory
 $total_posts = count_files_in_directory('../blog_posts');  // Adjust the path to point to the blog_posts directory
 
-
 // Set the main directory to monitor (relative path from admin folder)
 $dir = '../'; // Relative path to the 'dir' folder from the 'admin' folder
 
@@ -44,14 +43,14 @@ if ($dirSize >= 1024) {
     $formattedSize = $dirSize . ' bytes';
 }
 ?>
-    <style>
-        .my-card {
-            position: absolute;
-            left: 40%;
-            top: -20px;
-            border-radius: 50%;
-        }
-    </style>
+<style>
+    .my-card {
+        position: absolute;
+        left: 40%;
+        top: -20px;
+        border-radius: 50%;
+    }
+</style>
 
 <div class="container-fluid">
     <div class="row">
@@ -62,39 +61,23 @@ if ($dirSize >= 1024) {
                 <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
                 <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies"></i> Blog Posts</a></li>
                 <li class="list-group-item"><a href="index.php?p=gallery" class="link-underline-light"><i class="bi bi-images"></i> Media Library</a></li>
-                <li class="list-group-item"><a href="index.php" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
+                <li class="list-group-item"><a href="index.php?p=settings" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
                 <li class="list-group-item"><a href="index.php?p=systeminfo" class="link-underline-light"><i class="bi bi-server"></i> System Info</a></li>
             </ul>
-			
-<?php
-// Define the directory containing sidebar files
-$sidebarDir = 'sidebars';
-
-// Scan the directory while ignoring the default "." and ".." entries
-$sidebarFiles = array_diff(scandir($sidebarDir), array('.', '..'));
-
-// Check if any files were found
-if (!empty($sidebarFiles)) {
-    // Loop through each file in the sidebar directory
-    foreach ($sidebarFiles as $file) {
-        // Optionally, you can filter by file type (e.g., only include PHP files)
-        if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
-            continue;
-        }
-        
-        // Build the file path
-        $filePath = $sidebarDir . '/' . $file;
-        
-        // Include the sidebar file; error handling can be added as needed
-        include $filePath;
-    }
-} else {
-    echo '<p class="mt-3">No sidebar items found.</p>';
-}
-?>
-
-
-
+            
+            <?php
+            // Include sidebar files if present
+            $sidebarDir = 'sidebars';
+            $sidebarFiles = array_diff(scandir($sidebarDir), array('.', '..'));
+            if (!empty($sidebarFiles)) {
+                foreach ($sidebarFiles as $file) {
+                    if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') continue;
+                    include $sidebarDir . '/' . $file;
+                }
+            } else {
+                echo '<p class="mt-3">No sidebar items found.</p>';
+            }
+            ?>
         </div>
 
         <!-- Main Content -->
@@ -152,83 +135,132 @@ if (!empty($sidebarFiles)) {
                 </div>
 
                 <!-- Recent Activity -->
+                 <!-- Recent Activity -->
                 <div class="mt-4">
                     <h5><i class="bi bi-list-check"></i> <a href="index.php?p=log" class="link-underline-light link-dark">Recent Activity</a></h5>
-                    <?php
-                    // Assuming the log data is stored in a file
-                    $logFile = __DIR__.'/../activity.log';
-                    $lines = file($logFile, FILE_IGNORE_NEW_LINES);  // Read log file line by line
 
-                    // Define the activities you want to track (excluding 404 errors)
-                    $activitiesToTrack = ['Page Created', 'Page Edited', 'Post Created', 'Post Edited', 'Post Deleted', 'Page Deleted'];
+<?php
+// Assuming the log data is stored in a file
+$logFile = __DIR__ . '/../activity.log';
+$lines = file($logFile, FILE_IGNORE_NEW_LINES);  // Read log file line by line
 
-                    // Function to format timestamp
-                    function formatTimestamp($timestamp) {
-                        return date("F j, Y, g:i a", strtotime($timestamp));  // E.g., March 13, 2025, 12:27 pm
-                    }
+// Define the activities you want to track and their associated icons
+$activitiesToTrack = [
+    'Page Created' => 'bi-file-earmark-plus',
+    'Page Edited' => 'bi-pencil',
+    'Post Created' => 'bi-file-earmark-text',
+    'Post Edited' => 'bi-pencil-square',
+    'Post Deleted' => 'bi-trash',
+    'Page Deleted' => 'bi-file-earmark-x',
+    'Image Uploaded' => 'bi-cloud-upload',
+    'Image Deleted' => 'bi-trash3',
+    'Admin Login' => 'bi-person-lock',
+    'User Login' => 'bi-person-check',
+    'Site Configuration' => 'bi-gear-fill'
+];
 
-                    // Filter and display the selected activities
-                    $activityMessages = [];
-                    foreach ($lines as $line) {
-                        preg_match('/^\[(.*?)\] - (.*?) - Filename: (.*?) - IP: (.*)$/', $line, $matches);
-                        if (count($matches) === 5) {
-                            $timestamp = $matches[1];
-                            $activity = $matches[2];
-                            $filename = $matches[3];
-                            
-                            // Ignore 404 errors and only process desired activities
-                            if (in_array($activity, $activitiesToTrack)) {
-                                // Adjust the activity messages as required
-                                $message = '';
-                                if ($activity === 'Page Created') {
-                                    $message = "Page \"<strong>$filename</strong>\" was Created.";
-                                } elseif ($activity === 'Page Edited') {
-                                    $message = "Page \"<strong>$filename</strong>\" was Edited.";
-                                } elseif ($activity === 'Post Created') {
-                                    $message = "Post \"<strong>$filename</strong>\" was Created.";
-                                } elseif ($activity === 'Post Edited') {
-                                    $message = "Post \"<strong>$filename</strong>\" was Edited.";
-                                } elseif ($activity === 'Post Deleted') {
-                                    $message = "Post \"<strong>$filename</strong>\" was Deleted.";
-                                } elseif ($activity === 'Page Deleted') {
-                                    $message = "Page \"<strong>$filename</strong>\" was Deleted.";
-                                }
+// Function to format timestamp
+function formatTimestamp($timestamp) {
+    // Use PHP's DateTime to ensure the timestamp is correctly formatted
+    try {
+        $dateTime = new DateTime($timestamp);
+        return $dateTime->format("F j, Y, g:i a");  // E.g., March 13, 2025, 12:27 pm
+    } catch (Exception $e) {
+        return "Invalid timestamp";
+    }
+}
 
-                                // Format the message and add to the list
-                                $activityMessages[] = [
-                                    'message' => $message,
-                                    'timestamp' => formatTimestamp($timestamp)
-                                ];
-                            }
-                        }
-                    }
+// Filter and display the selected activities
+$activityMessages = [];
+foreach ($lines as $line) {
+    // Use regex to capture the necessary details
+    if (preg_match('/^\[(.*?)\] - (.*?) - (.*?) - IP: (.*)$/', $line, $matches)) {
+        $timestamp = $matches[1];
+        $activity = $matches[2];
+        $detail = $matches[3];
+        $ip = $matches[4];
 
-                    // Limit to the most recent 5 items
-                    $activityMessages = array_slice($activityMessages, 0, 5);
+        // **Exclude any log entry related to 404 errors**
+        if (stripos($activity, '404 Not Found') !== false) {
+            continue;  // Skip this entry
+        }
 
-                    if (count($activityMessages) > 0):
-                    ?>
-                    <ul class="list-group">
-                        <?php foreach ($activityMessages as $entry): ?>
-                            <li class="list-group-item">
-                                <?php echo $entry['message']; ?> <small class="text-muted"><?php echo $entry['timestamp']; ?></small>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                    <?php else: ?>
-                        <p>No recent activities to display.</p>
-                    <?php endif; ?>
+        // Only process desired activities
+        if (array_key_exists($activity, $activitiesToTrack)) {
+            $message = '';
+            $filename = trim(str_replace("Filename:", "", $detail));
+            $icon = $activitiesToTrack[$activity]; // Get the icon class based on activity
+
+            switch ($activity) {
+                case 'Page Created': 
+                    $message = "Page \"<strong>$filename</strong>\" was Created."; 
+                    break;
+                case 'Page Edited': 
+                    $message = "Page \"<strong>$filename</strong>\" was Edited."; 
+                    break;
+                case 'Post Created': 
+                    $message = "Post \"<strong>$filename</strong>\" was Created."; 
+                    break;
+                case 'Post Edited': 
+                    $message = "Post \"<strong>$filename</strong>\" was Edited."; 
+                    break;
+                case 'Post Deleted': 
+                    $message = "Post \"<strong>$filename</strong>\" was Deleted."; 
+                    break;
+                case 'Page Deleted': 
+                    $message = "Page \"<strong>$filename</strong>\" was Deleted."; 
+                    break;
+                case 'Image Uploaded': 
+                    $message = "Image \"<strong>$filename</strong>\" was Uploaded."; 
+                    break;
+                case 'Image Deleted': 
+                    $message = "Image \"<strong>$filename</strong>\" was Deleted."; 
+                    break;
+                case 'Admin Login': 
+                case 'User Login':
+                    $username = trim(str_replace("Username:", "", $detail));
+                    $message = "$activity \"<strong>$username</strong>\" Logged in."; 
+                    break;
+                case 'Site Configuration': 
+                    $message = "Site configuration settings were updated."; 
+                    break;
+            }
+
+            // Store the message and the associated icon
+            $activityMessages[] = [
+                'message'   => $message,
+                'timestamp' => $timestamp,  // Save raw timestamp for debugging
+                'formattedTimestamp' => formatTimestamp($timestamp),  // Formatted timestamp
+                'ip'        => $ip,
+                'icon'      => $icon
+            ];
+        }
+    }
+}
+
+// Sort activities in descending order by timestamp (newest first)
+usort($activityMessages, function($a, $b) {
+    // Try to convert raw timestamps to a comparable format
+    $timeA = strtotime($a['timestamp']);
+    $timeB = strtotime($b['timestamp']);
+    
+    return $timeB - $timeA;
+});
+
+// Display the last 5 activities (most recent first)
+$recentActivities = array_slice($activityMessages, 0, 5);
+
+echo '<div class="list-group">';
+foreach ($recentActivities as $activity) {
+    echo '<div class="list-group-item d-flex justify-content-between" title="IP Address: ' . $activity['ip'] . '">';
+    echo '<p class="mb-1"><i class="bi ' . $activity['icon'] . '"></i> ' . $activity['message'] . '</p>';
+    echo '<span class="text-muted">' . $activity['formattedTimestamp'] . '</span>';
+    echo '</div>';
+}
+echo '</div>';
+?>
+
+
                 </div>
-
-                <!-- Quick Actions -->
-                <!-- <div class="mt-4">
-                    <h5>Quick Actions</h5>
-                    <button class="btn btn-primary"><i class="bi bi-plus-circle"></i> Add New Page</button>
-                    <button class="btn btn-success"><i class="bi bi-pencil-square"></i> Add New Post</button>
-                    <button class="btn btn-warning"><i class="bi bi-upload"></i> Upload Media</button>
-                </div> -->
-
             </div>
         </div>
-    </div>
-</div>

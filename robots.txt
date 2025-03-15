@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+Disallow: /cgi-bin/
+Sitemap: dev.thevintagegamers.com/sitemap.html

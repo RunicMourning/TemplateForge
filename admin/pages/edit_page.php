@@ -3,6 +3,9 @@
 
 $pageTitle = 'Edit Page';
 
+include_once __DIR__.'/../logger.php';
+
+
 if (!isset($_GET['page'])) {
     die("No page specified.");
 }
@@ -49,8 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (file_put_contents($filePath, $phpContent) !== false) {
             $success = "Page updated successfully.";
-include __DIR__.'/../logger.php'; // Adjust path as needed
-log_activity('File Edited', 'Filename: ' . $filename);
+log_activity('Page Edited', 'Filename: ' . $filename);
         } else {
             $error = "Error updating page.";
         }

@@ -1,4 +1,11 @@
 <?php
+
+// pages/Gallery.php
+
+$pageTitle = 'Media Library';
+
+include_once __DIR__.'/../logger.php';
+
 $imagesDir = __DIR__ . '/../../images/';
 $yearDirs = glob($imagesDir . '*', GLOB_ONLYDIR);
 
@@ -13,6 +20,7 @@ if (isset($_POST['delete'])) {
         unlink($imagePath);
         // If the deleted file is not a thumbnail, remove its thumbnail version as well.
         $fileName = basename($imagePath);
+log_activity('Image Deleted', 'Filename: ' . $fileName);
         if (substr($fileName, 0, 3) !== 'tn_') {
             $thumbPath = dirname($imagePath) . '/tn_' . $fileName;
             if (file_exists($thumbPath)) {

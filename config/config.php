@@ -2,40 +2,17 @@
 // Enable error reporting for debugging purposes
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
-// =========================
-// General Site Configuration
-// =========================
-$siteTitle = "TF Test Site"; // Website title for <title> tags
-
-// ==========================
-// Navigation Configuration
-// ==========================
-$enableHorizontalNav = true;
-$enableVerticalNav   = true;
-
-$activeNavClass      = 'active';
-$navItemClass        = "nav-item";
-$navLinkClass        = "nav-link";
-
-$enableHorizontalNavbar = true;
-$navbarFilePath = __DIR__ . '/navbar.txt';
-$activeNavbarClass = 'active';
-$page = 'home'; // Default page
-
-// ==========================
-// Podcast Configuration
-// ==========================
-$ispodcast = false;
-$podcastAuthor = "Your Name";
-$podcastDescription = "A short description of your podcast.";
-$podcastExplicit = false; // Mark as explicit or clean
+// Include settings from the settings file
+include_once 'settings.php';
 
 // ==========================
 // Add-ons & Includes
 // ==========================
 $headerIncludes = [];
 $footerIncludes = [];
+
+$page = 'home'; // Default page
+
 
 $addonsPath = __DIR__ . '/addons';
 if (is_dir($addonsPath)) {

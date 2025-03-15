@@ -1,124 +1,72 @@
 <?php
-// admin/edit_post.php
+// pages/create_post.php
 
-require_once 'login_module.php';
-require_once '../config/config.php';
-if (!isset($_GET['post'])) {
-    die("No post specified.");
-}
-$filename = basename($_GET['post']);
-$filePath = realpath(__DIR__ . '/../blog_posts') . "/$filename";
-if (!file_exists($filePath)) {
-    die("Post not found.");
-}
+$pageTitle = 'Create Post';
+include_once __DIR__.'/../logger.php';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = trim($_POST['title']);
-    $timestamp = trim($_POST['timestamp']);
-    $content = $_POST['content'];
-    
-    if ($title == '' || $timestamp == '' || $content == '') {
+    $filename = trim($_POST['filename']);
+    $title    = trim($_POST['title']);
+    $date     = trim($_POST['date']);  // Expected format: YYYY-MM-DD
+    $content  = $_POST['content'];
+
+    if ($filename === '' || $title === '' || $date === '' || $content === '') {
         $error = "All fields are required.";
     } else {
-        $phpContent = "<?php\n" .
-                      "// blog_posts/{$filename}\n\n" .
-                      "\$postTitle = " . var_export($title, true) . ";\n" .
-                      "\$postTimestamp = " . var_export($timestamp, true) . ";\n" .
-                      "?>\n" .
-                      $content;
-        if (file_put_contents($filePath, $phpContent) !== false) {
-            $success = "Post updated successfully.";
+        if (!preg_match('/^[a-zA-Z0-9_-]+$/', $filename)) {
+            $error = "Filename can only contain letters, numbers, dashes, and underscores.";
         } else {
-            $error = "Error updating post.";
+            // Combine the selected date with the current time.
+            $currentTime = date('H:i:s');
+            $postTimestamp = $date . ' ' . $currentTime;
+            
+            $phpContent = "<?php\n" .
+                          "// blog_posts/{$filename}.php\n\n" .
+                          "\$postTitle = " . var_export($title, true) . ";\n" .
+                          "\$postTimestamp = " . var_export($postTimestamp, true) . ";\n" .
+                          "?>\n" .
+                          $content;
+                          
+            $filePath = realpath(__DIR__ . '/../../blog_posts') . "/{$filename}.php";
+            
+            if (file_put_contents($filePath, $phpContent) !== false) {
+                $success = "Post created successfully.";
+
+log_activity('Post Created', 'Filename: ' . $filename);
+            } else {
+                $error = "Error creating post.";
+            }
         }
     }
-} else {
-    $existingContent = file_get_contents($filePath);
-    $title = '';
-    $timestamp = '';
-    if (preg_match('/\$postTitle\s*=\s*(["\'])(.*?)\1\s*;/', $existingContent, $matches)) {
-        $title = $matches[2];
-    }
-    if (preg_match('/\$postTimestamp\s*=\s*(["\'])(.*?)\1\s*;/', $existingContent, $matches)) {
-        $timestamp = $matches[2];
-    }
-    $content = preg_replace('/^<\?php.*?\?>\s*/s', '', $existingContent);
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Post</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <style>
-    html, body {
-      height: 100%;
-    }
-    pre {
-      background-color: #f5f5f5;
-      padding: 10px;
-      border: 1px solid #ddd;
-    }
-    #preview {
-      padding: 10px;
-      margin-top: 10px;
-    }
-    #colorPickerOverlay {
-      display: none;
-      position: absolute;
-      background-color: white;
-      border: 1px solid #ddd;
-      padding: 10px;
-      border-radius: 5px;
-      z-index: 999;
-    }
-  </style>
-</head>
-<body class="d-flex flex-column min-vh-100">
-  <div class="container-fluid d-flex flex-column min-vh-100">
-
-  
-  
-    <header class="bg-light p-2 d-flex justify-content-between align-items-center">
-  <div><i class="bi bi-book-half"></i> <?php echo htmlspecialchars($siteTitle); ?> Admin</div>
-  <a href="/" class="btn btn-sm btn-primary float-end" target="_blank" title="Visit Site">
-    Visit Site
-  </a>
-</header>
-  
-
-    <div class="row flex-grow-1 h-100">
-      <div class="col-sm-1 d-flex flex-column bg-body-tertiary h-100">
-        <div class="d-flex flex-column flex-shrink-0">
-          <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-<?php include('adminnav.inc'); ?>
-          </ul>
-        </div>
-      </div>
-      <div class="col-sm-11 h-100">
 
     <?php if (isset($error)): ?>
       <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>
+
     <?php if (isset($success)): ?>
       <div class="alert alert-success"><?php echo htmlspecialchars($success); ?></div>
     <?php endif; ?>
 
-    <form method="post" action="">
+    <form method="post" action="" class="mt-4">
           <div class="row mt-4">
             <div class="col">
-      <div class="form-group">
-        <label for="title">Post Title:</label>
-        <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>" required>
+      <div class="mb-3 input-group">
+        <span class="input-group-text" id="title-label">Title</span>
+        <input type="text" id="title" name="title" class="form-control" required aria-describedby="title-label">
+      </div>
+      <div class="mb-3 input-group">
+        <span class="input-group-text" id="date-label">Date</span>
+        <input type="date" id="date" name="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" required aria-describedby="date-label">
       </div>
 			</div>
             <div class="col">
-      <div class="form-group">
-        <label for="timestamp">Timestamp (YYYY-MM-DD HH:MM:SS):</label>
-        <input type="datetime-local" class="form-control" id="timestamp" name="timestamp" value="<?php echo htmlspecialchars($timestamp); ?>" required>
+      <div class="mb-3 input-group">
+        <span class="input-group-text" id="filename-label">Filename</span>
+        <input type="text" id="filename" name="filename" class="form-control" required aria-describedby="filename-label">
       </div>
 			</div>
           </div>
@@ -128,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="btn-group editor-controls w-100 card-header">
                   <button type="button" class="btn btn-light btn-sm" onclick="insertLink()" title="Insert Link"><i class="bi bi-link"></i></button>
                   <button type="button" class="btn btn-light btn-sm" onclick="insertImage()" title="Insert Image"><i class="bi bi-image"></i></button>
-                  <button type="button" class="btn btn-light btn-sm btn-color-picker" onclick="showColorPicker()" title="Text Color"><i class="bi bi-palette"></i></button>
                   <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('bold')" title="Bold Text"><i class="bi bi-type-bold"></i></button>
                   <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('italic')" title="Italic Text"><i class="bi bi-type-italic"></i></button>
                   <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('underline')" title="Underline Text"><i class="bi bi-type-underline"></i></button>
@@ -141,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <button type="button" class="btn btn-light btn-sm" onclick="insertTemplate('rightAlign')" title="Right Align"><i class="bi bi-text-right"></i></button>
                 </div>
                 <div class="card-body">
-                  <textarea class="form-control" id="content" name="content" rows="10" required><?php echo htmlspecialchars($content); ?></textarea>
+                  <textarea id="content" name="content" class="form-control" rows="10" required></textarea>
                 </div>
               </div>
             </div>
@@ -158,16 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           </div>
           <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
-      </div>
-    </div>
-  </div>
-  
-  
-      <!-- Hidden Elements -->
-    <div id="colorPickerOverlay">
-      <input type="color" id="colorPicker">
-      <button onclick="applyTextColor()">OK</button>
-    </div>
+
+
     
     <!-- Link Insertion Modal -->
     <div class="modal fade" id="linkModal" tabindex="-1" aria-labelledby="linkModalLabel" aria-hidden="true">
@@ -211,9 +150,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </div>
   </div>
+
+<script src="codeedit.js"></script>
   
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="codeedit.js"></script>
-</body>
-</html>

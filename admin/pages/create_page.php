@@ -3,6 +3,8 @@
 
 $pageTitle = 'Create Page';
 
+include_once __DIR__.'/../logger.php';
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve and trim input values.
     $filename        = trim($_POST['filename']);
@@ -53,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Attempt to write file
                 if (file_put_contents($filePath, $phpContent) !== false) {
-include __DIR__.'/../logger.php'; // Adjust path as needed
-log_activity('File Created', 'Filename: ' . $filename);
+
+log_activity('Page Created', 'Filename: ' . $filename);
 
                     $success = "Page created successfully.";
                 } else {

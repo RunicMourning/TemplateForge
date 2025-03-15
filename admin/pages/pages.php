@@ -39,18 +39,19 @@ foreach ($pages as $pagePath) {
         </div>
     </div>
 
-        <div class="row">
-          <?php foreach ($pagesWithTitles as $page): ?>
+    <div class="row">
+        <?php foreach ($pagesWithTitles as $page): ?>
             <div class="col-md-4 col-sm-6">
-              <div class="card mb-2">
-                <div class="card-body">
-                  <h5 class="card-title"><?php echo htmlspecialchars($page['title']); ?></h5>
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($page['title']); ?></h5>
+                    </div>
+                    <div class="card-footer btn-group" role="group" aria-label="Page Actions">
+                        <a href="index.php?p=edit_page&page=<?php echo urlencode($page['filename']); ?>" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="delete_page.php?page=<?php echo urlencode($page['filename']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this page?');">Delete</a>
+                    </div>
                 </div>
-                <div class="card-footer btn-group" role="group" aria-label="Page Actions">
-                    <a href="index.php?p=edit_page&post=<?php echo urlencode($page['filename']); ?>" class="btn btn-warning btn-sm">Edit</a>
-                    <a href="delete_page.php?page=<?php echo urlencode($filename); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this page?');">Delete</a>
-                </div>
-              </div>
             </div>
-          <?php endforeach; ?>
-        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
