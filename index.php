@@ -2,6 +2,7 @@
 // index.php
 // Include the configuration file.
 require_once __DIR__ . '/config/config.php';
+include __DIR__ . '/track.php';
 
 
 // Retrieve the 'p' parameter from the URL; default to 'home' if not provided.

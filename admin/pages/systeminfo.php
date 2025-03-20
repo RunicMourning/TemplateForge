@@ -1,4 +1,7 @@
 <?php
+$pageTitle = 'System Information';
+
+
 // Function to get system load (Linux only)
 function getServerLoad() {
     if (function_exists('sys_getloadavg')) {

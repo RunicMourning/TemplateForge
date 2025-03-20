@@ -1,0 +1,88 @@
+{
+    "home": {
+        "title": "Home",
+        "views": {
+            "2025-03-19": 2
+        },
+        "unique_ips": {
+            "2025-03-19": {
+                "24.225.110.69": true
+            }
+        },
+        "referrers": {
+            "2025-03-19": {
+                "Direct": 1,
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 1
+            }
+        },
+        "user_agents": {
+            "2025-03-19": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko\/20100101 Firefox\/136.0": 2
+            }
+        }
+    },
+    "about": {
+        "title": "About Us",
+        "views": {
+            "2025-03-19": 1
+        },
+        "unique_ips": {
+            "2025-03-19": {
+                "24.225.110.69": true
+            }
+        },
+        "referrers": {
+            "2025-03-19": {
+                "https:\/\/dev.thevintagegamers.com\/": 1
+            }
+        },
+        "user_agents": {
+            "2025-03-19": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko\/20100101 Firefox\/136.0": 1
+            }
+        }
+    },
+    "blog": {
+        "title": "Blog",
+        "views": {
+            "2025-03-19": 2
+        },
+        "unique_ips": {
+            "2025-03-19": {
+                "24.225.110.69": true
+            }
+        },
+        "referrers": {
+            "2025-03-19": {
+                "https:\/\/dev.thevintagegamers.com\/about.html": 1,
+                "https:\/\/dev.thevintagegamers.com\/index.php": 1
+            }
+        },
+        "user_agents": {
+            "2025-03-19": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko\/20100101 Firefox\/136.0": 2
+            }
+        }
+    },
+    "blog:first-post": {
+        "title": "First Post",
+        "views": {
+            "2025-03-19": 3
+        },
+        "unique_ips": {
+            "2025-03-19": {
+                "24.225.110.69": true
+            }
+        },
+        "referrers": {
+            "2025-03-19": {
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 3
+            }
+        },
+        "user_agents": {
+            "2025-03-19": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko\/20100101 Firefox\/136.0": 3
+            }
+        }
+    }
+}

@@ -19,4 +19,9 @@
             <i class="bi bi-cloud-upload"></i> Uploads
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="index.php?p=analytics">
+            <i class="bi bi-graph-up"></i> Analytics
+        </a>
+    </li>
 </ul>
