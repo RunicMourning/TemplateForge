@@ -2,24 +2,35 @@
 // Define the file path for analytics storage
 $logFile = __DIR__ . '/config/data/analytics.json';
 
-// Determine if it's a blog post or a standard page
-if (isset($_GET['p']) && $_GET['p'] === 'blog' && isset($_GET['post'])) {
-    // Blog Post Tracking
-    $postSlug = preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['post']);
-    $contentFile = __DIR__ . "/blog_posts/{$postSlug}.php";
+// Determine the page type based on the query parameters
+if (isset($_GET['p']) && $_GET['p'] === 'blog') {
+    if (!empty($_GET['post'])) {
+        // Blog Post Tracking: a non-empty "post" parameter means an individual blog post
+        $postSlug = preg_replace('/[^a-zA-Z0-9_-]/', '', $_GET['post']);
+        $contentFile = __DIR__ . "/blog_posts/{$postSlug}.php";
 
-    if (file_exists($contentFile)) {
-        $postTitle = 'Unknown Blog Post'; // Default in case title isn't set
-        ob_start();
-        include $contentFile;
-        ob_end_clean();
+        if (file_exists($contentFile)) {
+            $postTitle = 'Unknown Blog Post'; // Default if title isn't set
+            ob_start();
+            include $contentFile;
+            ob_end_clean();
 
-        // Store as "blog:slug" to differentiate from regular pages
-        $pageSlug = "blog:$postSlug";
-        $pageTitle = $postTitle;
+            // Use "blog:slug" to uniquely track the individual post
+            $pageSlug = "blog:$postSlug";
+            $pageTitle = $postTitle;
+        } else {
+            $pageSlug = "blog:404";
+            $pageTitle = "404 - Blog Post Not Found";
+        }
     } else {
-        $pageSlug = "blog:404";
-        $pageTitle = "404 - Blog Post Not Found";
+        // Blog Listing Tracking: no (or empty) "post" parameter
+        $pageSlug = 'blog';
+        // Set a title for the blog listing page
+        $pageTitle = "Blog Listing";
+        // Optionally, you can include the blog listing file if needed
+        // ob_start();
+        // include __DIR__ . "/pages/blog.php";
+        // ob_end_clean();
     }
 } else {
     // Standard Page Tracking
@@ -49,10 +60,10 @@ $analytics = file_exists($logFile) ? json_decode(file_get_contents($logFile), tr
 // Ensure the page entry exists in the analytics log
 if (!isset($analytics[$pageSlug])) {
     $analytics[$pageSlug] = [
-        'title' => $pageTitle,
-        'views' => [],
-        'unique_ips' => [],
-        'referrers' => [],
+        'title'       => $pageTitle,
+        'views'       => [],
+        'unique_ips'  => [],
+        'referrers'   => [],
         'user_agents' => []
     ];
 }
