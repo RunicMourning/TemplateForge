@@ -42,36 +42,46 @@ function generateUsernameFromIP() {
 // Generate the username based on the visitor's IP
 $username = 'Guest'.generateUsernameFromIP();
 
-// Define an array with random content (including the latest post title)
-$randomContent = [
-    "Why don't skeletons fight each other? They don't have the guts.",
-    "What do you call fake spaghetti? An impasta!",
-    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
-    "Why don’t some couples go to the gym? Because some relationships don’t work out.",
-    "I used to play piano by ear, but now I use my hands."
-];
-
-// Randomize the content and store the first item in a string
-shuffle($randomContent);
-$randomItem = $randomContent[0];
-
 // Define the welcome message
 $welcomeMessage = 'Welcome to our community! How can I assist you today?';
 
-// Escape the random item for JavaScript compatibility (to avoid breaking the script)
-$escapedRandomItem = addslashes($randomItem);
-
 $footerIncludes[] = <<<HTML
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3">
+<script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3"></script>
+<script>
   const button = new Crate({
     server: '201789112133484553', // The Vintage Gamers
     channel: '1201038181584343110', // #community-chat
-    welcomeMessage: '$welcomeMessage',
-    username: '$username'
-  })
-  
-  // Pass the random item into the notification, escaping any quotes
-  crate.notify('$escapedRandomItem');
+    welcomeMessage: '<?php echo $welcomeMessage; ?>',
+    username: '<?php echo $username; ?>'
+  });
+
+  // Define an array of messages to simulate conversation or grab attention.
+  const messages = [
+    "Hello there, need assistance?",
+    "Don't forget to check out our latest updates!",
+    "Having fun? Join the chat now!",
+    "Questions? I'm here to help!",
+    "Let's get the conversation started!"
+  ];
+
+  // Function to get a random delay between two values (in milliseconds).
+  function getRandomDelay(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  // Function to send a notification and schedule the next one.
+  function randomNotify() {
+    // Randomly select a message.
+    const message = messages[Math.floor(Math.random() * messages.length)];
+    // Trigger the notification.
+    crate.notify(message);
+    // Schedule the next notification with a random delay (e.g., between 30 and 60 seconds).
+    const delay = getRandomDelay(30000, 60000);
+    setTimeout(randomNotify, delay);
+  }
+
+  // Start the notifications after an initial random delay.
+  setTimeout(randomNotify, getRandomDelay(30000, 60000));
 </script>
 HTML;
 ?>

@@ -23,16 +23,13 @@ if (!isset($footerIncludes) || !is_array($footerIncludes)) {
 
 // Add sample content to the header and footer.
 $footerIncludes[] = <<<HTML
-<!-- Cookie Consent Modal -->
-<div id="cookieConsentModal" class="modal fade show text-dark" tabindex="-1" style="display: none; position: fixed; bottom: 0; width: 100%; background: rgba(0, 0, 0, 0.85); color: white;">
-  <div class="modal-dialog modal-sm" style="margin: auto; max-width: 350px;">
-    <div class="modal-content text-center p-3">
-      <p class="mb-2">
-        This site uses cookies to enhance your experience. 
-        <a href="privacy.html" class="text-dark text-decoration-underline">Learn more</a>.
-      </p>
-      <button id="acceptCookies" class="btn btn-primary btn-sm">Got it!</button>
-    </div>
+<!-- Cookie Consent Banner -->
+<div id="cookieConsentModal" style="position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0, 0, 0, 0.85); color: white; visibility: hidden; opacity: 0; transition: opacity 0.3s ease-in-out, visibility 0.3s; padding: 15px 20px; text-align: center; z-index: 1050;">
+  <div style="max-width: 600px; margin: auto; display: flex; justify-content: space-between; align-items: center; gap: 15px;">
+    <p class="mb-0" style="flex: 1;">
+      We use essential cookies to ensure our site functions properly. With your consent, we also use non-essential cookies to enhance your experience and analyze website traffic. By clicking "Accept," you agree to our use of cookies as outlined in our <a href="privacy.html" class="text-white text-decoration-underline">privacy policy</a>.
+    </p>
+    <button id="acceptCookies" class="btn btn-primary btn-sm" aria-label="Accept Cookies" style="cursor: pointer;">Accept</button>
   </div>
 </div>
 
@@ -40,14 +37,18 @@ $footerIncludes[] = <<<HTML
 document.addEventListener("DOMContentLoaded", function () {
     if (!localStorage.getItem("cookieConsent")) {
         let modal = document.getElementById("cookieConsentModal");
-        modal.style.display = "block"; // Show the modal
+        modal.style.visibility = "visible";
+        modal.style.opacity = "1"; // Smooth fade-in effect
 
         document.getElementById("acceptCookies").addEventListener("click", function () {
             localStorage.setItem("cookieConsent", "true");
-            modal.style.display = "none"; // Hide the modal
+            modal.style.opacity = "0"; // Smooth fade-out effect
+            setTimeout(() => modal.style.visibility = "hidden", 300);
         });
     }
 });
 </script>
 HTML;
+
+
 ?>

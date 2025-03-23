@@ -3,7 +3,7 @@
 // =========================
 // General Site Configuration
 // =========================
-$siteTitle = "TF Testbed";
+$siteTitle = "TemplateForge";
 
 // ==========================
 // Navigation Configuration
