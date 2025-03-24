@@ -54,8 +54,8 @@
 /admin/                    # Admin area files
  └── admin.php             # Main admin page
  └── login.php             # Login page
- └── /pages/             # Admin content management
-     └── pages Go here     # page functionality
+ └── /pages/               # Admin content management
+     └── Pages Go here     # page functionality
 ```
 
 ## ⚙️ Installation & Setup
