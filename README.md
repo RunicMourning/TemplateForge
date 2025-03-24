@@ -22,24 +22,40 @@
 - **Site-Wide Search:** Users can find content across both static pages and blog posts.
 - **Custom Search Results Page:** Results are displayed in a dedicated template (`search_template.php`).
 
+### 🔑 Admin Area
+- **Content Management:** Manage pages, blog posts, and site settings from a dedicated Admin Area.
+- **User Authentication:** Login-protected Admin Area to securely manage content.
+- **Intuitive Interface:** A simple interface for creating and editing pages, blog posts, and site settings.
+- **Real-Time Previews:** Preview changes to content before publishing them live.
+
+### 📊 Basic Analytics
+- **Page Views Tracking:** Track the number of views for each page and blog post.
+- **Custom Analytics Page:** A simple analytics dashboard that aggregates page views data, displaying which pages and posts are being accessed the most.
+- **Configuration:** Analytics data is stored in a JSON file in `/config/data/`, and can be easily integrated with third-party tools or exported for further analysis.
+
+
 ## 📂 Directory Structure
 ```plaintext
-/index.php
-/config/
- └── config.php
- └── /addons/
-     └── (Addon files here)
-/templates/
- └── (Page templates, search template, etc.)
-/pages/
- └── home.php
- └── 404.php
-/blog_posts/
- └── (Blog posts here)
-/css/
- └── style.css
-/sidebars/
- └── (Sidebar files here)
+/index.php                 # Main entry point
+/config/                   # Configuration files
+ └── config.php            # Main configuration settings
+ └── /addons/              # Additional modules or add-ons
+/templates/                # Template files
+ └── main_template.php     # Primary template file
+/pages/                    # Static pages
+ └── home.php              # Homepage
+ └── 404.php               # 404 error page
+/blog_posts/               # Blog post files
+ └── blog_post_1.php       # Example blog post
+/css/                      # Stylesheets
+ └── style.css             # Main stylesheet
+/sidebars/                 # Sidebar content files
+ └── sidebar_left.php      # Left sidebar
+/admin/                    # Admin area files
+ └── admin.php             # Main admin page
+ └── login.php             # Login page
+ └── /pages/             # Admin content management
+     └── pages Go here     # page functionality
 ```
 
 ## ⚙️ Installation & Setup
