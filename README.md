@@ -82,8 +82,8 @@ If a requested page is not found, the system automatically:
 2. Sends an appropriate HTTP 404 response header.
 
 ## 🚀 Future Enhancements
-- 🛠 **Admin Panel:** Simplified content management.
-- 🔐 **User Authentication:** Restricted content support.
+- 🛠 ~~**Admin Panel:** Simplified content management.~~
+- 🔐 ~~**User Authentication:** Restricted content support.~~
 - ⚡ **Performance Optimization:** Caching mechanisms for faster load times.
 
 ## 🏁 Conclusion
