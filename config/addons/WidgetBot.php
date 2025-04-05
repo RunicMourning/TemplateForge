@@ -51,8 +51,8 @@ $footerIncludes[] = <<<HTML
   const button = new Crate({
     server: '201789112133484553', // The Vintage Gamers
     channel: '1201038181584343110', // #community-chat
-    welcomeMessage: '<?php echo $welcomeMessage; ?>',
-    username: '<?php echo $username; ?>'
+    welcomeMessage: '$welcomeMessage',
+    username: '$username'
   });
 
   // Define an array of messages to simulate conversation or grab attention.
