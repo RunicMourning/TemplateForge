@@ -218,7 +218,20 @@ $iconMapping = [
 
         <div class="col-md-9">
             <div class="bg-light p-4 rounded">
-                <h3>Dashboard</h3>
+                <h3>Dashboard</h3> 
+<?php
+if (isset($_SESSION['username']) && empty($_SESSION['welcome_shown'])):
+    $_SESSION['welcome_shown'] = true; // Set the flag so it doesn't show again
+    $username = ucfirst(strtolower(htmlspecialchars($_SESSION['username'])));
+?>
+<div class="alert alert-success mt-3 d-flex align-items-center" role="alert">
+    <i class="bi bi-person-circle me-3" style="font-size: 1.5rem;"></i>
+    <div>
+        Welcome back, <strong><?php echo $username; ?></strong>! Glad to have you here.
+    </div>
+</div>
+<?php endif; ?>
+
 
                 <div class="bg-light p-5 rounded dashboard-section">
                     <div class="row w-100">

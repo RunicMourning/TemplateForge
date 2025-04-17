@@ -87,6 +87,11 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
                                     <input type="password" id="password" name="password" class="form-control" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary w-100">Login</button>
+<div class="text-center mt-3">
+    <a href="/" class="btn btn-text">
+         Return to Main Site
+    </a>
+</div>
                             </form>
                         </div>
                     </div>
