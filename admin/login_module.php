@@ -8,6 +8,21 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+// Path to the .htpasswd file
+$htpasswdFile = __DIR__ . '/.htpasswd';
+
+// Function to load users from .htpasswd file
+function load_htpasswd($file) {
+    if (!file_exists($file)) return [];
+    $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    $users = [];
+    foreach ($lines as $line) {
+        [$user, $hash] = explode(':', $line, 2);
+        $users[trim($user)] = trim($hash);
+    }
+    return $users;
+}
+
 // Check if user is logged in.
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     // Process login form if submitted.
@@ -15,23 +30,26 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
 
-        // Hard-coded credentials (for demonstration only).
-        $valid_username = 'admin';
-        $valid_password = 'password123';
+        // Load users from .htpasswd
+        $users = load_htpasswd($htpasswdFile);
 
-        if ($username === $valid_username && $password === $valid_password) {
+        if (isset($users[$username]) && password_verify($password, $users[$username])) {
+            // If username exists and password matches the hash, log the user in
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
+
+            log_activity('Admin login', 'Username: ' . $username);
+
+            // Redirect to the same page to prevent form resubmission
             header("Location: " . $_SERVER['REQUEST_URI']);
-
-log_activity('Admin login', 'Username: ' . $username);
-
             exit;
         } else {
+            // Invalid username or password
             $error = "Invalid username or password.";
-log_activity('Failed login', 'Username: ' . $username);
+            log_activity('Failed login', 'Username: ' . $username);
         }
     }
+
     ?>
     <!DOCTYPE html>
     <html lang="en">

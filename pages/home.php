@@ -64,3 +64,7 @@ $pageTitle = 'Home';
     </div>
 </section>
 
+
+<div id="fourthwall-embed">
+  <script src="https://thevintagegamers-shop.fourthwall.com/embed.js"></script>
+</div>

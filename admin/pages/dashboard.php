@@ -190,8 +190,10 @@ $iconMapping = [
                 <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
                 <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies"></i> Blog Posts</a></li>
                 <li class="list-group-item"><a href="index.php?p=gallery" class="link-underline-light"><i class="bi bi-images"></i> Media Library</a></li>
-                <li class="list-group-item"><a href="index.php?p=settings" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
                 <li class="list-group-item"><a href="index.php?p=systeminfo" class="link-underline-light"><i class="bi bi-server"></i> System Info</a></li>
+                <li class="list-group-item"><a href="index.php?p=manageusers" class="link-underline-light"><i class="bi bi-person-fill-check"></i> Users</a></li>
+                <li class="list-group-item"><a href="index.php?p=settings" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
+
             </ul>
             
             <?php

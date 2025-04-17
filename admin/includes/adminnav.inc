@@ -24,4 +24,9 @@
             <i class="bi bi-graph-up"></i> Analytics
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link text-danger" href="logout.php">
+            <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+    </li>
 </ul>
