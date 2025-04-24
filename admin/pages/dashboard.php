@@ -3,20 +3,16 @@
 
 $pageTitle = 'Dashboard';
 
-// Function to count the files in a directory
 function count_files_in_directory($dir) {
-    $files = array_diff(scandir($dir), array('..', '.')); // Ignore "." and ".."
+    $files = array_diff(scandir($dir), ['..', '.']);
     return count($files);
 }
 
-// Get the number of pages and blog posts by counting files in the respective directories
-$total_pages = count_files_in_directory('../pages');  // Adjust the path if necessary
-$total_posts = count_files_in_directory('../blog_posts');  // Adjust the path if necessary
+$total_pages = count_files_in_directory('../pages');
+$total_posts = count_files_in_directory('../blog_posts');
 
-// Set the main directory to monitor (relative path from admin folder)
-$dir = '../'; // Relative path to the main directory
+$dir = '../';
 
-// Function to get the total size of a directory (including subdirectories)
 function getDirectorySize($path) {
     $size = 0;
     try {
@@ -25,108 +21,68 @@ function getDirectorySize($path) {
             $size += $file->getSize();
         }
     } catch (Exception $e) {
-        // Handle exceptions, such as "Directory not found" or "Permission denied"
         error_log("Error calculating directory size: " . $e->getMessage());
-        return 0; // Return 0 size in case of error to avoid breaking the dashboard
+        return 0;
     }
     return $size;
 }
 
-// Get directory size in bytes
 $dirSize = getDirectorySize($dir);
+$formattedSize = $dirSize >= 1024 ? ($dirSize / 1024 >= 1024 ? round($dirSize / 1048576, 2) . ' MB' : round($dirSize / 1024, 2) . ' KB') : $dirSize . ' bytes';
 
-// Convert size to KB or MB
-if ($dirSize >= 1024) {
-    $sizeInKB = $dirSize / 1024;
-    if ($sizeInKB >= 1024) {
-        $sizeInMB = $sizeInKB / 1024;
-        $formattedSize = round($sizeInMB, 2) . ' MB';
-    } else {
-        $formattedSize = round($sizeInKB, 2) . ' KB';
-    }
-} else {
-    $formattedSize = $dirSize . ' bytes';
-}
-
-// ----- NEW: Calculate "Views Today" as Unique Views -----
-// Define path to the analytics JSON file (adjust the path if needed)
 $analyticsFile = __DIR__ . '/../../config/data/analytics.json';
+$views_today = 0;
 $uniqueIPsToday = [];
-$views_today = 0; // Initialize to 0
 
 if (file_exists($analyticsFile)) {
     $analytics = json_decode(file_get_contents($analyticsFile), true);
     $today = date("Y-m-d");
-
-    // Check if $analytics is valid
-    if (is_array($analytics)) { // Added check
-        // Loop through each page/post entry and collect unique IPs for today
-        foreach ($analytics as $pageSlug => $data) {
-            if (isset($data['unique_ips'][$today]) && is_array($data['unique_ips'][$today])) { // Added is_array check
+    if (is_array($analytics)) {
+        foreach ($analytics as $page => $data) {
+            if (!empty($data['unique_ips'][$today])) {
                 $uniqueIPsToday = array_merge($uniqueIPsToday, array_keys($data['unique_ips'][$today]));
             }
         }
-        $views_today = count(array_unique($uniqueIPsToday)); // count unique IPs
+        $views_today = count(array_unique($uniqueIPsToday));
     } else {
-        error_log("Warning: Analytics data is not a valid array.");
-        $views_today = "Invalid data"; // Set a message,  do not use 0 to indicate error
+        error_log("Invalid analytics structure");
+        $views_today = "Invalid data";
     }
 } else {
-    error_log("Warning: Analytics file not found at " . $analyticsFile);
+    error_log("Analytics file missing");
     $views_today = "No data";
 }
 
-// --- Get Latest Updates ---
-function getLatestUpdates($numUpdates = 5) {
-    $logFile = __DIR__ . '/../activity.log';
-    $lines = @file($logFile, FILE_IGNORE_NEW_LINES);
+function getLatestUpdates($num = 5) {
+    $log = __DIR__ . '/../activity.log';
+    $lines = @file($log, FILE_IGNORE_NEW_LINES);
     $updates = [];
-
     if ($lines) {
         foreach ($lines as $line) {
-            if (preg_match('/^\[(.*?)\] - (.*?) - (.*?) - IP: (.*)$/', $line, $matches)) {
-                $timestamp = $matches[1];
-                $activity = $matches[2];
-                $detail = $matches[3];
-                $ip = $matches[4];
-
-                // Exclude login attempts and 404 errors.
-                if (stripos($activity, 'Login attempt') !== false || stripos($activity, '404 Not Found') !== false || stripos($activity, 'Admin login') !== false) {
-                    continue; // Skip this iteration
-                }
-
-                $updates[] = [
-                    'timestamp' => $timestamp,
-                    'activity' => $activity,
-                    'detail' => $detail,
-                    'ip' => $ip
-                ];
+            if (preg_match('/^\[(.*?)\] - (.*?) - (.*?) - IP: (.*)$/', $line, $match)) {
+                [$all, $ts, $act, $detail, $ip] = $match;
+                if (stripos($act, 'Login') !== false || stripos($act, '404') !== false) continue;
+                $updates[] = ['timestamp' => $ts, 'activity' => $act, 'detail' => $detail, 'ip' => $ip];
             }
         }
     }
-    // Sort by timestamp (most recent first)
-    usort($updates, function($a, $b) {
-        return strtotime($b['timestamp']) - strtotime($a['timestamp']);
-    });
-    return array_slice($updates, 0, $numUpdates);
+    usort($updates, fn($a, $b) => strtotime($b['timestamp']) - strtotime($a['timestamp']));
+    return array_slice($updates, 0, $num);
 }
 
 $latestUpdates = getLatestUpdates();
 
-// --- Get System Information ---
 function getSystemInfo() {
-    $systemInfo = [
+    return [
         'os' => php_uname('s') . ' ' . php_uname('r'),
         'php_version' => PHP_VERSION,
         'server_software' => $_SERVER['SERVER_SOFTWARE'] ?? 'N/A',
         'document_root' => $_SERVER['DOCUMENT_ROOT'] ?? 'N/A',
     ];
-    return $systemInfo;
 }
 
 $systemInfo = getSystemInfo();
 
-// --- Define Icon Mapping ---
 $iconMapping = [
     'Page Created' => 'bi bi-file-earmark-check',
     'Page Edited' => 'bi bi-file-earmark-font',
@@ -136,164 +92,61 @@ $iconMapping = [
     'Post Deleted' => 'bi bi-file-earmark-x',
     'Image Uploaded' => 'bi bi-image',
     'Image Deleted' => 'bi bi-image-fill',
-    'Site Configuration' => 'bi bi-gear', // Corrected key
+    'Site Configuration' => 'bi bi-gear',
 ];
 ?>
 
-<style>
-    .my-card {
-        position: absolute;
-        left: 40%;
-        top: -20px;
-        border-radius: 50%;
-    }
-    .dashboard-section {
-        margin-bottom: 20px;
-    }
-    .list-group-item i {
-        margin-right: 5px;
-    }
-    .bi-file-earmark-check {
-        color: green;
-    }
-    .bi-file-earmark-font {
-        color: blue;
-    }
-    .bi-file-earmark-excel {
-        color: red;
-    }
-    .bi-file-earmark-plus {
-        color: green;
-    }
-    .bi-file-earmark-text {
-        color: blue;
-    }
-    .bi-file-earmark-x {
-        color: red;
-    }
-    .bi-image {
-        color: purple;
-    }
-    .bi-image-fill {
-        color: red; /* Corrected to red for consistency */
-    }
-    .bi-gear {
-        color: orange;
-    }
-</style>
-
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row">
-        <div class="col-md-3 bg-light p-3">
-            <h5 class="text-center">Admin Menu</h5>
-            <ul class="list-group">
-                <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text"></i> Pages</a></li>
-                <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies"></i> Blog Posts</a></li>
-                <li class="list-group-item"><a href="index.php?p=gallery" class="link-underline-light"><i class="bi bi-images"></i> Media Library</a></li>
-                <li class="list-group-item"><a href="index.php?p=systeminfo" class="link-underline-light"><i class="bi bi-server"></i> System Info</a></li>
-                <li class="list-group-item"><a href="index.php?p=manageusers" class="link-underline-light"><i class="bi bi-person-fill-check"></i> Users</a></li>
-                <li class="list-group-item"><a href="index.php?p=settings" class="link-underline-light"><i class="bi bi-gear"></i> Settings</a></li>
-
-            </ul>
-            
-            <?php
-            // Include sidebar files if present
-            $sidebarDir = 'sidebars';
-            $sidebarFiles = array_diff(scandir($sidebarDir), array('.', '..'));
-            if (!empty($sidebarFiles)) {
-                foreach ($sidebarFiles as $file) {
-                    if (pathinfo($file, PATHINFO_EXTENSION) !== 'php') continue;
-                    try {
-                        include $sidebarDir . '/' . $file;
-                    } catch (Exception $e) {
-                        error_log("Error including sidebar file: " . $e->getMessage() . " in " . $sidebarDir . '/' . $file);
-                        echo '<p class="mt-3 text-danger">Error loading sidebar item.</p>'; // Friendly message
-                    }
-                }
-            } else {
-                echo '<p class="mt-3">No sidebar items found.</p>';
-            }
-            ?>
-        </div>
-
-        <div class="col-md-9">
-            <div class="bg-light p-4 rounded">
-                <h3>Dashboard</h3> 
-<?php
-if (isset($_SESSION['username']) && empty($_SESSION['welcome_shown'])):
-    $_SESSION['welcome_shown'] = true; // Set the flag so it doesn't show again
-    $username = ucfirst(strtolower(htmlspecialchars($_SESSION['username'])));
-?>
-<div class="alert alert-success mt-3 d-flex align-items-center" role="alert">
-    <i class="bi bi-person-circle me-3" style="font-size: 1.5rem;"></i>
-    <div>
-        Welcome back, <strong><?php echo $username; ?></strong>! Glad to have you here.
-    </div>
-</div>
-<?php endif; ?>
-
-
-                <div class="bg-light p-5 rounded dashboard-section">
-                    <div class="row w-100">
-                        <div class="col-md-3">
-                            <div class="card border-primary mx-1 p-3">
-                                <div class="card border-primary shadow text-light bg-primary p-3 my-card">
-                                    <i class="bi bi-file-earmark-text-fill"></i>
-                                </div>
-                                <div class="text-primary text-center mt-3"><h4>Total Pages</h4></div>
-                                <div class="text-primary text-center mt-2"><h1><?php echo $total_pages; ?></h1></div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-md-3">
-                            <div class="card border-success mx-1 p-3">
-                                <div class="card border-success shadow text-light bg-success p-3 my-card">
-                                    <i class="bi bi-stickies-fill"></i>
-                                </div>
-                                <div class="text-success text-center mt-3"><h4>Total Posts</h4></div>
-                                <div class="text-success text-center mt-2"><h1><?php echo $total_posts; ?></h1></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="card border-info mx-1 p-3">
-                                <div class="card border-info shadow text-light bg-info p-3 my-card">
-                                    <i class="bi bi-eye-fill"></i>
-                                </div>
-                                <div class="text-info text-center mt-3"><h4>Views Today</h4></div>
-                                <div class="text-info text-center mt-2"><h1><?php echo $views_today; ?></h1></div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="card border-warning mx-1 p-3">
-                                <div class="card border-warning shadow text-light bg-warning p-3 my-card">
-                                    <i class="bi bi-folder-fill"></i>
-                                </div>
-                                <div class="text-warning text-center mt-3"><h4>Directory Size</h4></div>
-                                <div class="text-warning text-center mt-2"><h1><?php echo $formattedSize; ?></h1></div>
-                            </div>
-                        </div>
+        <div class="col-12">
+                <h3 class="mb-4">Dashboard</h3>
+                <?php if (isset($_SESSION['username']) && empty($_SESSION['welcome_shown'])): 
+                    $_SESSION['welcome_shown'] = true; 
+                    $username = ucfirst(strtolower(htmlspecialchars($_SESSION['username']))); ?>
+                    <div class="alert alert-success d-flex align-items-center mb-4">
+                        <i class="bi bi-person-circle fs-3 me-3"></i>
+                        <div>Welcome back, <strong><?= $username ?></strong>! Glad to have you here.</div>
                     </div>
+                <?php endif; ?>
+
+                <div class="row g-4 mb-4">
+                    <?php
+                    $cards = [
+                        ['label' => 'Total Pages', 'value' => $total_pages, 'color' => 'primary', 'icon' => 'bi-file-earmark-text-fill'],
+                        ['label' => 'Total Posts', 'value' => $total_posts, 'color' => 'success', 'icon' => 'bi-stickies-fill'],
+                        ['label' => 'Views Today', 'value' => $views_today, 'color' => 'info', 'icon' => 'bi-eye-fill'],
+                        ['label' => 'Directory Size', 'value' => $formattedSize, 'color' => 'warning text-dark', 'icon' => 'bi-folder-fill'],
+                    ];
+                    foreach ($cards as $card): ?>
+                        <div class="col-md-6 col-xl-3">
+                            <div class="card text-white bg-<?= $card['color'] ?> shadow-sm h-100">
+                                <div class="card-body d-flex align-items-center">
+                                    <i class="bi <?= $card['icon'] ?> fs-1 me-3"></i>
+                                    <div>
+                                        <h6 class="mb-0"><?= $card['label'] ?></h6>
+                                        <h2 class="mb-0 fw-bold"><?= $card['value'] ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
 
-                <div class="dashboard-section">
-                    <h5><i class="bi bi-bar-chart-line"></i> Website Traffic Overview</h5>
-                    <div class="row">
+                <div class="mb-4">
+                    <h5><i class="bi bi-bar-chart-line me-2"></i> Website Traffic Overview</h5>
+                    <div class="row g-3">
                         <div class="col-md-6">
-                            <div class="card">
+                            <div class="card h-100">
                                 <div class="card-body">
                                     <h6 class="card-title">Total Page Views</h6>
-                                    <p class="card-text">
+                                    <p class="card-text fs-4 fw-semibold">
                                         <?php
                                         $totalPageViews = 0;
-                                        if (file_exists($analyticsFile) && is_array(json_decode(file_get_contents($analyticsFile), true))) {
+                                        if (file_exists($analyticsFile)) {
                                             $analyticsData = json_decode(file_get_contents($analyticsFile), true);
                                             foreach ($analyticsData as $page) {
-                                                if(isset($page['views']) && is_array($page['views'])){
-                                                    foreach($page['views'] as $viewCount){
-                                                        $totalPageViews += $viewCount;
-                                                    }
+                                                if (!empty($page['views'])) {
+                                                    $totalPageViews += array_sum($page['views']);
                                                 }
                                             }
                                         }
@@ -304,26 +157,26 @@ if (isset($_SESSION['username']) && empty($_SESSION['welcome_shown'])):
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="card">
+                            <div class="card h-100">
                                 <div class="card-body">
                                     <h6 class="card-title">Total Unique Visitors</h6>
-                                    <p class="card-text">
+                                    <p class="card-text fs-4 fw-semibold">
                                         <?php
-                                         $totalUniqueVisitors = 0;
-                                         if (file_exists($analyticsFile) && is_array(json_decode(file_get_contents($analyticsFile), true))){
-                                                $analyticsData = json_decode(file_get_contents($analyticsFile), true);
-                                                $uniqueVisitors = [];
-                                                foreach($analyticsData as $page){
-                                                     if(isset($page['unique_ips']) && is_array($page['unique_ips'])){
-                                                         foreach($page['unique_ips'] as $date=>$ips){
-                                                                 foreach($ips as $ip=>$val){
-                                                                         $uniqueVisitors[$ip]=true;
-                                                                 }
-                                                         }
-                                                     }
+                                        $totalUniqueVisitors = 0;
+                                        if (file_exists($analyticsFile)) {
+                                            $analyticsData = json_decode(file_get_contents($analyticsFile), true);
+                                            $uniqueVisitors = [];
+                                            foreach ($analyticsData as $page) {
+                                                if (!empty($page['unique_ips'])) {
+                                                    foreach ($page['unique_ips'] as $ips) {
+                                                        foreach ($ips as $ip => $v) {
+                                                            $uniqueVisitors[$ip] = true;
+                                                        }
+                                                    }
                                                 }
-                                                $totalUniqueVisitors = count($uniqueVisitors);
-                                         }
+                                            }
+                                            $totalUniqueVisitors = count($uniqueVisitors);
+                                        }
                                         echo $totalUniqueVisitors;
                                         ?>
                                     </p>
@@ -333,39 +186,33 @@ if (isset($_SESSION['username']) && empty($_SESSION['welcome_shown'])):
                     </div>
                 </div>
 
-                <div class="dashboard-section">
-                    <h5><i class="bi bi-list-check"></i> <a href="index.php?p=log" class="link-underline-light link-dark">Recent Activity</a></h5>
-                    <?php
-                    if (empty($latestUpdates)) {
-                        echo '<div class="alert alert-info">No recent activity.</div>';
-                    } else {
-                        echo '<div class="list-group">';
-                        foreach ($latestUpdates as $update) {
-                            $formattedTimestamp = date("F j, Y, g:i a", strtotime($update['timestamp']));
-                            // Use the icon mapping
-                            $icon = isset($iconMapping[$update['activity']]) ? $iconMapping[$update['activity']] : 'bi bi-arrow-right-circle'; // Default icon
-                            echo '<div class="list-group-item d-flex justify-content-between" title="IP Address: ' . $update['ip'] . '">';
-                            echo '<p class="mb-1"><i class="' . $icon . '"></i> ' . $update['activity'] . ' - ' . $update['detail'] . '</p>';
-                            echo '<span class="text-muted">' . $formattedTimestamp . '</span>';
-                            echo '</div>';
-                        }
-                        echo '</div>';
-                    }
-                    ?>
+                <div class="mb-4">
+                    <h5><i class="bi bi-list-check me-2"></i> <a href="index.php?p=log" class="text-decoration-none">Recent Activity</a></h5>
+                    <?php if (empty($latestUpdates)): ?>
+                        <div class="alert alert-info">No recent activity.</div>
+                    <?php else: ?>
+                        <div class="list-group">
+                            <?php foreach ($latestUpdates as $u): 
+                                $timestamp = date("F j, Y, g:i a", strtotime($u['timestamp']));
+                                $icon = $iconMapping[$u['activity']] ?? 'bi bi-arrow-right-circle'; ?>
+                                <div class="list-group-item d-flex justify-content-between align-items-center" title="IP Address: <?= $u['ip'] ?>">
+                                    <p class="mb-0"><i class="<?= $icon ?> me-2"></i> <?= $u['activity'] ?> - <?= $u['detail'] ?></p>
+                                    <span class="text-muted small"><?= $timestamp ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
-                <div class="dashboard-section">
-                    <h5><i class="bi bi-server"></i> System Information</h5>
+                <div class="mb-0">
+                    <h5><i class="bi bi-server me-2"></i> System Information</h5>
                     <ul class="list-group">
-                        <li class="list-group-item"><strong>Operating System:</strong> <?php echo htmlspecialchars($systemInfo['os']); ?></li>
-                        <li class="list-group-item"><strong>PHP Version:</strong> <?php echo htmlspecialchars($systemInfo['php_version']); ?></li>
-                        <li class="list-group-item"><strong>Server Software:</strong> <?php echo htmlspecialchars($systemInfo['server_software']); ?></li>
-                        <li class="list-group-item"><strong>Document Root:</strong> <?php echo htmlspecialchars($systemInfo['document_root']); ?></li>
+                        <li class="list-group-item"><strong>Operating System:</strong> <?= htmlspecialchars($systemInfo['os']) ?></li>
+                        <li class="list-group-item"><strong>PHP Version:</strong> <?= htmlspecialchars($systemInfo['php_version']) ?></li>
+                        <li class="list-group-item"><strong>Server Software:</strong> <?= htmlspecialchars($systemInfo['server_software']) ?></li>
+                        <li class="list-group-item"><strong>Document Root:</strong> <?= htmlspecialchars($systemInfo['document_root']) ?></li>
                     </ul>
                 </div>
-
-                
-            </div>
         </div>
     </div>
 </div>

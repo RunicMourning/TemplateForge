@@ -2,35 +2,51 @@
 // pages/privacy.php
 
 $pageTitle = 'Privacy Policy';
+
+// Include settings to access $siteTitle and $googleadsenseenabled
+$settingsPath = dirname(__FILE__, 2) . '/settings.php';
+if (file_exists($settingsPath)) {
+    include_once $settingsPath;
+}
 ?>
+
 <h1 class="display-4">Privacy Policy</h1>
-                <p class="lead">Effective Date: 03/03/2025</p> 
-                
-                <p>At <strong><?php echo htmlspecialchars($siteTitle); ?></strong>, we are committed to protecting your privacy. This Privacy Policy outlines how we collect, use, and protect your personal information.</p>
+<p class="lead">Effective Date: March 3, 2025</p>
 
-                <h2>1. Information We Collect</h2>
-                <p>We do not collect personal information unless it is provided voluntarily via the contact form. The information we may collect includes:</p>
-                <ul>
-                    <li>Name</li>
-                    <li>Email Address</li>
-                </ul>
-                <p>This information is used solely for the purpose of responding to your inquiries or requests submitted through the contact form. We will not share, sell, or distribute this information to any third parties.</p>
+<p>At <strong><?php echo htmlspecialchars($siteTitle); ?></strong>, we are committed to protecting your privacy and ensuring the security of any information you choose to share with us. This Privacy Policy outlines our practices regarding the collection, use, and protection of your information.</p>
 
-                <h2>2. Cookies</h2>
-                <p>Our website uses cookies to enhance your browsing experience. Cookies are small files stored on your device that help us remember your preferences and improve the functionality of the site. You may choose to disable cookies in your browser settings, but doing so may affect certain features of the website.</p>
+<h2>1. Information We Collect</h2>
+<p>We only collect personal information when you voluntarily submit it through our contact form. This information may include:</p>
+<ul>
+    <li>Name</li>
+    <li>Email Address</li>
+</ul>
+<p>The information you provide is solely used to respond to your specific inquiries or requests submitted via the contact form. We do not share, sell, or otherwise distribute this information to external third parties.</p>
 
-                <h2>3. Third-Party Services</h2>
-                <p>We do not use third-party services, such as analytics or advertising platforms, to track your personal data.</p>
+<h2>2. Use of Cookies</h2>
+<p>Our website utilizes cookies to enhance user experience. These small text files are stored on your device to help us remember your preferences and improve site functionality. You have the option to disable cookies through your browser settings, but please be aware that this may impact certain features and the overall experience of the website.</p>
 
-                <h2>4. User Rights & Controls</h2>
-                <p>Since we do not collect any personal data beyond what is provided through the contact form, there are no user rights regarding data access or deletion, other than requesting the removal of the information via email.</p>
+<h2>3. Third-Party Services</h2>
+<?php if (!empty($googleadsenseenabled)) : ?>
+    <p>This website uses Google AdSense, a third-party advertising service, to display advertisements. Google may utilize cookies or web beacons to collect non-personally identifiable information in the process of serving ads. These cookies enable Google and its advertising partners to deliver ads based on your browsing activity on this and other websites. You can manage your ad preferences or opt out of personalized advertising by visiting the <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Google Ad Settings</a> page.</p>
+<?php else : ?>
+    <p>We do not currently employ third-party services, such as analytics or advertising platforms, that track or collect your personal data.</p>
+<?php endif; ?>
 
-                <h2>5. Security</h2>
-                <p>We do not store sensitive personal data beyond the contact form submissions. We take reasonable measures to ensure that any data you provide through our contact form is secure.</p>
+<h2>4. Data Retention</h2>
+<p>We retain the information submitted through our contact form only for as long as necessary to fulfill the purpose for which it was collected (i.e., to respond to your inquiries) and for a reasonable period thereafter for record-keeping purposes.</p>
 
-                <h2>6. Compliance</h2>
-                <p>We do not collect data subject to specific data protection regulations such as GDPR or CCPA, but we are committed to respecting your privacy and handling your information responsibly.</p>
+<h2>5. Your Rights and Controls</h2>
+<p>Given the limited personal data we collect, your primary control is the decision of whether or not to provide information through the contact form. If you have submitted information through the contact form and wish to have it reviewed, modified, or removed from our records, please contact us using the information provided below.</p>
 
-                <h2>7. Contact Information</h2>
-                <p>If you have any questions or concerns regarding our Privacy Policy or wish to remove your information from our system, please contact us at [Your Email Address] or visit our <a href="/contact.html">Contact Page</a>.</p>
-   
+<h2>6. Data Security</h2>
+<p>While we do not store sensitive personal data beyond the information submitted through the contact form, we implement reasonable technical and organizational measures to protect the information you provide from unauthorized access, use, or disclosure.</p>
+
+<h2>7. Compliance with Data Protection Principles</h2>
+<p>Although our data collection practices are minimal and may not fall directly under comprehensive data protection regulations like GDPR or CCPA, we are committed to upholding principles of data privacy and handling any information responsibly and with respect for your privacy.</p>
+
+<h2>8. Contact Us</h2>
+<p>If you have any questions, concerns, or requests regarding this Privacy Policy or the information you have provided, please do not hesitate to contact us at <a href="mailto:[Your Email Address]">[Your Email Address]</a> or through our <a href="/contact.html">Contact Page</a>.</p>
+
+<h2>9. Updates to This Privacy Policy</h2>
+<p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with a revised effective date. We encourage you to review this Privacy Policy periodically to stay informed about our privacy practices.</p>

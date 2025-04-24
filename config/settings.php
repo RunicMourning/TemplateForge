@@ -23,3 +23,10 @@ $ispodcast = false;
 $podcastAuthor = "Your Name";
 $podcastDescription = "A short description of your podcast.";
 $podcastExplicit = false;
+
+// ==========================
+// AdSense Configuration
+// ==========================
+$googleadsenseenabled = true;
+$googleAdsenseID = "ca-pub-5580430883511691";
+
