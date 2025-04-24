@@ -49,6 +49,7 @@ log_activity('Post Edited', 'Filename: ' . $filename);
 ?>
 
 
+  <h2 class="mb-4 mt-4"><i class="bi bi-pencil-square me-2"></i>Edit Post</h2>
     <?php if (isset($error)): ?>
       <div class="alert alert-danger"><?php echo htmlspecialchars($error); ?></div>
     <?php endif; ?>

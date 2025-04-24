@@ -67,6 +67,8 @@ log_activity('Page Created', 'Filename: ' . $filename);
     }
 }
 ?>
+
+  <h2 class="mb-4 mt-4"><i class="bi bi-pencil-square me-2"></i>Create Page</h2>
 <?php if (isset($error)): ?>
   <div class="message alert alert-danger">
     <?php echo htmlspecialchars($error); ?>

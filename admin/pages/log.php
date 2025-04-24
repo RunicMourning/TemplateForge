@@ -2,154 +2,115 @@
 // pages/log.php
 
 $pageTitle = 'Activity Log';
+include_once __DIR__ . '/../logger.php';
 
-// Path to the log file
 $logFile = __DIR__ . '/../activity.log';
 if (!file_exists($logFile)) {
-    echo "<div class='alert alert-danger'>Log file not found.</div>";
+    echo "<div class='container mt-5'><div class='alert alert-danger'>Log file not found.</div></div>";
     return;
 }
 
-// Read the log file line by line
 $lines = file($logFile, FILE_IGNORE_NEW_LINES);
-
-// Define results per page
 $resultsPerPage = 50;
-$totalLines = count($lines);
-$totalPages = ceil($totalLines / $resultsPerPage);
+$totalLines     = count($lines);
+$totalPages     = ceil($totalLines / $resultsPerPage);
+$page           = max(1, (int)($_GET['page'] ?? 1));
+$start          = ($page - 1) * $resultsPerPage;
+$entries        = array_slice($lines, $start, $resultsPerPage);
 
-// Get the current pagination page number; default to 1.
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if ($page < 1) {
-    $page = 1;
+function formatTimestamp($ts) {
+    return date("F j, Y, g:i a", strtotime($ts));
 }
 
-// Calculate the range of lines for the current page
-$start = ($page - 1) * $resultsPerPage;
-$entries = array_slice($lines, $start, $resultsPerPage);
-
-// Function to format the timestamp into a human-readable format.
-function formatTimestamp($timestamp) {
-    return date("F j, Y, g:i a", strtotime($timestamp));  // e.g., March 15, 2025, 12:27 pm
-}
-
-// Function to map the raw activity string to a standardized name and an icon.
-function getActivityData($activityType) {
-    $activityTypeLower = strtolower($activityType);
-    
-    // Default icon and name (if no match is found)
-    $icon = '<i class="bi bi-info-circle-fill text-secondary"></i>';
-    $standardName = $activityType;
-
-    // Define icon mappings
+function getActivityData($type) {
     $icons = [
-        '404 not found'       => ['<i class="bi bi-exclamation-triangle-fill text-danger"></i>', '404 Not Found'],
-        'page created'        => ['<i class="bi bi-file-earmark-plus-fill text-success"></i>', 'Page Created'],
-        'page edited'         => ['<i class="bi bi-pencil-square text-primary"></i>', 'Page Edited'],
-        'page deleted'        => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Page Deleted'],
-        'post created'        => ['<i class="bi bi-file-plus-fill text-success"></i>', 'Post Created'],
-        'post edited'         => ['<i class="bi bi-pencil-fill text-warning"></i>', 'Post Edited'],
-        'post deleted'        => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Post Deleted'],
-        'image uploaded'      => ['<i class="bi bi-file-earmark-image-fill text-success"></i>', 'Image Uploaded'],
-        'image deleted'       => ['<i class="bi bi-file-earmark-x-fill text-danger"></i>', 'Image Deleted'],
-        'admin login'         => ['<i class="bi bi-person-check-fill text-primary"></i>', 'Admin Login'],
-        'failed login'        => ['<i class="bi bi-person-x-fill text-danger"></i>', 'Failed Login Attempt'],
-        'site configuration'  => ['<i class="bi bi-gear-fill text-info"></i>', 'Site Configuration'],
-        'settings updated'      => ['<i class="bi bi-tools text-info"></i>', 'Settings Updated'],
+        '404 not found'      => ['bi-exclamation-triangle-fill text-danger',      '404 Not Found'],
+        'page created'       => ['bi-file-earmark-plus-fill text-success',        'Page Created'],
+        'page edited'        => ['bi-pencil-square text-primary',                'Page Edited'],
+        'page deleted'       => ['bi-file-earmark-x-fill text-danger',           'Page Deleted'],
+        'post created'       => ['bi-file-plus-fill text-success',               'Post Created'],
+        'post edited'        => ['bi-pencil-fill text-warning',                  'Post Edited'],
+        'post deleted'       => ['bi-file-earmark-x-fill text-danger',           'Post Deleted'],
+        'image uploaded'     => ['bi-file-earmark-image-fill text-success',      'Image Uploaded'],
+        'image deleted'      => ['bi-file-earmark-x-fill text-danger',           'Image Deleted'],
+        'admin login'        => ['bi-person-check-fill text-primary',            'Admin Login'],
+        'failed login'       => ['bi-person-x-fill text-danger',                  'Failed Login'],
+        'site configuration' => ['bi-gear-fill text-info',                       'Site Configured'],
+        'settings updated'   => ['bi-tools text-info',                           'Settings Updated'],
     ];
-
-    // Match action type to predefined icons
-    foreach ($icons as $key => $value) {
-        if (strpos($activityTypeLower, $key) !== false) {
-            $icon = $value[0];
-            $standardName = $value[1];
-            break;
+    $lower = strtolower($type);
+    foreach ($icons as $key => [$icon, $label]) {
+        if (strpos($lower, $key) !== false) {
+            return ['icon' => $icon, 'label' => $label];
         }
     }
-    
-    return ['icon' => $icon, 'name' => $standardName];
+    return ['icon' => 'bi-info-circle-fill text-secondary', 'label' => $type];
 }
 ?>
-
-<div class="container mt-5">
-    <h2><?php echo htmlspecialchars($pageTitle); ?></h2>
-    <table class="table table-bordered table-striped">
-        <thead>
+<div class="container my-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-white d-flex align-items-center">
+      <i class="bi bi-list-check me-2 fs-4"></i>
+      <h3 class="mb-0">Activity Log</h3>
+    </div>
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-striped align-middle mb-0">
+          <thead class="table-light">
             <tr>
-                <th>Activity</th>
-                <th>Date</th>
-                <th>IP Address</th>
+              <th>Activity</th>
+              <th>Date</th>
+              <th>IP Address</th>
             </tr>
-        </thead>
-        <tbody>
-            <?php 
-            foreach ($entries as $line):
-                // Extract the timestamp and the rest of the log entry.
-                if (preg_match('/^\[(.*?)\]\s*-\s*(.*)/', $line, $parts)) {
-                    $timestamp = $parts[1];
-                    $rest = $parts[2];
-
-                    // Split the rest by " - IP:" to isolate activity details and the IP.
-                    $split = explode(' - IP:', $rest);
-                    $activityAndFile = trim($split[0]);
-                    $ip = count($split) === 2 ? trim($split[1]) : '';
-
-                    // Further split the activity part into the main activity and file detail.
-                    $activityParts = explode(' - ', $activityAndFile, 2);
-                    $activityType = trim($activityParts[0]);
-                    $fileDetail = isset($activityParts[1]) ? trim($activityParts[1]) : '';
-                    
-                    // Get the standardized activity name and corresponding icon.
-                    $activityData = getActivityData($activityType);
-                    $activityIcon = $activityData['icon'];
-                    $activityName = $activityData['name'];
-            ?>
-            <tr>
-                <td>
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo htmlspecialchars($activityName); ?>">
-                        <?php echo $activityIcon; ?>
+          </thead>
+          <tbody>
+            <?php foreach ($entries as $line): ?>
+              <?php if (preg_match('/^\[(.*?)\]\s*-\s*(.*)/', $line, $m)): ?>
+                <?php
+                  $ts = $m[1];
+                  $rest = $m[2];
+                  list($actPart, $ipPart) = array_pad(explode(' - IP:', $rest, 2), 2, '');
+                  list($type, $detail) = array_pad(explode(' - ', $actPart, 2), 2, '');
+                  $data = getActivityData($type);
+                ?>
+                <tr>
+                  <td>
+                    <span data-bs-toggle="tooltip" title="<?= htmlspecialchars($data['label']) ?>">
+                      <i class="bi <?= $data['icon'] ?>"></i>
                     </span>
-                    <?php echo ' ' . htmlspecialchars($activityName); ?>
-                    <?php if ($fileDetail): ?>
-                        <br><small class="text-muted"><?php echo htmlspecialchars($fileDetail); ?></small>
+                    <?= ' ' . htmlspecialchars($data['label']) ?>
+                    <?php if ($detail): ?>
+                      <br><small class="text-muted"><?= htmlspecialchars($detail) ?></small>
                     <?php endif; ?>
-                </td>
-                <td><?php echo htmlspecialchars(formatTimestamp($timestamp)); ?></td>
-                <td><?php echo htmlspecialchars($ip); ?></td>
-            </tr>
-            <?php 
-                }
-            endforeach; 
-            ?>
-        </tbody>
-    </table>
-
-    <nav>
-        <ul class="pagination justify-content-center">
-            <?php if ($page > 1): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?p=log&page=<?php echo $page - 1; ?>">Previous</a>
-                </li>
-            <?php endif; ?>
-
-            <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                <li class="page-item <?php echo ($i === $page) ? 'active' : ''; ?>">
-                    <a class="page-link" href="index.php?p=log&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                </li>
-            <?php endfor; ?>
-
-            <?php if ($page < $totalPages): ?>
-                <li class="page-item">
-                    <a class="page-link" href="index.php?p=log&page=<?php echo $page + 1; ?>">Next</a>
-                </li>
-            <?php endif; ?>
+                  </td>
+                  <td><?= htmlspecialchars(formatTimestamp($ts)) ?></td>
+                  <td><?= htmlspecialchars($ipPart) ?></td>
+                </tr>
+              <?php endif; ?>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer bg-white">
+      <nav>
+        <ul class="pagination justify-content-center mb-0">
+          <?php if ($page > 1): ?>
+            <li class="page-item"><a class="page-link" href="?p=log&page=<?= $page - 1 ?>">Previous</a></li>
+          <?php endif; ?>
+          <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <li class="page-item <?= $i === $page ? 'active' : '' ?>">
+              <a class="page-link" href="?p=log&page=<?= $i ?>"><?= $i ?></a>
+            </li>
+          <?php endfor; ?>
+          <?php if ($page < $totalPages): ?>
+            <li class="page-item"><a class="page-link" href="?p=log&page=<?= $page + 1 ?>">Next</a></li>
+          <?php endif; ?>
         </ul>
-    </nav>
+      </nav>
+    </div>
+  </div>
 </div>
-
 <script>
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new bootstrap.Tooltip(el));
 </script>
