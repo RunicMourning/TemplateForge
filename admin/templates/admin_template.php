@@ -27,7 +27,7 @@
     <!-- Admin panel brand -->
     <a class="navbar-brand d-flex align-items-center" href="index.php">
       <i class="bi bi-speedometer2 me-1"></i>
-      <?= htmlspecialchars($siteTitle) ?> Admin Dashboard
+      <?= htmlspecialchars($siteTitle) ?> Dashboard
     </a>
 
     <!-- “View Site” link as a badge -->
@@ -55,6 +55,7 @@
          <ul class="list-group mainnav">
           <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text-fill me-2"></i>Pages</a></li>
           <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies-fill me-2"></i>Blog Posts</a></li>
+          <li class="list-group-item"><a href="index.php?p=widgets" class="link-underline-light"><i class="bi bi-puzzle-fill me-2"></i>Widgets</a></li>
           <li class="list-group-item"><a href="index.php?p=uploads" class="link-underline-light"><i class="bi bi-cloud-upload me-2"></i>Uploads</a></li>
           <li class="list-group-item"><a href="index.php?p=analytics" class="link-underline-light"><i class="bi bi-graph-up me-2"></i>Analytics</a></li>
           <li class="list-group-item"><a href="index.php?p=gallery" class="link-underline-light"><i class="bi bi-images me-2"></i>Media Library</a></li>
