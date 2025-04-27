@@ -3,60 +3,43 @@
 
 $pageTitle = 'Home';
 ?>
+
 <!-- Hero Section -->
-<header class="bg-dark text-white text-center py-5 mt-3 rounded-5">
-    <div class="container">
-        <h1>Welcome to <?php echo htmlspecialchars($siteTitle); ?></h1>
-        <p class="lead">A simple, clean homepage</p>
-        <a href="#" class="btn btn-light btn-lg">Get Started</a>
-    </div>
-</header>
-
-
-<!-- About Section -->
-<section class="container py-5">
-    <div class="row align-items-center">
-        <div class="col-md-6">
-            <h2>About Us</h2>
-            <p>We provide high-quality content, web solutions, and digital expertise to help you achieve your goals.</p>
-            <p>Our mission is to create engaging, user-friendly experiences that make an impact.</p>
-            <a href="#" class="btn btn-primary">Learn More</a>
-        </div>
-        <div class="col-md-6 text-center">
-            <img src="https://picsum.photos/500/300?random=1" class="img-fluid rounded" alt="About Image">
-        </div>
-    </div>
+<section class="container py-5 text-center">
+    <h1 class="display-3 fw-bold mb-4">Welcome to TemplateForge</h1>
+    <p class="lead text-muted mb-4">A modern templating system for dynamic web development.</p>
+    <a href="about.html" class="btn btn-primary btn-lg rounded-pill">Learn More</a>
 </section>
 
 <!-- Features Section -->
 <section class="bg-light py-5">
     <div class="container text-center">
-        <h2>Why Choose Us?</h2>
-        <div class="row mt-4">
+        <h2 class="fw-bold mb-5">Why Choose TemplateForge?</h2>
+        <div class="row g-4">
             <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/500/250?random=2" class="card-img-top" alt="Feature 1">
+                <div class="card feature-card h-100 border-0 shadow rounded-4 overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=2" class="card-img-top" alt="Dynamic Templates">
                     <div class="card-body">
-                        <h4 class="card-title">Quality Content</h4>
-                        <p class="card-text">We provide in-depth analysis and engaging content that keeps visitors coming back.</p>
+                        <h5 class="card-title fw-bold">Dynamic Template Loading</h5>
+                        <p class="card-text text-muted">Effortlessly load and manage your templates for a streamlined development process.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/500/250?random=3" class="card-img-top" alt="Feature 2">
+                <div class="card feature-card h-100 border-0 shadow rounded-4 overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=3" class="card-img-top" alt="Modular Structure">
                     <div class="card-body">
-                        <h4 class="card-title">Responsive Design</h4>
-                        <p class="card-text">Our websites are built to work seamlessly across all devices and screen sizes.</p>
+                        <h5 class="card-title fw-bold">Modular Structure</h5>
+                        <p class="card-text text-muted">Create scalable projects with a flexible, modular system that grows with your needs.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card mb-4">
-                    <img src="https://picsum.photos/500/250?random=4" class="card-img-top" alt="Feature 3">
+                <div class="card feature-card h-100 border-0 shadow rounded-4 overflow-hidden">
+                    <img src="https://picsum.photos/600/400?random=4" class="card-img-top" alt="Seamless Integration">
                     <div class="card-body">
-                        <h4 class="card-title">Fast & Secure</h4>
-                        <p class="card-text">We prioritize speed and security to provide the best user experience possible.</p>
+                        <h5 class="card-title fw-bold">Seamless Integration</h5>
+                        <p class="card-text text-muted">Easily integrate TemplateForge into your existing PHP-based projects for rapid deployment.</p>
                     </div>
                 </div>
             </div>
@@ -64,7 +47,10 @@ $pageTitle = 'Home';
     </div>
 </section>
 
+<!-- Call to Action Section -->
+<section class="container py-5 text-center">
+    <h2 class="fw-bold mb-4">Ready to Get Started?</h2>
+    <p class="lead text-muted mb-4">TemplateForge is here to help you create amazing web experiences with less effort. Start building your next project today.</p>
+    <a href="https://github.com/RunicMourning/TemplateForge" class="btn btn-primary btn-lg rounded-pill">View Documentation</a>
+</section>
 
-<div id="fourthwall-embed">
-  <script src="https://thevintagegamers-shop.fourthwall.com/embed.js"></script>
-</div>

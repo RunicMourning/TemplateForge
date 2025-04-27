@@ -1,74 +1,73 @@
 <?php
 // pages/about.php
 
-$pageTitle = 'About Us';
+$pageTitle = 'About TemplateForge';
 ?>
 <div class="row justify-content-center">
     <div class="col-lg-8 text-center mb-4">
-        <img src="https://picsum.photos/id/103/300/150?random=346" class="img-fluid m-3 shadow" alt="Profile Picture">
-        <h1 class="fw-bold">Your Name</h1>
-        <p class="text-muted">Web Developer | Content Creator | Technology Enthusiast</p>
+        <img src="https://picsum.photos/id/103/300/150?random=346" class="img-fluid m-3 shadow rounded" alt="TemplateForge System">
+        <h1 class="fw-bold">TemplateForge</h1>
+        <p class="text-muted">A Modern Templating System for Dynamic Web Development</p>
     </div>
 </div>
 
-<!-- About Me and Skills Section -->
+<!-- About TemplateForge Section -->
 <div class="row mt-4">
     <div class="col-lg-6">
-        <h2 class="text-primary">About Me</h2>
+        <h2 class="text-primary">What is TemplateForge?</h2>
         <p>
-            Welcome to my personal space on the web! I am passionate about web development, 
-            digital content creation, and exploring the ever-evolving world of technology. 
-            With experience in multiple programming languages and frameworks, I enjoy crafting 
-            user-friendly, innovative solutions.
+            TemplateForge is a dynamic and flexible templating system designed to streamline the process of developing scalable, customizable websites and web applications. By leveraging a clean, intuitive syntax and a modular approach, TemplateForge empowers developers to efficiently build and maintain complex web projects.
         </p>
         <p>
-            In addition to coding, I love sharing my knowledge through blogs, tutorials, 
-            and engaging with fellow enthusiasts. Whether it's designing intuitive websites 
-            or discussing the latest trends, I'm always eager to dive into new projects.
+            Whether you're building a simple static site or a sophisticated web application, TemplateForge provides the tools necessary to manage dynamic content, templates, and assets in a seamless, organized way. With TemplateForge, developers can focus on writing clean, maintainable code while the system takes care of the complex structure of dynamic content rendering.
         </p>
     </div>
     <div class="col-lg-6">
-        <h2 class="text-primary">My Skills</h2>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Web Development (HTML, CSS, JavaScript, PHP)
-                <span class="badge bg-primary rounded-pill">Advanced</span>
+        <h2 class="text-primary">Key Features</h2>
+        <ul class="list-unstyled">
+            <li class="mb-3">
+                <h5 class="fw-semibold text-secondary">Dynamic Template Loading</h5>
+                <p>TemplateForge allows you to load templates dynamically, making it easy to change the appearance of your site or application without rewriting code or reloading resources.</p>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                UI/UX Design & Frontend Frameworks
-                <span class="badge bg-warning rounded-pill">Intermediate</span>
+            <li class="mb-3">
+                <h5 class="fw-semibold text-secondary">Modular Structure for Scalability</h5>
+                <p>The system's modular approach helps developers create scalable applications, enabling the addition of new features and templates with minimal disruption to the existing codebase.</p>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Content Creation & Blogging
-                <span class="badge bg-success rounded-pill">Expert</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                SEO & Digital Marketing
-                <span class="badge bg-secondary rounded-pill">Beginner</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                Gaming & Tech Analysis
-                <span class="badge bg-danger rounded-pill">Expert</span>
+            <li class="mb-3">
+                <h5 class="fw-semibold text-secondary">Customizable Templating Syntax</h5>
+                <p>TemplateForge offers a flexible templating syntax that can be customized to fit the specific needs of any project, helping developers create cleaner and more organized templates.</p>
             </li>
         </ul>
+    </div>
+</div>
+
+<!-- Benefits of Using TemplateForge Section -->
+<div class="row mt-5">
+    <div class="col text-center">
+        <h3 class="text-primary">Why Choose TemplateForge?</h3>
+        <p>
+            TemplateForge offers developers the freedom to create fully customizable templates, reducing repetitive coding tasks and improving the overall speed of development. It provides flexibility through its modularity, allowing you to add new components or adjust templates without disrupting the entire system.
+        </p>
+        <p>
+            TemplateForge also integrates effortlessly into existing PHP-based projects, providing enhanced maintainability and scalability. With built-in debugging tools and comprehensive documentation, TemplateForge is designed to make development smooth and efficient.
+        </p>
     </div>
 </div>
 
 <!-- Connect Section -->
 <div class="row mt-5 text-center">
     <div class="col">
-        <h3 class="text-primary">Connect with Me</h3>
-<div class="btn-group border" role="group" aria-label="Social Media">
-  <a href="#" class="btn btn-light">
-    <i class="bi bi-twitter"></i> Twitter
-  </a>
-  <a href="#" class="btn btn-light">
-    <i class="bi bi-linkedin"></i> LinkedIn
-  </a>
-  <a href="#" class="btn btn-light">
-    <i class="bi bi-github"></i> GitHub
-  </a>
-</div>
-
+        <h3 class="text-primary">Connect with the TemplateForge Community</h3>
+        <div class="btn-group border" role="group" aria-label="Social Media">
+            <a href="#" class="btn btn-light" target="_blank">
+                <i class="bi bi-github"></i> GitHub
+            </a>
+            <a href="#" class="btn btn-light" target="_blank">
+                <i class="bi bi-twitter"></i> Twitter
+            </a>
+            <a href="#" class="btn btn-light" target="_blank">
+                <i class="bi bi-linkedin"></i> LinkedIn
+            </a>
+        </div>
     </div>
 </div>

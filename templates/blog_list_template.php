@@ -1,32 +1,23 @@
-<?php
-// templates/blog_list_template.php
-// This template outputs content for the blog listing (inside the body)
-
-?>
-
-	  
-    <?php foreach ($pagedPosts as $post): ?>
-<article class="blog-post mt-3">
-  <div class="card">
-    <h5 class="card-header">
-      <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="link-underline-primary text-black">
-        <?php echo htmlspecialchars($post['title']); ?>
-      </a>
-    </h5>
-    <div class="card-body">
-      <p class="card-text"><?php echo htmlspecialchars($post['excerpt']); ?></p>
-    </div>
-    <div class="card-footer d-flex justify-content-between align-items-center">
-      <small class="text-body-secondary">
+<div class="mt-4">
+  <?php foreach ($pagedPosts as $post): ?>
+    <article class="pb-4 mb-4 border-bottom">
+      <h2 class="h5 mb-1">
+        <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="text-decoration-underline text-dark">
+          <?php echo htmlspecialchars($post['title']); ?>
+        </a>
+      </h2>
+      <small class="text-muted">
         <?php
-        // Create DateTime object
         $date = new DateTime($post['timestamp']);
-        // Convert to a different format
-        echo $date->format('F j, Y g:i A'); // Example: December 3, 2025 11:25 AM
+        echo $date->format('F j, Y');
         ?>
       </small>
-      <a class="btn btn-danger" href="blog-<?php echo urlencode($post['slug']); ?>.html">Read More</a>
-    </div>
-  </div>
-</article>
-    <?php endforeach; ?>
+      <p class="mt-2 text-secondary small">
+        <?php echo htmlspecialchars($post['excerpt']); ?>
+      </p>
+      <a href="blog-<?php echo urlencode($post['slug']); ?>.html" class="text-primary fw-semibold small">
+        Continue Reading <i class="bi bi-arrow-right"></i>
+      </a>
+    </article>
+  <?php endforeach; ?>
+</div>

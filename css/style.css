@@ -45,11 +45,10 @@ a {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Cairo Play", serif;
   font-optical-sizing: auto;
-  font-weight: bold;
+  font-weight: normal;
   font-style: normal;
   font-variation-settings: "slnt" 0;
   text-decoration: none;
-  text-transform: lowercase;
 }
 
 h1::first-letter, 
@@ -91,24 +90,3 @@ h6::first-letter {
 .bi-twitter { color: #1D9BF0; }
 .bi-vimeo { color: #1AB7EA; }
 .bi-youtube { color: #FF0000; }
-
-/*--------------------------------------------------------------
-   ✅ Custom Icons for Functional Sections
-   Specific icons for common site functions like home, profile, blog, etc.
---------------------------------------------------------------*/
-
-.bi-house-door { color: #007bff; }
-.bi-people { color: #20c997; }
-.bi-journal-text { color: #fff; }
-.bi-exclamation-circle-fill { color: #dc3545; }
-.bi-search { color: #efefef; }
-.bi-clock-history { color: #6f42c1; }
-.bi-file-earmark-text { color: #007bff; }
-.bi-calendar3 { color: #fd7e14; }
-.bi-folder-fill { background: linear-gradient(45deg, #FFD700 0%, #FFB700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.bi-arrow-right { color: #17a2b8; }
-.bi-shield-lock-fill { color: #bbb; }
-.bi-person-fill { color: #007bff; }
-.bi-lock-fill { color: #dc3545; }
-.bi-box-arrow-in-right { color: #1e3a8a; }
-
