@@ -9,7 +9,7 @@
   <link rel="alternate" type="application/rss+xml" href="/rss.php" title="<?php echo htmlspecialchars($siteTitle); ?> RSS Feed" />
 
   <!-- Styles -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.3/dist/cosmo/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cairo+Play:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
@@ -62,42 +62,47 @@
     </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-dark text-light pt-5">
+<!-- Footer -->
+<footer class="bg-dark text-light py-5 mt-5 border-top border-secondary">
     <div class="container">
-      <div class="row g-4">
-        <div class="col-md-4">
-          <h6 class="text-uppercase">Follow Us</h6>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-linkedin me-2"></i>LinkedIn</a></li>
-            <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-bluesky me-2"></i>Bluesky</a></li>
-            <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-instagram me-2"></i>Instagram</a></li>
-          </ul>
+        <div class="row align-items-center">
+            <!-- Site Title and Tagline -->
+            <div class="col-md-6 mb-4 mb-md-0">
+                <h5 class="fw-bold"><?php echo htmlspecialchars($siteTitle); ?></h5>
+                <p class="small mb-2">Flexible. Modular. Ready to Build.</p>
+                <p class="small mb-0" style="color: #aaa;">Version 1.0 — &copy; <?php echo date('Y'); ?>.</p>
+            </div>
+
+            <!-- Footer Navigation -->
+            <div class="col-md-6 text-md-end">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        <a href="privacy.html" class="text-light text-decoration-none">Privacy</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://github.com/RunicMourning/TemplateForge" class="text-light text-decoration-none" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-github"></i> GitHub
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="col-md-4">
-          <h6 class="text-uppercase">Legal</h6>
-          <ul class="list-unstyled">
-            <li><a href="#" class="text-decoration-none text-light"><i class="bi bi-file-earmark-text me-2"></i>Terms & Conditions</a></li>
-            <li><a href="privacy.html" class="text-decoration-none text-light"><i class="bi bi-shield-lock me-2"></i>Privacy Policy</a></li>
-          </ul>
-        </div>
+        <hr class="border-primary my-4">
 
-        <div class="col-md-4">
-          <h6 class="text-uppercase">Contact</h6>
-          <ul class="list-unstyled">
-            <li><i class="bi bi-envelope-at-fill me-2"></i><a href="mailto:contact@mywebsite.com" class="text-decoration-none text-light">contact@mywebsite.com</a></li>
-            <li><i class="bi bi-telephone me-2"></i><a href="tel:+11234567890" class="text-decoration-none text-light">(123) 456-7890</a></li>
-            <li><i class="bi bi-geo-alt-fill me-2"></i>123 Business Ave, City, State</li>
-          </ul>
-        </div>
-      </div>
+        <div class="row">
+            <div class="col-md-6 small">
+                &copy; <?php echo date('Y'); ?> <?php echo htmlspecialchars($siteTitle); ?>. Version 1.0. Built with TemplateForge.
+            </div>
 
-      <div class="text-center small mt-4 border-top pt-3">
-        &copy; 2025 <strong><?php echo htmlspecialchars($siteTitle); ?></strong>. All rights reserved.
-      </div>
+            <div class="col-md-6 text-md-end small" style="color: #aaa;">
+                Made with <span class="text-danger">&hearts;</span> for developers.
+            </div>
+        </div>
     </div>
-  </footer>
+</footer>
+
+
 
 </div>
 

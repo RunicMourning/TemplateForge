@@ -1,26 +1,9 @@
 <?php
 // pages/404.php
 
-$pageTitle = '404';
+$pageTitle = 'Error 404: Page Not Found!';
 $headerIncludes[] = <<<HTML
-<!-- Minimalist Animations & Styles -->
-<style>
-    .error-animation {
-        animation: popFade 0.8s ease-out;
-    }
-    @keyframes popFade {
-        0% { transform: scale(0.98); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
-    }
-    .nerd-info {
-        transition: background-color 0.3s ease, border 0.3s ease;
-        border: 1px solid #e0e0e0;
-    }
-    .nerd-info:hover {
-        background-color: #f1f3f5;
-        border-color: #d0d7de;
-    }
-</style>
+
 HTML;
 $footerIncludes[] = "";
 
@@ -31,13 +14,13 @@ log_activity('404 Not Found', 'Requested URL: ' . $requested_url);
 ?>
 
 <div class="container py-3">
-    <div class="card border-0 rounded-5 p-4 error-animation">
+    <div class="card p-4 shadow-sm border-0 rounded-4">
         
         <!-- Search Form at Top -->
         <div class="card-header bg-transparent border-0 text-center mb-4">
             <form class="input-group input-group-lg" action="search.html" method="GET">
-                <input type="text" class="form-control rounded-start-pill" name="q" placeholder="Search for a page..." aria-label="Search" aria-describedby="button-addon2">
-                <button class="btn btn-danger rounded-end-pill" type="submit" id="button-addon2">Go</button>
+                <input type="text" class="form-control rounded-start" name="q" placeholder="Search for a page..." aria-label="Search" aria-describedby="button-addon2">
+                <button class="btn btn-danger rounded-end" type="submit" id="button-addon2">Go</button>
             </form>
         </div>
 

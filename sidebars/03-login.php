@@ -9,24 +9,24 @@
             <!-- Username Input -->
             <div class="mb-3">
                 <div class="input-group">
-                    <span class="input-group-text" id="username-addon">
+                    <span class="input-group-text rounded-start" id="username-addon">
                         <i class="bi bi-person-fill"></i>
                     </span>
-                    <input type="text" class="form-control rounded-3" id="username" name="username" placeholder="Enter username" required aria-describedby="username-addon">
+                    <input type="text" class="form-control rounded-end" id="username" name="username" placeholder="Enter username" required aria-describedby="username-addon">
                 </div>
             </div>
             <!-- Password Input -->
             <div class="mb-3">
                 <div class="input-group">
-                    <span class="input-group-text" id="password-addon">
+                    <span class="input-group-text rounded-start" id="password-addon">
                         <i class="bi bi-lock-fill"></i>
                     </span>
-                    <input type="password" class="form-control rounded-3" id="password" name="password" placeholder="Enter password" required aria-describedby="password-addon">
+                    <input type="password" class="form-control rounded-end" id="password" name="password" placeholder="Enter password" required aria-describedby="password-addon">
                 </div>
             </div>
             <!-- Submit Button -->
             <div class="d-grid">
-                <button type="submit" class="btn btn-primary rounded-pill shadow-sm">
+                <button type="submit" class="btn btn-success rounded-pill shadow-sm">
                     <i class="bi bi-box-arrow-in-right"></i> Login
                 </button>
             </div>
