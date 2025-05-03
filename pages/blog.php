@@ -26,7 +26,12 @@ if (isset($_GET['post']) && !empty($_GET['post'])) {
     ob_start();
     include $postFile;
     $postContent = ob_get_clean();
-    
+
+    // ── append the post’s title to the pageTitle
+    if (isset($postTitle) && $postTitle !== '') {
+        $pageTitle .= ' - ' . $postTitle;
+    }
+
     // Load the single post template.
     include __DIR__ . '/../templates/blog_post_template.php';
 

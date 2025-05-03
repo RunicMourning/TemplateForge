@@ -53,6 +53,7 @@
     <nav class="col-md-3 col-lg-2 d-md-block bg-secondary text-white border-end vh-100 position-fixed pt-3">
       <div class="position-sticky">
          <ul class="list-group mainnav">
+          <li class="list-group-item"><a href="index.php" class="link-underline-light"><i class="bi bi-house-fill me-2"></i>Dashboard</a></li>
           <li class="list-group-item"><a href="index.php?p=pages" class="link-underline-light"><i class="bi bi-file-earmark-text-fill me-2"></i>Pages</a></li>
           <li class="list-group-item"><a href="index.php?p=posts" class="link-underline-light"><i class="bi bi-stickies-fill me-2"></i>Blog Posts</a></li>
           <li class="list-group-item"><a href="index.php?p=widgets" class="link-underline-light"><i class="bi bi-puzzle-fill me-2"></i>Widgets</a></li>

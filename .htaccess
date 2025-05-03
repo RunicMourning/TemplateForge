@@ -1,30 +1,60 @@
+# ------------------------------------------------------------------------------
+# Enable the rewrite engine for all following rules
+# ------------------------------------------------------------------------------
 RewriteEngine On
 
-# If .htaccess is in /testing/, set RewriteBase accordingly
+# ------------------------------------------------------------------------------
+# If this .htaccess lives in a subfolder (e.g. /testing/), tell mod_rewrite
+# how to treat relative paths. Adjust as needed.
+# ------------------------------------------------------------------------------
 RewriteBase /testing/
 
-# Ensure the requested file or directory exists before rewriting
+# ------------------------------------------------------------------------------
+# Only apply rewrites if the request does NOT map to an existing file or dir
+# ------------------------------------------------------------------------------
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# Redirect index.html to index.php?p=home (this rule should come first)
+# ------------------------------------------------------------------------------
+# 1) Home page: map index.html ? index.php?p=home
+#    – User-friendly static URL
+#    – Internally serves dynamic home content
+# ------------------------------------------------------------------------------
 RewriteRule ^index\.html$ /index.php?p=home [L,QSA]
 
-# Rewrite blog.html to index.php?p=blog (blog list page)
+# ------------------------------------------------------------------------------
+# 2) Blog listing: map blog.html ? index.php?p=blog
+#    – Static “blog.html” URL shows blog overview
+# ------------------------------------------------------------------------------
 RewriteRule ^blog\.html$ /index.php?p=blog [L,QSA]
 
-# Rewrite individual post URLs like blog-my-first-post.html to index.php?p=blog&post=post-slug
-RewriteRule ^blog-([a-zA-Z0-9_-]+)\.html$ /index.php?p=blog&post=$1 [L,QSA]
+# ------------------------------------------------------------------------------
+# 3) Individual blog posts:
+#    URLs like blog-my-first-post.html
+#    ? index.php?p=blog&post=post-slug
+# ------------------------------------------------------------------------------
+RewriteRule ^blog-([A-Za-z0-9_-]+)\.html$ /index.php?p=blog&post=$1 [L,QSA]
 
-# General rule: Rewrite page.html to index.php?p=page
-RewriteRule ^([a-zA-Z0-9_-]+)\.html$ /index.php?p=$1 [L,QSA]
+# ------------------------------------------------------------------------------
+# 4) General “pretty” pages:
+#    page.html ? index.php?p=page
+#    – Catches any single-segment .html file
+# ------------------------------------------------------------------------------
+RewriteRule ^([A-Za-z0-9_-]+)\.html$ /index.php?p=$1 [L,QSA]
 
-# Custom 404 Redirect to a user-friendly page
+# ------------------------------------------------------------------------------
+# Custom 404 handling:
+# Serve a friendly static 404.html on not-found errors
+# ------------------------------------------------------------------------------
 ErrorDocument 404 /404.html
 
 
+# ------------------------------------------------------------------------------
+# BEGIN mod_deflate — compress assets to reduce bandwidth
+# ------------------------------------------------------------------------------
 <IfModule mod_deflate.c>
-    # Compress HTML, CSS, JavaScript, Text, XML, and fonts
+
+    # Compress these MIME types
     AddOutputFilterByType DEFLATE application/javascript
     AddOutputFilterByType DEFLATE application/rss+xml
     AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
@@ -46,9 +76,11 @@ ErrorDocument 404 /404.html
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/xml
 
-    # Exclude certain file types from compression
+    # Don’t attempt to gzip already-compressed images
     SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp)$ no-gzip dont-vary
 
-    # Ensure proxies don’t send incorrect content
+    # Ensure proxies deliver correct content based on encoding
     Header append Vary Accept-Encoding
+
 </IfModule>
+# END mod_deflate
