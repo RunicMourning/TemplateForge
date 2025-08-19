@@ -1,71 +1,121 @@
 # 🚀 TemplateForge
 
-**TemplateForge** is a modular, flat-file-based website built with PHP, designed to provide dynamic content loading, a blog system, and search functionality—all without a database.
+**TemplateForge** is a modular, flat-file-based PHP website framework, designed to deliver dynamic content, a blog system, analytics, and search—without relying on a database.
+
+---
+
+## 📸 Screenshots
+
+### 🏠 Homepage
+
+![Homepage Screenshot](docs/screenshots/homepage.png)
+
+### 📝 Blog System
+
+![Blog Screenshot](docs/screenshots/blog.png)
+
+### 🔑 Admin Dashboard
+
+![Admin Dashboard](docs/screenshots/admin_dashboard.png)
+
+### 📊 Analytics Page
+
+![Analytics Screenshot](docs/screenshots/analytics.png)
+
+---
 
 ## 📌 Key Features
 
 ### 🗂 Flat-File Content Management
-- **Modular Content:** Each page is stored as an individual PHP file in the `/pages/` directory.
-- **Blog System:** Blog posts are stored in `/blog_posts/` for easy management.
-- **Seamless Integration:** Output buffering captures content for smooth template rendering.
+
+* **Modular Content:** Pages live in `/pages/` as individual PHP files.
+* **Blog System:** Posts are stored in `/blog_posts/`.
+* **SEO-Ready Pages:** Includes sitemap, privacy policy, and 404 support.
 
 ### 🎨 Centralized Template System
-- **Unified Layout:** A single template file (`main_template.php`) defines the entire site layout.
-- **Dynamic Content Injection:** Pages and blog posts integrate seamlessly into the template.
-- **Sidebar Support:** Easily configurable sidebars located in `/sidebars/`.
 
-### 🧩 Modular Add-On Support
-- **Auto-Loaded Modules:** The `config.php` file automatically loads all PHP files in `/config/addons/`.
-- **Smart Navigation:** Dynamically generated menus with active class highlighting.
+* **Unified Layout:** `main_template.php` governs the full site design.
+* **Dynamic Content Injection:** Pages, blog posts, and sidebars are seamlessly rendered.
+* **Template Variants:** Dedicated templates for blog listings, blog posts, and search.
 
-### 🔍 Built-In Search Functionality
-- **Site-Wide Search:** Users can find content across both static pages and blog posts.
-- **Custom Search Results Page:** Results are displayed in a dedicated template (`search_template.php`).
+### 🧩 Modular Add-On & Widget Support
+
+* **Auto-Loaded Addons:** `/config/addons/` supports plug-and-play PHP modules.
+* **Built-In Addons:** Bootstrap nav, cookie consent modal, AdSense, metadata injector, and more.
+* **Sidebar & Widgets:** Prebuilt components like login, recent posts, random content, adsense, and comments.
 
 ### 🔑 Admin Area
-- **Content Management:** Manage pages, blog posts, and site settings from a dedicated Admin Area.
-- **User Authentication:** Login-protected Admin Area to securely manage content.
-- **Intuitive Interface:** A simple interface for creating and editing pages, blog posts, and site settings.
-- **Real-Time Previews:** Preview changes to content before publishing them live.
 
-### 📊 Basic Analytics
-- **Page Views Tracking:** Track the number of views for each page and blog post.
-- **Custom Analytics Page:** A simple analytics dashboard that aggregates page views data, displaying which pages and posts are being accessed the most.
-- **Configuration:** Analytics data is stored in a JSON file in `/config/data/`, and can be easily integrated with third-party tools or exported for further analysis.
+* **User Authentication:** Login/logout with `.htpasswd` support.
+* **Content Management:** Create, edit, and delete pages/posts.
+* **Site Settings:** Update configuration, navigation, and widgets.
+* **Analytics Dashboard:** Tracks page/blog views (JSON-driven).
+* **Advanced Tools:** Upload manager, logs, system info, activity tracking.
+* **Template-Based UI:** Admin layout centralized in `/admin/templates/admin_template.php`.
 
+### 🔍 Search & SEO
+
+* **Built-In Search:** Results rendered with `search_template.php`.
+* **RSS Feed:** Auto-generated feed via `rss.php`.
+* **Sitemap & Robots:** Ready-to-use `/pages/sitemap.php` and `robots.txt`.
+* **Favicon Support:** `favicon.ico` included.
+
+### 📊 Analytics & Tracking
+
+* **Page Views Tracking:** Stored in `/config/data/analytics.json`.
+* **Admin Analytics:** Dedicated `/admin/pages/analytics.php`.
+* **Custom Tracker:** `track.php` for lightweight analytics logging.
+
+### 🛠 Developer-Friendly
+
+* **Simple Config:** `config.php`, plus navigation via `navbar.txt` and `navigation.txt`.
+* **Test Utilities:** `test.php` for dev/testing.
+* **Flat-File Storage:** Easy migration, backup, and version control.
+
+---
 
 ## 📂 Directory Structure
+
 ```plaintext
-/index.php                 # Main entry point
-/config/                   # Configuration files
- └── config.php            # Main configuration settings
- └── /addons/              # Additional modules or add-ons
-/templates/                # Template files
- └── main_template.php     # Primary template file
-/pages/                    # Static pages
- └── home.php              # Homepage
- └── 404.php               # 404 error page
-/blog_posts/               # Blog post files
- └── blog_post_1.php       # Example blog post
-/css/                      # Stylesheets
- └── style.css             # Main stylesheet
-/sidebars/                 # Sidebar content files
- └── sidebar_left.php      # Left sidebar
-/admin/                    # Admin area files
- └── admin.php             # Main admin page
- └── login.php             # Login page
- └── /pages/               # Admin content management
-     └── Pages Go here     # page functionality
+/index.php                # Main entry point
+/.htaccess                # URL rewriting rules
+/favicon.ico              # Site icon
+/robots.txt               # SEO crawler rules
+/rss.php                  # Blog RSS feed
+/track.php                # Tracking script
+/admin/                   # Admin area
+  ├── index.php           # Admin dashboard
+  ├── login_module.php    # Login handling
+  ├── logout.php          # Logout
+  ├── logger.php          # Activity logging
+  ├── pages/              # Admin modules (create/edit content, analytics, logs, settings)
+  ├── widgets/            # Admin widgets (adsense, comments, etc.)
+  └── templates/          # Admin template
+/blog_posts/              # Blog post files
+/config/                  # Config files
+  ├── config.php          # Main settings
+  ├── addons/             # Add-ons (nav, adsense, cookie modal, etc.)
+  ├── data/               # Analytics JSON data
+/css/style.css            # Stylesheet
+/pages/                   # Static pages
+/sidebars/                # Sidebar modules
+/templates/               # Templates (main, blog, search)
 ```
 
+---
+
 ## ⚙️ Installation & Setup
-1. **Ensure PHP 7+** is installed on your web server.
-2. **Upload** the project files to your web server.
-3. **Modify** `config/config.php` to set up site settings like title, navigation, and preferences.
-4. **Customize Content:** Add or edit content files in the `/pages/` directory.
+
+1. **PHP 7+ Required** on your server.
+2. **Upload Files** to your hosting environment.
+3. **Configure Site** via `config/config.php`, `navbar.txt`, and `navigation.txt`.
+4. **Login to Admin Area** (`/admin/`) to manage content, users, and settings.
+
+---
 
 ## 🔄 URL Rewriting & .htaccess
-TemplateForge utilizes `.htaccess` for user-friendly URLs.
+
+TemplateForge uses `.htaccess` for clean URLs:
 
 ```apache
 RewriteEngine On
@@ -74,20 +124,24 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 ```
 
-This allows pages to be accessed via clean URLs like `/about` instead of `/pages/about.php`.
+---
 
 ## 🚨 404 Handling
-If a requested page is not found, the system automatically:
-1. Loads `404.php` from the `/pages/` directory.
-2. Sends an appropriate HTTP 404 response header.
+
+Missing pages automatically load `/pages/404.php` with an HTTP 404 response.
+
+---
 
 ## 🚀 Future Enhancements
-- 🛠 ~~**Admin Panel:** Simplified content management.~~
-- 🔐 ~~**User Authentication:** Restricted content support.~~
-- ⚡ **Performance Optimization:** Caching mechanisms for faster load times.
+
+* ⚡ **Performance Optimization:** Optional caching layer.
+* 🔗 **Plugin Marketplace:** Expand add-on ecosystem.
+* 📈 **Advanced Analytics:** Charts and reporting.
+
+---
 
 ## 🏁 Conclusion
-TemplateForge provides a robust, flexible architecture for dynamic PHP websites—without the overhead of a database. Its modular design ensures easy expansion and customization. 🚀
 
-> 💡 **Contributions & Feedback Welcome!** If you have suggestions or want to contribute, feel free to submit a pull request or open an issue! 🎉
+TemplateForge is a **database-free CMS-style framework**—modular, extensible, and easy to deploy. From blogs to full websites, it’s designed to scale without complexity. 🚀
 
+> 💡 **Contributions Welcome** — Open issues and PRs are encouraged! 🎉
