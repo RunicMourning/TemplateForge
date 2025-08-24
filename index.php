@@ -1,6 +1,46 @@
 <?php
 // index.php
 // Include the configuration file.
+
+
+if (session_status() === PHP_SESSION_NONE) session_start();
+include __DIR__.'/admin/logger.php';
+
+// Get common context
+$requested_url = $_SERVER['REQUEST_URI'] ?? 'Unknown URL';
+$referrer = $_SERVER['HTTP_REFERER'] ?? 'None';
+$client_ip = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+$user_agent_full = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+$logged_in_user = isset($_SESSION['loggedin'], $_SESSION['username']) && $_SESSION['loggedin'] 
+    ? $_SESSION['username'] 
+    : 'Anonymous';
+
+// Simplify User Agent
+$user_agent_display = 'Unknown Browser/OS';
+$agents = ['Firefox','Edge','Chrome','Safari','Opera','Bot/Crawler','Internet Explorer'];
+foreach ($agents as $agent) {
+    if (strpos($user_agent_full, $agent) !== false) {
+        $user_agent_display = $agent;
+        break;
+    }
+}
+
+// Custom PHP error handler
+set_error_handler(function($errno, $errstr, $errfile, $errline) use ($requested_url, $client_ip, $user_agent_full, $logged_in_user) {
+    $message = "PHP Error [$errno] - Message: $errstr | File: $errfile on line $errline | URL: $requested_url | IP: $client_ip | UA: $user_agent_full | User: $logged_in_user";
+    log_activity('PHP Error', $message);
+    return false; // allow default handling
+});
+
+// Capture fatal errors
+register_shutdown_function(function() use ($requested_url, $client_ip, $user_agent_full, $logged_in_user) {
+    $error = error_get_last();
+    if ($error !== null) {
+        $message = "Fatal Error [{$error['type']}] - Message: {$error['message']} | File: {$error['file']} on line {$error['line']} | URL: $requested_url | IP: $client_ip | UA: $user_agent_full | User: $logged_in_user";
+        log_activity('Fatal Error', $message);
+    }
+});
+
 require_once __DIR__ . '/config/config.php';
 include __DIR__ . '/track.php';
 

@@ -2,7 +2,7 @@
 // pages/sitemap.php
 
 // Define the title for this page.
-$pageTitle = "Sitemap";
+$pageTitle = "Full Site Sitemap & Navigation";
 $headerIncludes[] = "";
 $footerIncludes[] = "";
 

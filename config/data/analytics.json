@@ -2,65 +2,82 @@
     "home": {
         "title": "Home",
         "views": {
-            "2025-08-23": 21
+            "2025-08-23": 44
         },
         "unique_ips": {
             "2025-08-23": {
                 "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true,
                 "74.125.216.195": true,
                 "74.125.216.196": true,
-                "34.32.143.32": true
+                "34.32.143.32": true,
+                "216.52.89.112": true,
+                "165.23.236.83": true,
+                "204.15.208.42": true
             }
         },
         "referrers": {
             "2025-08-23": {
-                "Direct": 9,
+                "Direct": 14,
                 "https:\/\/dev.thevintagegamers.com\/admin\/index.php?p=widgets": 3,
-                "https:\/\/dev.thevintagegamers.com\/": 1,
-                "https:\/\/dev.thevintagegamers.com\/notfound.html": 3,
+                "https:\/\/dev.thevintagegamers.com\/": 2,
+                "https:\/\/dev.thevintagegamers.com\/notfound.html": 6,
                 "https:\/\/dev.thevintagegamers.com\/index.php?p=search": 1,
                 "https:\/\/dev.thevintagegamers.com\/index.php": 1,
-                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 1,
-                "https:\/\/dev.thevintagegamers.com\/index.html": 1,
-                "https:\/\/dev.thevintagegamers.com\/admin\/index.php?p=log": 1
+                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 2,
+                "https:\/\/dev.thevintagegamers.com\/index.html": 3,
+                "https:\/\/dev.thevintagegamers.com\/admin\/index.php?p=log": 2,
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 2,
+                "http:\/\/www.google.com": 1,
+                "https:\/\/dev.thevintagegamers.com\/admin\/index.php": 4,
+                "https:\/\/dev.thevintagegamers.com\/about.html": 1,
+                "https:\/\/dev.thevintagegamers.com\/contact.html": 1,
+                "https:\/\/dev.thevintagegamers.com\/blog-second-post.html": 1
             }
         },
         "user_agents": {
             "2025-08-23": {
-                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 17,
-                "Mediapartners-Google": 3,
-                "Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36": 1
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 37,
+                "Mediapartners-Google": 4,
+                "Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36": 1,
+                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 1,
+                "peer39_crawler\/1.0": 1
             }
         }
     },
     "blog": {
         "title": "Blog Listing",
         "views": {
-            "2025-08-23": 6
+            "2025-08-23": 14
         },
         "unique_ips": {
             "2025-08-23": {
-                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true
+                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true,
+                "74.125.216.194": true,
+                "216.52.89.112": true
             }
         },
         "referrers": {
             "2025-08-23": {
-                "https:\/\/dev.thevintagegamers.com\/": 2,
+                "https:\/\/dev.thevintagegamers.com\/": 4,
                 "https:\/\/dev.thevintagegamers.com\/admin\/index.php?p=widgets": 2,
-                "https:\/\/dev.thevintagegamers.com\/index.html": 1,
-                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 1
+                "https:\/\/dev.thevintagegamers.com\/index.html": 5,
+                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 1,
+                "Direct": 1,
+                "http:\/\/www.google.com": 1
             }
         },
         "user_agents": {
             "2025-08-23": {
-                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 6
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 12,
+                "Mediapartners-Google": 1,
+                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 1
             }
         }
     },
     "404": {
         "title": "404 - Page Not Found",
         "views": {
-            "2025-08-23": 44
+            "2025-08-23": 66
         },
         "unique_ips": {
             "2025-08-23": {
@@ -70,7 +87,10 @@
                 "74.7.35.113": true,
                 "216.52.89.84": true,
                 "74.125.216.195": true,
-                "204.15.208.43": true
+                "204.15.208.43": true,
+                "216.52.89.112": true,
+                "209.190.62.253": true,
+                "74.125.216.194": true
             }
         },
         "referrers": {
@@ -78,50 +98,32 @@
                 "https:\/\/dev.thevintagegamers.com\/blog.html": 1,
                 "https:\/\/dev.thevintagegamers.com\/admin\/index.php?p=widgets": 5,
                 "https:\/\/dev.thevintagegamers.com\/admin\/analytics": 1,
-                "Direct": 9,
-                "http:\/\/www.google.com": 4,
-                "https:\/\/dev.thevintagegamers.com\/about.html": 19,
+                "Direct": 16,
+                "http:\/\/www.google.com": 6,
+                "https:\/\/dev.thevintagegamers.com\/about.html": 21,
                 "https:\/\/dev.thevintagegamers.com\/notfound.html": 3,
-                "https:\/\/dev.thevintagegamers.com\/butt\/": 2
+                "https:\/\/dev.thevintagegamers.com\/butt\/": 6,
+                "https:\/\/dev.thevintagegamers.com\/butt\/index.html": 4,
+                "https:\/\/dev.thevintagegamers.com\/butt\/notfound.html": 1,
+                "https:\/\/dev.thevintagegamers.com": 1,
+                "https:\/\/dev.thevintagegamers.com\/privacy.html": 1
             }
         },
         "user_agents": {
             "2025-08-23": {
-                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 36,
-                "Mediapartners-Google": 2,
-                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 4,
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 52,
+                "Mediapartners-Google": 5,
+                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 6,
                 "Mozilla\/5.0 AppleWebKit\/537.36 (KHTML, like Gecko); compatible; ChatGPT-User\/1.0; +https:\/\/openai.com\/bot": 1,
-                "peer39_crawler\/1.0": 1
+                "peer39_crawler\/1.0": 1,
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/118.0.0.0 Safari\/537.36": 1
             }
         }
     },
     "blog:first-post": {
         "title": "First Post",
         "views": {
-            "2025-08-23": 6
-        },
-        "unique_ips": {
-            "2025-08-23": {
-                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true
-            }
-        },
-        "referrers": {
-            "2025-08-23": {
-                "https:\/\/dev.thevintagegamers.com\/blog.html": 4,
-                "Direct": 1,
-                "https:\/\/dev.thevintagegamers.com\/index.html": 1
-            }
-        },
-        "user_agents": {
-            "2025-08-23": {
-                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 6
-            }
-        }
-    },
-    "about": {
-        "title": "About TemplateForge",
-        "views": {
-            "2025-08-23": 6
+            "2025-08-23": 8
         },
         "unique_ips": {
             "2025-08-23": {
@@ -131,18 +133,50 @@
         },
         "referrers": {
             "2025-08-23": {
-                "https:\/\/dev.thevintagegamers.com\/blog.html": 1,
-                "https:\/\/dev.thevintagegamers.com\/search.html?q=s": 1,
-                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 1,
-                "Direct": 1,
-                "https:\/\/dev.thevintagegamers.com\/blog-notfound.html": 1,
-                "https:\/\/dev.thevintagegamers.com\/blog-first-poest.html": 1
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 5,
+                "Direct": 2,
+                "https:\/\/dev.thevintagegamers.com\/index.html": 1
             }
         },
         "user_agents": {
             "2025-08-23": {
-                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 5,
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 7,
                 "Mediapartners-Google": 1
+            }
+        }
+    },
+    "about": {
+        "title": "About TemplateForge",
+        "views": {
+            "2025-08-23": 11
+        },
+        "unique_ips": {
+            "2025-08-23": {
+                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true,
+                "74.125.216.194": true,
+                "216.52.89.84": true,
+                "209.190.62.182": true
+            }
+        },
+        "referrers": {
+            "2025-08-23": {
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 3,
+                "https:\/\/dev.thevintagegamers.com\/search.html?q=s": 1,
+                "https:\/\/dev.thevintagegamers.com\/blog-first-post.html": 1,
+                "Direct": 1,
+                "https:\/\/dev.thevintagegamers.com\/blog-notfound.html": 1,
+                "https:\/\/dev.thevintagegamers.com\/blog-first-poest.html": 1,
+                "http:\/\/www.google.com": 1,
+                "https:\/\/dev.thevintagegamers.com\/": 1,
+                "https:\/\/dev.thevintagegamers.com": 1
+            }
+        },
+        "user_agents": {
+            "2025-08-23": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 8,
+                "Mediapartners-Google": 1,
+                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 1,
+                "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/118.0.0.0 Safari\/537.36": 1
             }
         }
     },
@@ -218,6 +252,57 @@
             "2025-08-23": {
                 "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 1,
                 "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/118.0.0.0 Safari\/537.36": 1
+            }
+        }
+    },
+    "privacy": {
+        "title": "Privacy Policy \u2013 Your Data \u0026 Security",
+        "views": {
+            "2025-08-23": 3
+        },
+        "unique_ips": {
+            "2025-08-23": {
+                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true,
+                "209.190.63.11": true,
+                "216.52.89.112": true
+            }
+        },
+        "referrers": {
+            "2025-08-23": {
+                "https:\/\/dev.thevintagegamers.com\/provacy.html": 1,
+                "https:\/\/dev.thevintagegamers.com": 1,
+                "http:\/\/www.google.com": 1
+            }
+        },
+        "user_agents": {
+            "2025-08-23": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 1,
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/118.0.0.0 Safari\/537.36": 1,
+                "Mozilla\/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko\/20080311 Firefox\/2.0.0.13": 1
+            }
+        }
+    },
+    "blog:second-post": {
+        "title": "second post",
+        "views": {
+            "2025-08-23": 2
+        },
+        "unique_ips": {
+            "2025-08-23": {
+                "2605:4a80:f000:bd00:74cb:7909:1f87:fb3f": true,
+                "34.32.143.32": true
+            }
+        },
+        "referrers": {
+            "2025-08-23": {
+                "https:\/\/dev.thevintagegamers.com\/blog.html": 1,
+                "Direct": 1
+            }
+        },
+        "user_agents": {
+            "2025-08-23": {
+                "Mozilla\/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko\/20100101 Firefox\/142.0": 1,
+                "Mozilla\/5.0 (X11; Linux x86_64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36": 1
             }
         }
     }

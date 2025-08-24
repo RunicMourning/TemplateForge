@@ -1,10 +1,9 @@
 <?php
 // pages/home.php
 
-$pageTitle = 'Home';
+$pageTitle = 'Modular PHP Website Framework with Blog, Analytics & Admin Dashboard';
 ?>
-
-<!-- Hero Section -->
+<!-- Hero Section --> 
 <section class="container py-5 text-center">
     <h1 class="display-3 fw-bold mb-4">Welcome to TemplateForge</h1>
     <p class="lead text-muted mb-4">A modern templating system for dynamic web development.</p>

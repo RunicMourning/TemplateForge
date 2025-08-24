@@ -20,6 +20,10 @@ foreach ($pages as $pagePath) {
         'title' => $title
     ];
 }
+
+// Define pages with restricted actions
+$noEditDelete = ['search.php', '404.php', 'blog.php', 'sitemap.php'];
+$noDelete = ['home.php'];
 ?>
 
 <div class="container mt-5">
@@ -42,11 +46,26 @@ foreach ($pages as $pagePath) {
             </thead>
             <tbody>
                 <?php foreach ($pagesWithTitles as $page): ?>
+                    <?php
+                        $disableEdit = in_array($page['filename'], $noEditDelete);
+                        $disableDelete = in_array($page['filename'], $noEditDelete) || in_array($page['filename'], $noDelete);
+                    ?>
                     <tr>
                         <td><?php echo htmlspecialchars($page['title']); ?></td>
                         <td class="text-end">
-                            <a href="index.php?p=edit_page&page=<?php echo urlencode($page['filename']); ?>" class="btn btn-outline-secondary btn-sm me-2">Edit</a>
-                            <a href="delete_page.php?page=<?php echo urlencode($page['filename']); ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this page?');">Delete</a>
+                            <!-- Edit Button -->
+                            <a href="index.php?p=edit_page&page=<?php echo urlencode($page['filename']); ?>"
+                               class="btn btn-sm me-2 <?php echo $disableEdit ? 'btn-secondary disabled' : 'btn-outline-secondary'; ?>"
+                               <?php echo $disableEdit ? 'tabindex="-1" aria-disabled="true"' : ''; ?>>
+                               Edit
+                            </a>
+
+                            <!-- Delete Button -->
+                            <a href="delete_page.php?page=<?php echo urlencode($page['filename']); ?>"
+                               class="btn btn-sm <?php echo $disableDelete ? 'btn-secondary disabled' : 'btn-outline-danger'; ?>"
+                               <?php echo $disableDelete ? 'tabindex="-1" aria-disabled="true"' : 'onclick="return confirm(\'Are you sure you want to delete this page?\');"'; ?>>
+                               Delete
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
