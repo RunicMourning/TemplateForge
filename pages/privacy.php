@@ -1,21 +1,14 @@
 <?php
 // pages/privacy.php
 
-$pageTitle = 'Privacy Policy';
-
-// Include settings to access $siteTitle and $googleadsenseenabled
-$settingsPath = dirname(__FILE__, 2) . '/settings.php';
-if (file_exists($settingsPath)) {
-    include_once $settingsPath;
-}
+$pageTitle = 'Privacy Policy – Your Data & Security';
 ?>
-
-<!-- Privacy Policy Header -->
+<!-- Privacy Policy Header --> 
 <section class="container py-5 text-center">
     <h1 class="display-3 fw-bold mb-4">Privacy Policy</h1>
     <p class="lead text-muted mb-5">Effective Date: March 3, 2025</p>
 </section>
-
+ 
 <!-- Privacy Policy Content Section -->
 <section class="container pb-5">
     <p>At <strong><?php echo htmlspecialchars($siteTitle); ?></strong>, we are committed to protecting your privacy and ensuring the security of any information you choose to share with us. This Privacy Policy outlines our practices regarding the collection, use, and protection of your information.</p>

@@ -1,7 +1,7 @@
 <?php
 // pages/about.php
 
-$pageTitle = 'About TemplateForge';
+$pageTitle = 'About TemplateForge – Scalable PHP Framework for Developers & Designers';
 ?>
 <div class="row justify-content-center">
     <div class="col-lg-8 text-center mb-4">
@@ -9,7 +9,7 @@ $pageTitle = 'About TemplateForge';
         <h1 class="fw-bold">TemplateForge</h1>
         <p class="text-muted">A Modern Templating System for Dynamic Web Development</p>
     </div>
-</div>
+</div> 
 
 <!-- About TemplateForge Section -->
 <div class="row mt-4">

@@ -1,7 +1,7 @@
 <?php
 if (session_status() === PHP_SESSION_NONE) session_start();
 
-$pageTitle = 'Error 404: Page Not Found!';
+$pageTitle = "Oops! This Page Doesn't Exist";
 $headerIncludes[] = "";
 $footerIncludes[] = "";
 

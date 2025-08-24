@@ -4,7 +4,7 @@
 echo generateBreadcrumbs();
 
 // Define the title for this page.
-$pageTitle = "Search";
+$pageTitle = "Search Results";
 $headerIncludes[] = "";
 $footerIncludes[] = "";
 

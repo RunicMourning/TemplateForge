@@ -61,8 +61,29 @@ function getLatestUpdates($num = 5) {
         foreach ($lines as $line) {
             if (preg_match('/^\[(.*?)\] - (.*?) - (.*?) - IP: (.*)$/', $line, $match)) {
                 [$all, $ts, $act, $detail, $ip] = $match;
-                if (stripos($act, 'Login') !== false || stripos($act, '404') !== false) continue;
-                $updates[] = ['timestamp' => $ts, 'activity' => $act, 'detail' => $detail, 'ip' => $ip];
+
+                // Combine act + detail for filtering
+                $text = strtolower($act . ' ' . $detail);
+
+                // Skip unwanted log types
+                if (
+                    str_contains($text, '404') ||
+                    str_contains($text, 'fatal error') ||
+                    str_contains($text, 'php error') ||
+                    str_contains($text, 'parse error') ||
+                    str_contains($text, 'warning') ||
+                    str_contains($text, 'notice') ||
+                    str_contains($text, 'deprecated')
+                ) {
+                    continue;
+                }
+
+                $updates[] = [
+                    'timestamp' => $ts,
+                    'activity'  => $act,
+                    'detail'    => $detail,
+                    'ip'        => $ip
+                ];
             }
         }
     }

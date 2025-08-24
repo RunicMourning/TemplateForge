@@ -1,7 +1,7 @@
 <?php
 // pages/blog.php
 
-$pageTitle = "Blog";
+$pageTitle = "News & Articles";
 $headerIncludes[] = "";
 $footerIncludes[] = "";
 
