@@ -1,10 +1,17 @@
 [2025-04-23 22:45:48] - Admin login - Username: steve - IP: 24.225.110.69
-[2025-04-24 10:15:53] - Admin login - Username: admin - IP: 24.225.110.69
 [2025-04-24 10:19:45] - Admin login - Username: admin - IP: 24.225.110.69
 [2025-04-24 10:59:54] - Site Configuration - Settings Updated - IP: 24.225.110.69
-[2025-04-24 11:00:14] - Site Configuration - Settings Updated - IP: 24.225.110.69
-[2025-04-24 11:02:09] - Site Configuration - Settings Updated - IP: 24.225.110.69
-[2025-04-24 11:05:16] - Site Configuration - Settings Updated - IP: 24.225.110.69
-[2025-04-24 11:05:23] - Site Configuration - Settings Updated - IP: 24.225.110.69
-[2025-04-25 22:37:04] - Admin login - Username: admin - IP: 24.225.110.69
+[2025-08-23 15:29:17] - Admin login - Username: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 19:55:25] - 404 Not Found - URL: /blog-notfound.html | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:07:06] - 404 Not Found - URL: /butt | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:07:16] - 404 Not Found - URL: /butt/ | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:09:16] - 404 Not Found - URL: /butt/ | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:09:16] - 404 Not Found - URL: /butt/ | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:09:16] - 404 Not Found - URL: /butt/css/style.css | Referrer: https://dev.thevintagegamers.com/butt/ | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:09:16] - 404 Not Found - URL: /butt/css/style.css | Referrer: https://dev.thevintagegamers.com/butt/ | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:10:33] - 404 Not Found - URL: /butt/ | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:10:33] - 404 Not Found - URL: /butt/ | Referrer: None | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:10:33] - 404 Not Found - URL: /butt/css/style.css | Referrer: https://dev.thevintagegamers.com/butt/ | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:10:33] - 404 Not Found - URL: /butt/css/style.css | Referrer: https://dev.thevintagegamers.com/butt/ | IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:142.0) Gecko/20100101 Firefox/142.0 | User: admin - IP: 2605:4a80:f000:bd00:74cb:7909:1f87:fb3f
+[2025-08-23 20:14:48] - 404 Not Found - URL: /blog-notfound.html | Referrer: https://dev.thevintagegamers.com | IP: 209.190.14.204 | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36 | User: Anonymous - IP: 209.190.14.204
 

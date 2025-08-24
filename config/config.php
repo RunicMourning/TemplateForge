@@ -85,16 +85,15 @@ function loadSidebars($dir = null) {
 // ==========================
 
 /**
- * Generates Bootstrap-compatible breadcrumb navigation.
+ * Generates Bootstrap-compatible breadcrumb navigation with clean URLs.
  * 
  * @return string HTML output for breadcrumbs.
  */
 function generateBreadcrumbs() {
     $breadcrumbs = [
-        ["title" => "Home", "link" => "index.php"]
+        ["title" => "Home", "link" => "index.html"]
     ];
 
-    // Capture the current page and generate breadcrumbs dynamically
     if (isset($_GET['p'])) {
         $page = $_GET['p'];
         handlePageBreadcrumbs($breadcrumbs, $page);
@@ -104,42 +103,43 @@ function generateBreadcrumbs() {
 }
 
 /**
- * Determines and structures the breadcrumb path based on the requested page.
+ * Determines breadcrumb path for the requested page using .html URLs.
  * 
  * @param array &$breadcrumbs The breadcrumbs array to modify.
  * @param string $page The current page identifier.
  */
 function handlePageBreadcrumbs(array &$breadcrumbs, string $page) {
     if ($page === 'blog') {
-        $breadcrumbs[] = ["title" => "Blog", "link" => "index.php?p=blog"];
+        $breadcrumbs[] = ["title" => "Blog", "link" => "blog.html"];
         
         if (isset($_GET['post']) && !empty($_GET['post'])) {
             $postSlug = htmlspecialchars($_GET['post']);
-
-            // Retrieve the actual post title
             $postTitle = getPostTitle($postSlug);
 
-            // Add post title (fallback to slug if title is missing)
+            // Post breadcrumb (no link for current page)
             $breadcrumbs[] = ["title" => $postTitle ?: $postSlug, "link" => ""];
         }
     } elseif ($page === 'search') {
-        $breadcrumbs[] = ["title" => "Search", "link" => "index.php?p=search"];
+        $breadcrumbs[] = ["title" => "Search", "link" => "search.html"];
         
         if (isset($_GET['q']) && !empty($_GET['q'])) {
             $searchTerm = htmlspecialchars($_GET['q']);
             $breadcrumbs[] = ["title" => $searchTerm, "link" => ""];
         }
     } else {
-        // Generic breadcrumb handling for other pages
-        $breadcrumbs[] = ["title" => ucfirst(htmlspecialchars($page)), "link" => ""];
+        // Generic pages
+        $breadcrumbs[] = [
+            "title" => ucfirst(htmlspecialchars($page)),
+            "link" => $page . ".html"
+        ];
     }
 }
 
 /**
  * Builds the final breadcrumb HTML structure.
  * 
- * @param array $breadcrumbs The breadcrumbs array to convert into HTML.
- * @return string The formatted breadcrumb navigation HTML.
+ * @param array $breadcrumbs The breadcrumbs array.
+ * @return string HTML of breadcrumbs
  */
 function buildBreadcrumbHtml(array $breadcrumbs) {
     $html = '<nav aria-label="breadcrumb"><ol class="breadcrumb mt-3">';
