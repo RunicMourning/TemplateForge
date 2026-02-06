@@ -12,7 +12,7 @@
                     <span class="input-group-text rounded-start" id="username-addon">
                         <i class="bi bi-person-fill"></i>
                     </span>
-                    <input type="text" class="form-control rounded-end" id="username" name="username" placeholder="Enter username" required aria-describedby="username-addon">
+                    <input type="text" class="form-control rounded-end" id="user" name="user" placeholder="Enter username" required aria-describedby="user-addon">
                 </div>
             </div>
             <!-- Password Input -->
